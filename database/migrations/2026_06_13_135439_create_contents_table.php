@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('maps_url')->nullable();
             $table->enum('status',['pending','approved','rejected','deleted'])->default('pending');
             $table->boolean('was_approved')->default(false);
+            $table->unsignedBigInteger('view_count')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
