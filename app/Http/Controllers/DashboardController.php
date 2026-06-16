@@ -16,9 +16,9 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         $stats = [
-            'approved' => Content::where('user_id', $userId)->where('status', 'approved')->count(),
-            'pending'  => Content::where('user_id', $userId)->where('status', 'pending')->count(),
-            'rejected' => Content::where('user_id', $userId)->where('status', 'rejected')->count(),
+            'approved' => Content::query()->where('user_id', $userId)->where('status', 'approved')->count(),
+            'pending'  => Content::query()->where('user_id', $userId)->where('status', 'pending')->count(),
+            'rejected' => Content::query()->where('user_id', $userId)->where('status', 'rejected')->count(),
         ];
 
         $contents = Content::with([

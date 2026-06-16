@@ -14,10 +14,10 @@ class DashboardController extends Controller
     public function index()
     {
         $stats = [
-            'total'    => Content::count(),
-            'pending'  => Content::where('status', 'pending')->count(),
-            'approved' => Content::where('status', 'approved')->count(),
-            'rejected' => Content::where('status', 'rejected')->count(),
+            'total'    => Content::query()->count('*'),
+            'pending'  => Content::query()->where('status', 'pending')->count(),
+            'approved' => Content::query()->where('status', 'approved')->count(),
+            'rejected' => Content::query()->where('status', 'rejected')->count(),
         ];
 
         $recentPending = Content::with(['user', 'category', 'regency'])
