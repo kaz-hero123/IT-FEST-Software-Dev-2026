@@ -12,7 +12,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+        'contributor' => \App\Http\Middleware\EnsureContributor::class,
+        'admin'       => \App\Http\Middleware\EnsureAdmin::class,
+    ]);
+     $middleware->redirectGuestsTo(function ($request) {
+        if ($request->is('admin/*')) {
+            return route('admin.login');
+        }
+        return route('login');
+    });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

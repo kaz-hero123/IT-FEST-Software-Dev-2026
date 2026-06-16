@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('content_id')->constrained()->cascadeOnDelete();
             $table->foreignId('admin_id')->constrained('users')->cascadeOnDelete();
-            $table->enum('action',['pending','approved','unpublished','deleted'])->default('pending');
-            $table->text('note');
-            $table->timestamps();
+            $table->enum('action',['approved','rejected','unpublished','deleted']);
+            $table->text('note')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

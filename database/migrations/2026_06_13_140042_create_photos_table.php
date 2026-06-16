@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('content_id')->constrained()->onDelete('cascade');
             $table->string('file_path');
             $table->boolean('is_primary')->default(false);
-            $table->timestamps();
         });
     }
 
