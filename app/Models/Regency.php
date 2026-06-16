@@ -21,9 +21,13 @@ class Regency extends Model
         return $this->hasMany(Content::class);
     }
 
-    // Untuk ExploreController — hitung konten approved saja
     public function approvedContents()
     {
         return $this->hasMany(Content::class)->where('status', 'approved');
+    }
+
+    public function getRouteKeyName(): string
+    {
+    return 'slug';
     }
 }

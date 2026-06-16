@@ -15,15 +15,26 @@ class Content extends Model
         'category_id',
         'regency_id',
         'title',
+        'slug',
         'description',
+        'address',
         'maps_url',
         'status',
         'was_approved',
+        'view_count',
     ];
 
     protected $casts = [
         'was_approved' => 'boolean',
     ];
+
+    /**
+     * Route model binding uses slug instead of ID for SEO-friendly URLs.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     // Relasi: konten milik satu user (contributor)
     public function user()
