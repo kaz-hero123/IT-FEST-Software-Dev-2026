@@ -25,7 +25,7 @@ class DashboardController extends Controller
                 'category',
                 'regency',
                 'photos' => fn($q) => $q->where('is_primary', true),
-                'moderationNotes' => fn($q) => $q->latest('created_at')->limit(1),
+                'latestModerationNote',
             ])
             ->where('user_id', $userId)
             ->latest()

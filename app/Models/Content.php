@@ -71,4 +71,10 @@ class Content extends Model
     {
         return $this->hasOne(Photo::class)->where('is_primary', true);
     }
+
+    // Helper: ambil moderation note terbaru (1 saja, per konten — aman untuk eager load)
+    public function latestModerationNote()
+    {
+        return $this->hasOne(ModerationNote::class)->latestOfMany('created_at');
+    }
 }
