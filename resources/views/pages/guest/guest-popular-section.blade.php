@@ -1,7 +1,6 @@
-<!-- Wrapper luar: Menjamin background putih selalu FULL kiri-kanan layar -->
+
 <section class="py-16 bg-white overflow-hidden">
   
-  <!-- Kontainer Dalam: Mengunci lebar konten utama agar pas & punya jarak aman seperti semula -->
   <div class="max-w-6xl mx-auto px-6">
     
     <!-- Header Section -->

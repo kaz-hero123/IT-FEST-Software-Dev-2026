@@ -1,4 +1,4 @@
-<!-- Wrapper Luar (Konsisten dengan section lain) -->
+
 <section class="w-full bg-white py-12 md:py-16 overflow-hidden">
   
   <div class="max-w-6xl mx-auto px-6 flex justify-center">
@@ -9,7 +9,7 @@
       style="background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px), linear-gradient(110deg, #05261e 0%, #0c3c2e 45%, #6a441e 100%); background-size: 32px 32px, cover; background-position: 0 0, center;"
     >
       
-      <!-- Top Pill Button (Hanya tampil di mobile) -->
+      <!--(tampilan di mobile) -->
       <div class="bg-white/10 md:hidden border border-white/15 rounded-full px-5 py-2 flex items-center justify-center gap-2 shadow-inner shrink-0">
         <x-lucide-megaphone class="w-4 h-4 text-white/90" stroke-width="2" />
         <span class="text-white text-sm font-medium tracking-tight">Untuk Warga Lokal</span>

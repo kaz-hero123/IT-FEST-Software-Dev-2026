@@ -84,11 +84,11 @@
                 </a>
             </div>
 
-            <!-- SISI KANAN (Hanya Aktif di Desktop): Overlapping Images Grid Tanpa Border/Padding -->
+            <!-- SISI KANAN (Hanya Aktif di Desktop) -->
             <div class="hidden md:flex w-full md:w-1/2 justify-center md:justify-end">
                 <div class="relative w-full max-w-[480px] h-[420px] flex items-center justify-center">
                     
-                    <!-- Glow Blur Background Desktop (Ukuran Pas, Intensitas Cahaya Maksimal) -->
+                    <!-- Glow Blur Background Desktop-->
                     <div class="absolute top-6 left-2 w-56 h-56 bg-[#124d45]/70 rounded-full blur-[45px] pointer-events-none"></div>
                     <div class="absolute bottom-12 right-6 w-56 h-56 bg-[#ff8a65]/80 rounded-full blur-[50px] pointer-events-none"></div>
 
