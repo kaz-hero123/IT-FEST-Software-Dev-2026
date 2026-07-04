@@ -1,17 +1,15 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-between items-center h-20">
             <!-- Logo Container -->
-            <div class="flex items-center space-x-2">
-                <!-- SVG Icon (Simplified version of the logo in image) -->
-                <div class="w-[39px] h-[29px] flex-shrink-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-[45px] h-[35px] flex-shrink-0">
                     <img src="{{ asset('images/jelajah_madura_logo.png') }}" alt="Logo" class="w-full h-full object-contain">
-
                 </div>
-                <!-- Text -->
-                <a href="/" class="flex items-center text-[16px] font-bold tracking-tight">
+                <!-- Text Logo -->
+                <a href="/" class="flex items-center text-[18px] font-bold tracking-tight">
                     <span class="text-[#0a2622]">Jelajah</span>
-                    <span class="text-[#ff8a65] ml-1">Madura</span>
+                    <span class="text-[#ed8a53] ml-1">Madura</span>
                 </a>
             </div>
 
@@ -28,11 +26,17 @@
                 </button>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="/" class="text-[#0a2622] hover:text-[#ff8a65] transition-colors">Beranda</a>
-                    <a href="/explore" class="text-gray-500 hover:text-[#ff8a65] transition-colors">Jelajahi</a>
-                    <a href="/contact" class="text-gray-500 hover:text-[#ff8a65] transition-colors">Kontak</a>
-                    <a href="/login" class="bg-[#0a2622] text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-all">Login</a>
+                <div class="hidden md:flex items-center space-x-8 text-[15px] font-medium">
+                    <!-- Active State for Home -->
+                    <a href="/" class="text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1 transition-colors">Home</a>
+                    <a href="/about" class="text-gray-900 hover:text-[#ed8a53] transition-colors">About</a>
+                    <a href="/explore" class="text-gray-900 hover:text-[#ed8a53] transition-colors">Explore</a>
+                    <a href="/contact" class="text-gray-900 hover:text-[#ed8a53] transition-colors">Contact</a>
+                    
+                    <!-- Gradient Button -->
+                    <a href="/promosi" class="bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm font-semibold text-sm">
+                        Promosikan Tempatmu
+                    </a>
                 </div>
             </div>
         </div>
@@ -47,11 +51,14 @@
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
          class="md:hidden bg-white border-t border-gray-50 px-4 py-4 space-y-3" style="display: none;">
-        <a href="/" class="block text-sm font-semibold text-[#0a2622] py-2">Beranda</a>
-        <a href="/explore" class="block text-sm font-medium text-gray-600 py-2">Jelajahi</a>
-        <a href="/contact" class="block text-sm font-medium text-gray-600 py-2">Kontak</a>
+        <a href="/" class="block text-sm font-semibold text-[#ed8a53] py-2">Home</a>
+        <a href="/about" class="block text-sm font-medium text-gray-600 py-2">About</a>
+        <a href="/explore" class="block text-sm font-medium text-gray-600 py-2">Explore</a>
+        <a href="/contact" class="block text-sm font-medium text-gray-600 py-2">Contact</a>
         <div class="pt-2 border-t border-gray-100">
-            <a href="/login" class="block w-full text-center bg-[#0a2622] text-white py-3 rounded-xl font-semibold">Login</a>
+            <a href="/promosi" class="block w-full text-center bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white py-3 rounded-xl font-semibold">
+                Promosikan Tempatmu
+            </a>
         </div>
     </div>
 </nav>
