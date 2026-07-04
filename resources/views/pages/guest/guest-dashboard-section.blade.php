@@ -4,34 +4,35 @@
         <img src="{{ asset('images/dashboard.png') }}" 
              alt="Madura Beach" 
              class="w-full h-full object-cover">
-        <!-- Green Gradient Overlay -->
         <div class="absolute inset-0 bg-[#0a2622]/30 mix-blend-overlay"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/60 via-[#0a2622]/20 to-gray-50"></div>
-
-
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 w-full max-w-3xl px-4 text-center">
-        <h1 class="text-[32px] md:text-[40px] font-bold text-white mb-8 drop-shadow-lg leading-tight">
-            Jelajahi Permata <br> Tersembunyi Madura
+    <!-- Content Container -->
+    <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto">
+        
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide">
+            Jelajahi Permata Tersembunyi Madura
         </h1>
 
-        <!-- Search Bar with Glassmorphism -->
-        <div class="relative group max-w-2xl mx-auto">
+        <div class="relative max-w-3xl mx-auto bg-white/20 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl">
+            
+            <!-- Search -->
+            <div class="pl-4 pr-2 flex items-center pointer-events-none text-white/90">
+                <i data-lucide="search" class="w-5 h-5 stroke-[2.5] drop-shadow-md"></i>
+            </div>
+            
             <input type="text" 
                    placeholder="Cari Kuliner, Wisata, atau UMKM..." 
-                   class="block w-full h-[46px] px-14 bg-white/20 backdrop-blur-md border border-white rounded-full text-white placeholder-white/80 placeholder:text-[12px] focus:outline-none focus:ring-4 focus:ring-white/30 focus:bg-white/40 transition-all text-sm shadow-2xl">
+                   class="block w-full h-11 bg-transparent border-none text-white placeholder-white/80 focus:outline-none text-sm md:text-base text-left pl-2 pr-24">
             
-            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-white drop-shadow-md"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            </div>
-
+          
+            <button class="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-8 bg-[#022B22] hover:bg-[#011F18] text-white text-sm font-semibold rounded-full transition-all duration-200 shadow-md">
+                Cari
+            </button>
+            
         </div>
-
-
     </div>
 
-    <!-- Bottom Vignette Fade to White -->
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
 </section>
