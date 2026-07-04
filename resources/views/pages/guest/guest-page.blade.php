@@ -10,5 +10,11 @@
 
     {{-- Visi --}}
     @include('pages.guest.guest-visi-section')
+
+    {{-- Popular --}}
+    @include('pages.guest.guest-popular-section')
+
+    {{-- Contributor --}}
+    @include('pages.guest.guest-contributor-section')
 @endsection
 
