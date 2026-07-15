@@ -1,7 +1,7 @@
 <section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/dashboard.png') }}" 
+        <img src="{{ asset('images/culture/culture07-old.jpg') }}" 
              alt="Madura Beach" 
              class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-[#0a2622]/30 mix-blend-overlay"></div>
