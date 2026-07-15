@@ -9,6 +9,6 @@ class LandingController extends Controller
 {
     public function index()
     {
-        return view('pages.guest.guest-page');
+        return view('pages.user.home.user-home-index');
     }
 }
