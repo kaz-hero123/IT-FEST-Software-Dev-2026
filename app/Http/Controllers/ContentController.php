@@ -56,7 +56,7 @@ class ContentController extends Controller
         $categories = Category::all();
         $regencies = Regency::all();
 
-        return view('contents.create', compact('categories', 'regencies'));
+        return view('pages.contributor.form.contributor-create', compact('categories', 'regencies'));
     }
 
     /**
@@ -109,7 +109,7 @@ class ContentController extends Controller
         $categories = Category::all();
         $regencies = Regency::all();
 
-        return view('contents.edit', compact('content', 'categories', 'regencies'));
+        return view('pages.contributor.form.contributor-edit', compact('content', 'categories', 'regencies'));
     }
 
     /**
