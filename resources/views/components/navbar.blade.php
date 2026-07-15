@@ -34,7 +34,7 @@
                     <a href="/question" class="{{ request()->is('question') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Question</a>
                     
                     <!-- Gradient Button -->
-                    <a href="/promosi" class="bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm font-semibold text-sm">
+                    <a href="/register" class="inline-flex items-center h-10 bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white px-6 rounded-full hover:opacity-90 transition-all shadow-sm font-semibold text-sm">
                         Promosikan Tempatmu
                     </a>
                 </div>
@@ -56,7 +56,7 @@
         <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Explore</a>
         <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Question</a>
         <div class="pt-2 border-t border-gray-100">
-            <a href="/promosi" class="block w-full text-center bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white py-3 rounded-xl font-semibold">
+            <a href="/register" class="block w-full text-center bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white py-3 rounded-xl font-semibold">
                 Promosikan Tempatmu
             </a>
         </div>
