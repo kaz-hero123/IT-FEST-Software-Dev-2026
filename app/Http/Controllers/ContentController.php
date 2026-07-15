@@ -44,7 +44,7 @@ class ContentController extends Controller
             ->limit(4)
             ->get();
 
-        return view('explore.detail', compact('content', 'relatedContents'));
+        return view('pages.user.explore.components.user-explore-detail', compact('content', 'relatedContents'));
     }
 
     /**

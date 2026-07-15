@@ -56,10 +56,9 @@
                         <!-- Thumbnail -->
                         <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
                             @if($item->photos->count() > 0)
-                                <img src="{{ asset($item->photos->first()->file_path) }}" 
+                                <img src="{{ asset('storage/' . $item->photos->first()->image_path) }}" 
                                      alt="{{ $item->title }}" 
-                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                     onerror="this.src='{{ asset('images/culture/culture05.jpg') }}'">
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @else
                                 <img src="{{ asset('images/placeholder.jpg') }}" 
                                      alt="Placeholder" 
@@ -67,8 +66,7 @@
                             @endif
 
                             <!-- Category Badge -->
-                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-[#af4926] shadow-sm uppercase tracking-wider">
-                                <x-lucide-tag class="w-3 h-3 inline-block mr-1" />
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-[#af4926] shadow-sm">
                                 {{ $item->category->name }}
                             </div>
                         </div>
@@ -79,12 +77,12 @@
                                 {{ $item->title }}
                             </h3>
                             <p class="text-sm text-gray-500 mb-4 line-clamp-3">
-                                {{ Str::limit(strip_tags($item->description), 100) }}
+                                {{ $item->meta_desc ?? Str::limit(strip_tags($item->body), 100) }}
                             </p>
                             
                             <div class="mt-auto">
                                 <div class="flex items-center text-xs text-gray-500 mb-4">
-                                    <x-lucide-map-pin class="w-4 h-4 mr-1.5 text-[#af4926]" />
+                                    <x-lucide-map-pin class="w-4 h-4 mr-1.5 text-gray-400" />
                                     <span class="truncate">{{ $item->address ?? $regency->name }}</span>
                                 </div>
                                 <a href="/explore/{{ $regency->slug }}/{{ $item->slug }}" 

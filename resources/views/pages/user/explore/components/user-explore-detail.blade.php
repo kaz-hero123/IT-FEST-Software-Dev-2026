@@ -1,0 +1,220 @@
+@extends('layouts.layout')
+
+@section('navbar')
+    @include('components.navbar')
+@endsection
+
+@section('content')
+<div class="bg-gray-50 min-h-screen py-10">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <div>
+                <!-- Badges -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-200/70 text-gray-700 text-xs font-semibold">
+                        <x-lucide-utensils class="w-3.5 h-3.5 mr-1.5" />
+                        {{ $content->category->name }}
+                    </span>
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-200/70 text-gray-700 text-xs font-semibold">
+                        <x-lucide-eye class="w-3.5 h-3.5 mr-1.5" />
+                        {{ number_format($content->view_count, 1, ',', '.') }}k views
+                    </span>
+                </div>
+                <!-- Title & Address -->
+                <h1 class="text-3xl md:text-4xl font-extrabold text-[#0a2622] mb-2 tracking-tight">
+                    {{ $content->title }}
+                </h1>
+                <div class="flex items-center text-gray-500 text-sm">
+                    <x-lucide-map-pin class="w-4 h-4 mr-1.5 text-[#d35a39]" />
+                    {{ $content->address ?? $content->regency->name }}
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3 mt-4 md:mt-0">
+                <button class="flex items-center px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold text-sm shadow-sm hover:bg-gray-50 transition-colors">
+                    <x-lucide-share-2 class="w-4 h-4 mr-2" />
+                    Bagikan
+                </button>
+                <button class="flex items-center px-4 py-2 rounded-xl bg-[#0a2622] text-white font-semibold text-sm shadow-sm hover:bg-[#071b17] transition-colors">
+                    <x-lucide-bookmark class="w-4 h-4 mr-2" />
+                    Simpan
+                </button>
+            </div>
+        </div>
+
+        <!-- Photo Gallery (Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 mb-10 h-auto md:h-[500px]">
+            <!-- Big Image -->
+            <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
+                <img src="{{ asset($content->primaryPhoto->file_path ?? 'images/placeholder.jpg') }}" 
+                     alt="{{ $content->title }}" 
+                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                     onerror="this.src='{{ asset('images/pantai.png') }}'">
+            </div>
+            <!-- Small Images Right Column -->
+            <div class="md:col-span-1 flex flex-col gap-3 md:gap-4 h-auto md:h-full min-h-0 min-w-0">
+                <!-- Fetch rest of photos, max 3 -->
+                @php $secondaryPhotos = $content->photos->where('is_primary', false)->take(3); @endphp
+                
+                <!-- 1st Small Image -->
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0">
+                    <img src="{{ asset($secondaryPhotos->values()->get(0)->file_path ?? 'images/culture/culture02.jpg') }}" 
+                         alt="Gallery 1" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- 2nd Small Image -->
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0">
+                    <img src="{{ asset($secondaryPhotos->values()->get(1)->file_path ?? 'images/culture/culture03.jpg') }}" 
+                         alt="Gallery 2" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- 3rd Small Image with overlay -->
+                <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0">
+                    <img src="{{ asset($secondaryPhotos->values()->get(2)->file_path ?? 'images/culture/culture04.jpg') }}" 
+                         alt="Gallery 3" class="w-full h-full object-cover">
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                        <span class="text-white font-semibold flex items-center">
+                            <x-lucide-image class="w-5 h-5 mr-2" />
+                            Lihat {{ $content->photos->count() }} Foto
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content (2 Columns) -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Left Column: Tentang & Fasilitas -->
+            <div class="w-full lg:w-2/3 space-y-8">
+                
+                <!-- Tentang Section -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
+                    <h2 class="text-xl font-bold text-[#0a2622] mb-5">Tentang Tempat Ini</h2>
+                    
+                    <div class="prose prose-gray max-w-none prose-p:leading-relaxed prose-p:text-gray-600 prose-p:mb-5">
+                        <!-- Convert markdown-like syntax / linebreaks from description -->
+                        {!! nl2br(e($content->description)) !!}
+                    </div>
+                </div>
+
+                <!-- Fasilitas Section (Static Example based on image) -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
+                    <h2 class="text-base font-bold text-gray-800 uppercase tracking-wider mb-6">FASILITAS</h2>
+                    
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-circle-parking class="w-5 h-5 text-gray-400 mr-3" /> Area Parkir Luas
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-droplets class="w-5 h-5 text-gray-400 mr-3" /> Toilet Bersih
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-moon class="w-5 h-5 text-gray-400 mr-3" /> Mushola
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-shopping-bag class="w-5 h-5 text-gray-400 mr-3" /> Pusat Oleh-oleh
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-snowflake class="w-5 h-5 text-gray-400 mr-3" /> Ruangan Ber-AC (VIP)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Lokasi & Kontributor Info -->
+            <div class="w-full lg:w-1/3 space-y-6">
+                <!-- Widget Lokasi -->
+                <div class="bg-white rounded-3xl p-6 md:p-7 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
+                    <h3 class="text-base font-extrabold text-[#0a2622] mb-4">Lokasi & Kontak</h3>
+                    
+                    <!-- Static Maps Placeholder Image -->
+                    <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 overflow-hidden relative">
+                       <img src="{{ asset('images/pantai.png') }}" class="w-full h-full object-cover grayscale opacity-60">
+                       <div class="absolute inset-0 flex items-center justify-center">
+                           <div class="bg-white/90 backdrop-blur px-4 py-2 rounded-lg font-bold text-[#d35a39] shadow-sm flex items-center">
+                               <x-lucide-map-pin class="w-4 h-4 mr-2" /> Bebek Sinjay Asli
+                           </div>
+                       </div>
+                    </div>
+
+                    <!-- Address Text -->
+                    <div class="flex items-start mb-4">
+                        <x-lucide-map-pin class="w-5 h-5 text-[#d35a39] mr-3 shrink-0 mt-0.5" />
+                        <span class="text-sm text-gray-600 font-medium leading-relaxed">{{ $content->address }}</span>
+                    </div>
+
+                    <!-- Jam Buka Text -->
+                    <div class="flex items-start mb-6">
+                        <x-lucide-clock class="w-5 h-5 text-gray-400 mr-3 shrink-0 mt-0.5" />
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold text-green-600 mb-0.5">Buka Sekarang</span>
+                            <span class="text-sm text-gray-500">07.00 - 17.00 WIB</span>
+                        </div>
+                    </div>
+
+                    <a href="{{ $content->maps_url ?? '#' }}" target="_blank" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#c54e2e] hover:bg-[#a93f23] text-white font-semibold text-sm transition-colors shadow-sm">
+                        <x-lucide-map class="w-4 h-4 mr-2" />
+                        Buka di Google Maps
+                    </a>
+                </div>
+
+                <!-- Info Kontributor -->
+                <div class="bg-white rounded-3xl p-5 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)] flex items-center bg-[#f7f9f8]">
+                    <div class="w-12 h-12 rounded-full bg-[#d7e5df] flex items-center justify-center text-[#0a2622] font-bold text-lg mr-4 shrink-0">
+                        DK
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-[11px] text-gray-500 font-semibold mb-0.5">Ditambahkan oleh</p>
+                        <p class="text-sm font-bold text-[#0a2622] leading-tight">Dinas Pariwisata Bangkalan</p>
+                    </div>
+                    <x-lucide-badge-check class="w-6 h-6 text-green-500 shrink-0" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Tempat Terkait (Related Contents) -->
+        <div class="mt-20 border-t border-gray-200 pt-10 pb-8">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-[#0a2622] mb-1">Tempat Terkait di {{ $content->regency->name }}</h2>
+                    <p class="text-sm text-gray-500">Rekomendasi kuliner lain yang mungkin Anda suka</p>
+                </div>
+                <a href="#" class="text-[#c54e2e] font-semibold text-sm flex items-center hover:underline">
+                    Lihat Semua
+                    <x-lucide-arrow-right class="w-4 h-4 ml-1" />
+                </a>
+            </div>
+
+            <!-- Related Items Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+                @foreach($relatedContents as $related)
+                <a href="/explore/{{ $content->regency->slug }}/{{ $related->slug }}" class="group block bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="relative w-full aspect-[4/3] bg-gray-200">
+                        <img src="{{ asset($related->primaryPhoto->file_path ?? 'images/culture/culture05.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/pantai.png') }}'">
+                        <!-- Kategori Badge -->
+                        <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold text-white flex items-center uppercase tracking-wider">
+                            <x-lucide-utensils class="w-3 h-3 mr-1" />
+                            Kuliner
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-[15px] font-bold text-[#0a2622] mb-1.5 line-clamp-1 group-hover:text-[#c54e2e] transition-colors">
+                            {{ $related->title }}
+                        </h3>
+                        <div class="flex items-center text-[12px] text-gray-500 font-medium">
+                            <x-lucide-map-pin class="w-3.5 h-3.5 mr-1 text-gray-400" />
+                            {{ $related->address }}
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+</div>
+@endsection
