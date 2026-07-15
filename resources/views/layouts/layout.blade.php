@@ -12,6 +12,17 @@
     <style>
         body { font-family: 'Satoshi', sans-serif; }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Satoshi', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
 </head>
 <body class="bg-gray-50 text-[#0a2622]">

@@ -11,4 +11,9 @@ class LandingController extends Controller
     {
         return view('pages.user.home.user-home-index');
     }
+
+    public function about()
+    {
+        return view('pages.user.about.user-about-index');
+    }
 }
