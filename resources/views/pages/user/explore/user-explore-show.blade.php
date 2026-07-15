@@ -6,7 +6,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+<section class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <img src="{{ asset($regency->img) }}" 

@@ -10,7 +10,7 @@
 </style>
 <section class="bg-[#fcfcfc] min-h-screen pb-20">
     <!-- Hero Section -->
-    <section class="relative w-full h-[80vh] min-h-[550px] flex items-center justify-center overflow-hidden">
+    <section class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
             <img src="{{ asset('images/culture/culture02.jpg') }}" 

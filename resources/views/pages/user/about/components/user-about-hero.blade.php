@@ -1,4 +1,4 @@
-<section class="relative h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
+<section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
         <img src="{{ asset('images/culture/culture03.jpg') }}" 
@@ -27,5 +27,5 @@
     </div>
 
     <!-- Gradient Overlay bawah untuk smooth transition -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
 </section>
