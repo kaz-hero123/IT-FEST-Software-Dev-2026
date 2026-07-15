@@ -23,7 +23,8 @@
             }
         }
     </script>
-
+    
+    @vite(['resources/js/app.js'])
 </head>
 <body class="bg-gray-50 text-[#0a2622]">
     {{-- Main Navbar --}}
@@ -33,11 +34,6 @@
         @yield('content')
     </main>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
-        });
-    </script>
 </body>
 
 

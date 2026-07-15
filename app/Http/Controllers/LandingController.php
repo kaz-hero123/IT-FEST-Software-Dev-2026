@@ -16,4 +16,9 @@ class LandingController extends Controller
     {
         return view('pages.user.about.user-about-index');
     }
+
+    public function question()
+    {
+        return view('pages.user.question.user-question-index');
+    }
 }
