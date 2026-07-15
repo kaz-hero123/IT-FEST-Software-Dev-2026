@@ -29,12 +29,13 @@ class ContentController extends Controller
         // Increment view count
         $content->increment('view_count');
 
-        $content->load(['photos', 'category', 'regency']);
+        $content->load(['photos', 'category', 'regency', 'user']);
 
         // Related contents: same category + same regency, approved, max 4, exclude current
         $relatedContents = Content::with([
                 'photos' => fn($q) => $q->where('is_primary', true),
                 'category',
+                'regency',
             ])
             ->where('status', 'approved')
             ->where('category_id', $content->category_id)
@@ -187,7 +188,7 @@ class ContentController extends Controller
         $slug = $baseSlug;
         $counter = 2;
 
-        while (Content::where('slug', $slug)->where('id', '!=', $excludeId)->exists()) {
+        while (Content::withTrashed()->where('slug', $slug)->where('id', '!=', $excludeId)->exists()) {
             $slug = $baseSlug . '-' . $counter;
             $counter++;
         }
