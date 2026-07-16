@@ -8,9 +8,14 @@
 <div class="min-h-screen bg-[#f7f7f5] py-10 px-4 md:px-8">
     <div class="max-w-6xl mx-auto">
         
-        <div class="mb-8">
-            <h1 class="text-2xl md:text-3xl font-bold text-[#0f172a]">Tambah Konten</h1>
-            <p class="text-sm text-gray-500 mt-1">Bagikan informasi menarik tentang destinasi wisata, kuliner, produk UMKM, atau spot foto di Madura. Pastikan informasi yang Anda berikan akurat dan berkualitas.</p>
+        <div class="flex items-start gap-3 md:gap-4 mb-8">
+            <a href="/dashboard" class="mt-1 shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors shadow-sm">
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            </a>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-[#0f172a]">Tambah Konten</h1>
+                <p class="text-sm text-gray-500 mt-1.5">Bagikan informasi menarik tentang destinasi wisata, kuliner, produk UMKM, atau spot foto di Madura. Pastikan informasi yang Anda berikan akurat dan berkualitas.</p>
+            </div>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-8">

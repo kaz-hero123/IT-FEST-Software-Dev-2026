@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="min-h-screen bg-[#fafafa] py-10 px-4 md:px-8">
-    <div class="max-w-3xl mx-auto">
+<div class="min-h-screen bg-[#f7f7f5] py-10 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto">
         
         {{-- Header --}}
         <div class="flex items-center gap-3 mb-6">
@@ -29,9 +29,11 @@
             <p class="text-[12px] text-[#8a5f00]/90 pl-5 leading-relaxed">Content will return to 'pending' status after saving changes. It will require moderation approval before becoming public again.</p>
         </div>
 
-        {{-- Form --}}
-        <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6 md:p-8">
-            <form action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" x-data="editForm()">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- FORM SECTION (Kiri) -->
+            <div class="w-full lg:w-2/3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
+                <form action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" x-data="editForm()">
                 @csrf
                 @method('PUT')
                 
@@ -170,6 +172,47 @@
                 </div>
             </form>
         </div>
+
+        <!-- SIDEBAR SECTION (Kanan) -->
+        <div class="w-full lg:w-1/3 flex flex-col gap-5">
+            {{-- Panduan Card --}}
+            <div class="bg-[#dcf2ea] rounded-2xl p-6 shadow-sm border border-[#cbe4db]">
+                <div class="flex items-center gap-2 mb-4">
+                    <svg class="w-4 h-4 text-[#0c3c2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    <h3 class="text-base font-bold text-[#0c3c2e]">Panduan Kontribusi</h3>
+                </div>
+                <ul class="text-[13px] text-[#205344] space-y-3 list-none pl-1">
+                    <li class="flex items-start gap-2">
+                        <div class="w-1.5 h-1.5 bg-[#4c8473] rounded-full mt-1.5 shrink-0"></div>
+                        Gunakan foto asli dengan pencahayaan yang baik, hindari watermark berlebih.
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <div class="w-1.5 h-1.5 bg-[#4c8473] rounded-full mt-1.5 shrink-0"></div>
+                        Pastikan alamat dan titik koordinat maps sesuai dengan lokasi sebenarnya.
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <div class="w-1.5 h-1.5 bg-[#4c8473] rounded-full mt-1.5 shrink-0"></div>
+                        Berikan deskripsi yang jujur dan informatif agar bermanfaat bagi wisatawan.
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <div class="w-1.5 h-1.5 bg-[#4c8473] rounded-full mt-1.5 shrink-0"></div>
+                        Konten akan ditinjau oleh tim moderator sebelum dipublikasikan.
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Image Preview Illustration --}}
+            <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-sm group">
+                <img src="https://images.unsplash.com/photo-1596404179374-601980072bba?q=80&w=2670&auto=format&fit=crop" alt="Ilustrasi Gili Iyang" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/30 to-transparent"></div>
+                <div class="absolute bottom-5 left-5 right-5">
+                    <span class="inline-flex items-center justify-center bg-[#25c46b] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm mb-2 tracking-wider">Inspirasi</span>
+                    <h4 class="text-white font-semibold text-base leading-[1.3] truncate whitespace-normal line-clamp-2">Gili Iyang, Oksigen Terbaik Kedua di Dunia</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
     </div>
 </div>
 
