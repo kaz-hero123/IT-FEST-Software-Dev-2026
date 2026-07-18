@@ -96,6 +96,28 @@
                     </div>
                 </div>
 
+                {{-- Jam Operasional --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    <div>
+                        <label class="block text-[13px] font-bold text-[#0f172a] mb-1.5 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#ed8a53]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            Jam Buka
+                        </label>
+                        <input type="time" name="open_time" value="{{ $content->open_time ? \Carbon\Carbon::parse($content->open_time)->format('H:i') : '' }}"
+                               class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#ed8a53] focus:ring-2 focus:ring-[#ed8a53]/20 bg-[#fafafa] text-[13.5px] transition-colors">
+                        <p class="text-[11px] text-gray-400 mt-1">Kosongkan jika tidak ada jam operasional</p>
+                    </div>
+                    <div>
+                        <label class="block text-[13px] font-bold text-[#0f172a] mb-1.5 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#ed8a53]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            Jam Tutup
+                        </label>
+                        <input type="time" name="close_time" value="{{ $content->close_time ? \Carbon\Carbon::parse($content->close_time)->format('H:i') : '' }}"
+                               class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#ed8a53] focus:ring-2 focus:ring-[#ed8a53]/20 bg-[#fafafa] text-[13.5px] transition-colors">
+                        <p class="text-[11px] text-gray-400 mt-1">Kosongkan jika tidak ada jam operasional</p>
+                    </div>
+                </div>
+
                 <hr class="border-gray-100 my-8">
 
                 {{-- Media --}}

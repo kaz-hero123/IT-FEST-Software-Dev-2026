@@ -132,6 +132,17 @@
                 <div class="text-[13px] text-[#374151] leading-relaxed font-medium whitespace-pre-line bg-gray-50 rounded-xl p-4 border border-gray-100">{{ $content->description }}</div>
             </div>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-5">
+                <div>
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Open Time</p>
+                    <p class="text-[12.5px] font-bold text-[#0f172a]">{{ $content->open_time ? \Carbon\Carbon::parse($content->open_time)->format('H:i') . ' WIB' : '-' }}</p>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Close Time</p>
+                    <p class="text-[12.5px] font-bold text-[#0f172a]">{{ $content->close_time ? \Carbon\Carbon::parse($content->close_time)->format('H:i') . ' WIB' : '-' }}</p>
+                </div>
+            </div>
+
             @if($content->address || $content->maps_url)
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @if($content->address)

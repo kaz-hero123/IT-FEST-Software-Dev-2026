@@ -19,6 +19,8 @@ class Content extends Model
         'description',
         'address',
         'maps_url',
+        'open_time',
+        'close_time',
         'status',
         'was_approved',
         'view_count',

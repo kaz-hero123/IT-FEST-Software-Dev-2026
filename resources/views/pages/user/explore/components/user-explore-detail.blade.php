@@ -172,13 +172,32 @@
                     </div>
 
                     <!-- Jam Buka Text -->
+                    @if($content->open_time || $content->close_time)
+                    @php
+                        $now = \Carbon\Carbon::now('Asia/Jakarta');
+                        $openTime  = $content->open_time  ? \Carbon\Carbon::createFromFormat('H:i:s', $content->open_time)  : null;
+                        $closeTime = $content->close_time ? \Carbon\Carbon::createFromFormat('H:i:s', $content->close_time) : null;
+                        $isOpen = ($openTime && $closeTime)
+                            ? $now->between(
+                                \Carbon\Carbon::today('Asia/Jakarta')->setTimeFrom($openTime),
+                                \Carbon\Carbon::today('Asia/Jakarta')->setTimeFrom($closeTime)
+                              )
+                            : false;
+                        $openLabel  = $openTime  ? $openTime->format('H.i')  : '--:--';
+                        $closeLabel = $closeTime ? $closeTime->format('H.i') : '--:--';
+                    @endphp
                     <div class="flex items-start mb-6">
-                        <x-lucide-clock class="w-5 h-5 text-gray-400 mr-3 shrink-0 mt-0.5" />
+                        <x-lucide-clock class="w-5 h-5 {{ $isOpen ? 'text-green-500' : 'text-red-400' }} mr-3 shrink-0 mt-0.5" />
                         <div class="flex flex-col">
-                            <span class="text-sm font-bold text-green-600 mb-0.5">Buka Sekarang</span>
-                            <span class="text-sm text-gray-500">07.00 - 17.00 WIB</span>
+                            <span class="text-sm font-bold {{ $isOpen ? 'text-green-600' : 'text-red-500' }} mb-0.5">
+                                {{ $isOpen ? 'Buka Sekarang' : 'Tutup Sekarang' }}
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                {{ $openLabel }} – {{ $closeLabel }} WIB
+                            </span>
                         </div>
                     </div>
+                    @endif
 
                     @if($content->maps_url)
                         <a href="{{ $content->maps_url }}" target="_blank" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#c54e2e] hover:bg-[#a93f23] text-white font-semibold text-sm transition-colors shadow-sm">

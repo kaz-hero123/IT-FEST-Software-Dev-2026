@@ -99,6 +99,33 @@
 
                     <hr class="border-gray-100 my-8">
 
+                    {{-- Jam Operasional --}}
+                    <h2 class="text-lg font-bold text-[#0f172a] mb-5">Jam Operasional</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-[#0f172a] mb-1.5 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#ed8a53]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Jam Buka (Opsional)
+                            </label>
+                            <input type="time" name="open_time"
+                                   class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#ed8a53] focus:ring-2 focus:ring-[#ed8a53]/20 bg-white"
+                                   placeholder="07:00">
+                            <p class="text-[11px] text-gray-400 mt-1">Contoh: 08:00</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-[#0f172a] mb-1.5 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#ed8a53]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Jam Tutup (Opsional)
+                            </label>
+                            <input type="time" name="close_time"
+                                   class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#ed8a53] focus:ring-2 focus:ring-[#ed8a53]/20 bg-white"
+                                   placeholder="17:00">
+                            <p class="text-[11px] text-gray-400 mt-1">Contoh: 17:00</p>
+                        </div>
+                    </div>
+
+                    <hr class="border-gray-100 my-8">
+
                     {{-- Media Promosi --}}
                     <h2 class="text-lg font-bold text-[#0f172a] mb-5">Media Promosi</h2>
                     <div class="space-y-5">

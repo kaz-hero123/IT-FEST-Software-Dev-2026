@@ -29,6 +29,8 @@ class StoreContentRequest extends FormRequest
             'regency_id'  => ['required', 'exists:regencies,id'],
             'address'     => ['nullable', 'string', 'max:500'],
             'maps_url'    => ['nullable', 'url', 'max:500'],
+            'open_time'   => ['nullable', 'date_format:H:i'],
+            'close_time'  => ['nullable', 'date_format:H:i'],
             'photos'      => ['required', 'array', 'min:1', 'max:5'],
             'photos.*'    => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];

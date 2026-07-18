@@ -77,6 +77,8 @@ class ContentController extends Controller
             'description'  => $request->description,
             'address'      => $request->address,
             'maps_url'     => $request->maps_url,
+            'open_time'    => $request->open_time,
+            'close_time'   => $request->close_time,
             'status'       => 'pending',
             'was_approved' => false,
         ]);
@@ -134,6 +136,8 @@ class ContentController extends Controller
             'description' => $request->description,
             'address'     => $request->address,
             'maps_url'    => $request->maps_url,
+            'open_time'   => $request->open_time,
+            'close_time'  => $request->close_time,
             'status'      => 'pending', // Paksa reset ke pending setelah edit
         ]);
 
