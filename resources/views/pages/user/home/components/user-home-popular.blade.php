@@ -13,104 +13,58 @@
       </p>
     </div>
 
-    <!-- Cards Grid: 1 kolom di HP (Hanya 2 kartu), 3 kolom di Desktop (6 kartu) -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-      
-      <!-- Card 1 (HP & Desktop) -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
-          </div>
-        </div>
-      </div>
+    @if($popularContents->isNotEmpty())
+      <!-- Cards Grid: 1 kolom di HP (2 kartu), 3 kolom di Desktop (6 kartu) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+        @foreach($popularContents as $index => $item)
+          @php
+            $coverUrl = $item->primaryPhoto
+              ? Storage::url($item->primaryPhoto->file_path)
+              : asset('images/food.png');
+          @endphp
 
-      <!-- Card 2 (HP & Desktop) -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
+          <div class="{{ $index >= 2 ? 'hidden lg:block' : '' }} bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
+            <a href="/explore/{{ $item->regency->slug }}/{{ $item->slug }}" class="block">
+              <div class="relative aspect-video">
+                <img src="{{ $coverUrl }}"
+                     alt="{{ $item->title }}"
+                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                     onerror="this.src='{{ asset('images/food.png') }}'"/>
+                @if($item->category)
+                  <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                    {{ $item->category->name }}
+                  </span>
+                @endif
+              </div>
+              <div class="p-5">
+                <h3 class="text-base font-bold text-[#1A1A1A] mb-2 line-clamp-1">{{ $item->title }}</h3>
+                <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
+                  <div class="flex items-center gap-1.5">
+                    <span>{{ $item->regency->name ?? '' }}, Madura</span>
+                  </div>
+                  <div class="flex items-center gap-1 text-[#FF9F43]">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <span class="font-semibold">{{ number_format($item->view_count / 100, 1) }}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
           </div>
-        </div>
+        @endforeach
       </div>
-
-      <!-- Card 3 (Hanya Desktop) -->
-      <div class="hidden lg:block bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
-          </div>
-        </div>
+    @else
+      <!-- Empty state jika belum ada konten approved -->
+      <div class="flex flex-col items-center justify-center py-16 text-center text-gray-400">
+        <svg class="w-12 h-12 mb-3 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <p class="text-sm font-medium">Belum ada destinasi yang tersedia.</p>
       </div>
-
-      <!-- Card 4 (Hanya Desktop) -->
-      <div class="hidden lg:block bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 (Hanya Desktop) -->
-      <div class="hidden lg:block bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 (Hanya Desktop) -->
-      <div class="hidden lg:block bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
-        <div class="relative aspect-video">
-          <img src="/images/food.png" alt="Bebek Sinjay Asli Bangkalan" class="w-full h-full object-cover"/>
-          <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">Kuliner</span>
-        </div>
-        <div class="p-5">
-          <h3 class="text-base font-bold text-[#1A1A1A] mb-2">Bebek Sinjay Asli Bangkalan</h3>
-          <div class="flex items-center justify-between text-xs text-[#7D7D7D]">
-            <div class="flex items-center gap-1.5"><span>Bangkalan, Madura</span></div>
-            <div class="flex items-center gap-1 text-[#FF9F43]"><span class="font-semibold">4.8</span></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    @endif
 
     <!-- Bottom Link -->
     <div class="mt-12 text-center">
-      <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A59] hover:text-[#e0694b] transition-colors">
+      <a href="/explore" class="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A59] hover:text-[#e0694b] transition-colors">
         Lihat Semua
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>

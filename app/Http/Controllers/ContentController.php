@@ -29,7 +29,7 @@ class ContentController extends Controller
         // Increment view count
         $content->increment('view_count');
 
-        $content->load(['photos', 'category', 'regency']);
+        $content->load(['photos', 'category', 'regency', 'user']);
 
         // Related contents: same category + same regency, approved, max 4, exclude current
         $relatedContents = Content::with([

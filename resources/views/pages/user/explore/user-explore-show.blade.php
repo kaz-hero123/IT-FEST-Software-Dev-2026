@@ -55,8 +55,8 @@
                     <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1">
                         <!-- Thumbnail -->
                         <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                            @if($item->photos->count() > 0)
-                                <img src="{{ asset($item->photos->first()->file_path) }}" 
+                            @if($item->primaryPhoto)
+                                <img src="{{ Storage::url($item->primaryPhoto->file_path) }}" 
                                      alt="{{ $item->title }}" 
                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                      onerror="this.src='{{ asset('images/culture/culture05.jpg') }}'">

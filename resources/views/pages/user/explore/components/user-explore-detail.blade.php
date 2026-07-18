@@ -48,10 +48,16 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 mb-10 h-auto md:h-[500px]">
             <!-- Big Image -->
             <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
-                <img src="{{ asset($content->primaryPhoto->file_path ?? 'images/placeholder.jpg') }}" 
-                     alt="{{ $content->title }}" 
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                     onerror="this.src='{{ asset('images/pantai.png') }}'">
+                @if($content->primaryPhoto)
+                    <img src="{{ Storage::url($content->primaryPhoto->file_path) }}" 
+                         alt="{{ $content->title }}" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                         onerror="this.src='{{ asset('images/pantai.png') }}'">
+                @else
+                    <img src="{{ asset('images/pantai.png') }}" 
+                         alt="{{ $content->title }}" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                @endif
             </div>
             <!-- Small Images Right Column -->
             <div class="md:col-span-1 flex flex-col gap-3 md:gap-4 h-auto md:h-full min-h-0 min-w-0">
@@ -59,28 +65,46 @@
                 @php $secondaryPhotos = $content->photos->where('is_primary', false)->take(3); @endphp
                 
                 <!-- 1st Small Image -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0">
-                    <img src="{{ asset($secondaryPhotos->values()->get(0)->file_path ?? 'images/culture/culture02.jpg') }}" 
-                         alt="Gallery 1" class="w-full h-full object-cover">
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
+                    @if($secondaryPhotos->values()->get(0))
+                        <img src="{{ Storage::url($secondaryPhotos->values()->get(0)->file_path) }}" 
+                             alt="Gallery 1" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center">
+                            <x-lucide-image class="w-8 h-8 text-gray-300" />
+                        </div>
+                    @endif
                 </div>
                 
                 <!-- 2nd Small Image -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0">
-                    <img src="{{ asset($secondaryPhotos->values()->get(1)->file_path ?? 'images/culture/culture03.jpg') }}" 
-                         alt="Gallery 2" class="w-full h-full object-cover">
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
+                    @if($secondaryPhotos->values()->get(1))
+                        <img src="{{ Storage::url($secondaryPhotos->values()->get(1)->file_path) }}" 
+                             alt="Gallery 2" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center">
+                            <x-lucide-image class="w-8 h-8 text-gray-300" />
+                        </div>
+                    @endif
                 </div>
                 
                 <!-- 3rd Small Image with overlay -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0">
-                    <img src="{{ asset($secondaryPhotos->values()->get(2)->file_path ?? 'images/culture/culture04.jpg') }}" 
-                         alt="Gallery 3" class="w-full h-full object-cover">
-                    <!-- Overlay -->
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                        <span class="text-white font-semibold flex items-center">
-                            <x-lucide-image class="w-5 h-5 mr-2" />
-                            Lihat {{ $content->photos->count() }} Foto
-                        </span>
-                    </div>
+                <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0 bg-gray-100">
+                    @if($secondaryPhotos->values()->get(2))
+                        <img src="{{ Storage::url($secondaryPhotos->values()->get(2)->file_path) }}" 
+                             alt="Gallery 3" class="w-full h-full object-cover">
+                        <!-- Overlay hanya jika ada foto -->
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                            <span class="text-white font-semibold flex items-center">
+                                <x-lucide-image class="w-5 h-5 mr-2" />
+                                Lihat {{ $content->photos->count() }} Foto
+                            </span>
+                        </div>
+                    @else
+                        <div class="w-full h-full flex items-center justify-center">
+                            <x-lucide-image class="w-8 h-8 text-gray-300" />
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -156,20 +180,27 @@
                         </div>
                     </div>
 
-                    <a href="{{ $content->maps_url ?? '#' }}" target="_blank" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#c54e2e] hover:bg-[#a93f23] text-white font-semibold text-sm transition-colors shadow-sm">
-                        <x-lucide-map class="w-4 h-4 mr-2" />
-                        Buka di Google Maps
-                    </a>
+                    @if($content->maps_url)
+                        <a href="{{ $content->maps_url }}" target="_blank" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#c54e2e] hover:bg-[#a93f23] text-white font-semibold text-sm transition-colors shadow-sm">
+                            <x-lucide-map class="w-4 h-4 mr-2" />
+                            Buka di Google Maps
+                        </a>
+                    @else
+                        <div class="flex items-center justify-center w-full py-3 rounded-xl bg-gray-100 text-gray-400 font-semibold text-sm cursor-not-allowed">
+                            <x-lucide-map-pin-off class="w-4 h-4 mr-2" />
+                            Lokasi Tidak Tersedia
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Info Kontributor -->
                 <div class="bg-white rounded-3xl p-5 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)] flex items-center bg-[#f7f9f8]">
                     <div class="w-12 h-12 rounded-full bg-[#d7e5df] flex items-center justify-center text-[#0a2622] font-bold text-lg mr-4 shrink-0">
-                        DK
+                        {{ strtoupper(substr($content->user->name ?? 'U', 0, 2)) }}
                     </div>
                     <div class="flex-1">
                         <p class="text-[11px] text-gray-500 font-semibold mb-0.5">Ditambahkan oleh</p>
-                        <p class="text-sm font-bold text-[#0a2622] leading-tight">Dinas Pariwisata Bangkalan</p>
+                        <p class="text-sm font-bold text-[#0a2622] leading-tight">{{ $content->user->name ?? 'Kontributor' }}</p>
                     </div>
                     <x-lucide-badge-check class="w-6 h-6 text-green-500 shrink-0" />
                 </div>
@@ -194,11 +225,11 @@
                 @foreach($relatedContents as $related)
                 <a href="/explore/{{ $content->regency->slug }}/{{ $related->slug }}" class="group block bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
                     <div class="relative w-full aspect-[4/3] bg-gray-200">
-                        <img src="{{ asset($related->primaryPhoto->file_path ?? 'images/culture/culture05.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/pantai.png') }}'">
+                        <img src="{{ $related->primaryPhoto ? Storage::url($related->primaryPhoto->file_path) : asset('images/culture/culture05.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/pantai.png') }}'">
                         <!-- Kategori Badge -->
                         <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold text-white flex items-center uppercase tracking-wider">
-                            <x-lucide-utensils class="w-3 h-3 mr-1" />
-                            Kuliner
+                            <x-lucide-tag class="w-3 h-3 mr-1" />
+                            {{ $related->category->name ?? 'Wisata' }}
                         </div>
                     </div>
                     <div class="p-4">
