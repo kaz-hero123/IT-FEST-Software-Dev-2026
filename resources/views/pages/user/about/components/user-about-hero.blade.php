@@ -10,11 +10,6 @@
 
     <!-- Content Container -->
     <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto mt-4">
-        <!-- Badge Atas -->
-        <span class="inline-block px-4 py-1.5 mb-5 text-xs font-semibold tracking-wider uppercase border border-white/40 rounded-full bg-white/10 backdrop-blur-sm text-white">
-            Platform Digital Terintegrasi
-        </span>
-
         <!-- Heading Utama -->
         <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide">
             Tentang Jelajah Madura
