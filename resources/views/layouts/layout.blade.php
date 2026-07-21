@@ -26,13 +26,16 @@
     
     @vite(['resources/js/app.js'])
 </head>
-<body class="bg-gray-50 text-[#0a2622]">
+<body class="bg-gray-50 text-[#0a2622] min-h-screen flex flex-col">
     {{-- Main Navbar --}}
     @yield('navbar')
 
-    <main>
+    <main class="flex-grow">
         @yield('content')
     </main>
+
+    <x-footer />
+    
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </body>
 
