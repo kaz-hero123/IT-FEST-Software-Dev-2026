@@ -8,10 +8,13 @@
 <!-- Hero Section -->
 <section class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
     <!-- Background Image -->
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 overflow-hidden">
         <img src="{{ asset($regency->img) }}" 
              alt="{{ $regency->name }}" 
-             class="w-full h-full object-cover"
+             data-parallax
+             data-parallax-speed="0.35"
+             data-parallax-scale="1.2"
+             class="w-full h-full object-cover origin-center will-change-transform"
              onerror="this.src='{{ asset('images/pantai.png') }}'">
         <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/60 to-transparent"></div>
     </div>

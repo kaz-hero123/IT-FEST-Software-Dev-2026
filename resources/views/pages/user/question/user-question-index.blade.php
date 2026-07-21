@@ -12,10 +12,13 @@
     <!-- Hero Section -->
     <section class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0 overflow-hidden">
             <img src="{{ asset('images/culture/culture02.jpg') }}" 
                  alt="FAQ Banner" 
-                 class="w-full h-full object-cover"
+                 data-parallax
+                 data-parallax-speed="0.25"
+                 data-parallax-scale="1.35"
+                 class="w-full h-full object-cover origin-center will-change-transform"
                  onerror="this.src='{{ asset('images/dashboard.png') }}'">
             <!-- Overlay and Gradient -->
             <div class="absolute inset-0 bg-[#0a2622]/40 mix-blend-overlay"></div>

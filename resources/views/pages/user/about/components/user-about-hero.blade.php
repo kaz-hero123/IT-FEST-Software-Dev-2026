@@ -1,9 +1,12 @@
 <section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
     <!-- Background Image with Overlay -->
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 overflow-hidden">
         <img src="{{ asset('images/culture/culture03.jpg') }}" 
              alt="culture" 
-             class="w-full h-full object-cover">
+             data-parallax
+             data-parallax-speed="0.25"
+             data-parallax-scale="1.35"
+             class="w-full h-full object-cover origin-center will-change-transform">
         <div class="absolute inset-0 bg-[#0a2622]/40 mix-blend-overlay"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/60 via-[#0a2622]/30 to-gray-50/20"></div>
     </div>

@@ -25,7 +25,10 @@
 
                 <!-- Background Image -->
                 <img src="{{ asset($item->img) }}"
-                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 z-0"
+                     data-parallax
+                     data-parallax-speed="0.15"
+                     data-parallax-scale="1.15"
+                     class="absolute inset-0 w-full h-full object-cover origin-center will-change-transform transition-transform duration-700 group-hover:scale-105 z-0"
                      alt="{{ $item->name }}"
                      onerror="this.src='{{ asset('images/pantai.png') }}'">
 

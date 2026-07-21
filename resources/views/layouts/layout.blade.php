@@ -37,6 +37,49 @@
     <x-footer />
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof window.initParallaxScroll === 'function') {
+                window.initParallaxScroll();
+            } else {
+                const parallaxElements = document.querySelectorAll('[data-parallax]');
+                if (!parallaxElements.length) return;
+                let ticking = false;
+
+                function updateParallax() {
+                    const windowHeight = window.innerHeight;
+                    parallaxElements.forEach((el) => {
+                        const speed = parseFloat(el.dataset.parallaxSpeed) || 0.25;
+                        const scale = parseFloat(el.dataset.parallaxScale) || 1.35;
+                        const parent = el.closest('section') || el.closest('.group') || el.parentElement;
+                        if (!parent) return;
+
+                        const rect = parent.getBoundingClientRect();
+                        if (rect.bottom >= -100 && rect.top <= windowHeight + 100) {
+                            const centerY = rect.top + rect.height / 2 - windowHeight / 2;
+                            const maxTranslate = Math.max(0, (rect.height * (scale - 1)) / 2 - 10);
+                            const rawTranslate = centerY * speed;
+                            const translateY = Math.max(-maxTranslate, Math.min(maxTranslate, rawTranslate));
+
+                            el.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale})`;
+                        }
+                    });
+                    ticking = false;
+                }
+
+                function onScroll() {
+                    if (!ticking) {
+                        requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                }
+
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', onScroll, { passive: true });
+                updateParallax();
+            }
+        });
+    </script>
 </body>
 
 
