@@ -1,38 +1,34 @@
 <section class="py-16 bg-white overflow-hidden">
     <div class="max-w-6xl mx-auto px-6">
-        <!-- Category Icons Grid -->
-        <div x-data="{ active: null }" class="grid grid-cols-4 gap-4 mb-16 w-full">
+        <!-- Categories Explanation (Decorative) -->
+        <div class="grid grid-cols-4 gap-4 mb-16 w-full">
             <!-- Kuliner -->
-            <div @click="active = 'kuliner'" class="text-center group cursor-pointer">
-                <div :class="active === 'kuliner' ? 'bg-[#0a2622] text-white shadow-lg shadow-[#0a2622]/20' : 'bg-gray-50 border border-gray-100 text-gray-600'" 
-                     class="w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
-                    <x-lucide-utensils class="w-7 h-7" />
+            <div class="text-center group cursor-default">
+                <div class="bg-gray-50 group-hover:bg-[#0a2622] border group-hover:border-[#0a2622] border-gray-100 text-gray-600 group-hover:text-white shadow-sm group-hover:shadow-lg group-hover:shadow-[#0a2622]/20 w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
+                    <x-lucide-utensils class="w-7 h-7 transition-transform group-hover:scale-110" />
                 </div>
-                <span :class="active === 'kuliner' ? 'font-bold text-[#0a2622]' : 'font-semibold text-gray-500'" class="text-xs transition-colors">Kuliner</span>
+                <span class="font-semibold text-gray-500 group-hover:text-[#0a2622] text-xs transition-colors">Kuliner</span>
             </div>
             <!-- Spot Foto -->
-            <div @click="active = 'foto'" class="text-center group cursor-pointer">
-                <div :class="active === 'foto' ? 'bg-[#0a2622] text-white shadow-lg shadow-[#0a2622]/20' : 'bg-gray-50 border border-gray-100 text-gray-600'" 
-                     class="w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
-                    <x-lucide-camera class="w-7 h-7" />
+            <div class="text-center group cursor-default">
+                <div class="bg-gray-50 group-hover:bg-[#0a2622] border group-hover:border-[#0a2622] border-gray-100 text-gray-600 group-hover:text-white shadow-sm group-hover:shadow-lg group-hover:shadow-[#0a2622]/20 w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
+                    <x-lucide-camera class="w-7 h-7 transition-transform group-hover:scale-110" />
                 </div>
-                <span :class="active === 'foto' ? 'font-bold text-[#0a2622]' : 'font-semibold text-gray-500'" class="text-xs transition-colors">Spot Foto</span>
+                <span class="font-semibold text-gray-500 group-hover:text-[#0a2622] text-xs transition-colors">Spot Foto</span>
             </div>
             <!-- UMKM -->
-            <div @click="active = 'umkm'" class="text-center group cursor-pointer">
-                <div :class="active === 'umkm' ? 'bg-[#0a2622] text-white shadow-lg shadow-[#0a2622]/20' : 'bg-gray-50 border border-gray-100 text-gray-600'" 
-                     class="w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
-                    <x-lucide-store class="w-7 h-7" />
+            <div class="text-center group cursor-default">
+                <div class="bg-gray-50 group-hover:bg-[#0a2622] border group-hover:border-[#0a2622] border-gray-100 text-gray-600 group-hover:text-white shadow-sm group-hover:shadow-lg group-hover:shadow-[#0a2622]/20 w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
+                    <x-lucide-store class="w-7 h-7 transition-transform group-hover:scale-110" />
                 </div>
-                <span :class="active === 'umkm' ? 'font-bold text-[#0a2622]' : 'font-semibold text-gray-500'" class="text-xs transition-colors">UMKM</span>
+                <span class="font-semibold text-gray-500 group-hover:text-[#0a2622] text-xs transition-colors">UMKM</span>
             </div>
             <!-- Wisata -->
-            <div @click="active = 'wisata'" class="text-center group cursor-pointer">
-                <div :class="active === 'wisata' ? 'bg-[#0a2622] text-white shadow-lg shadow-[#0a2622]/20' : 'bg-gray-50 border border-gray-100 text-gray-600'" 
-                     class="w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
-                    <x-lucide-send class="w-7 h-7" />
+            <div class="text-center group cursor-default">
+                <div class="bg-gray-50 group-hover:bg-[#0a2622] border group-hover:border-[#0a2622] border-gray-100 text-gray-600 group-hover:text-white shadow-sm group-hover:shadow-lg group-hover:shadow-[#0a2622]/20 w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center transition-all duration-300">
+                    <x-lucide-send class="w-7 h-7 transition-transform group-hover:scale-110" />
                 </div>
-                <span :class="active === 'wisata' ? 'font-bold text-[#0a2622]' : 'font-semibold text-gray-500'" class="text-xs transition-colors">Wisata</span>
+                <span class="font-semibold text-gray-500 group-hover:text-[#0a2622] text-xs transition-colors">Wisata</span>
             </div>
         </div>
 
@@ -78,7 +74,7 @@
                     </li>
                 </ul>
 
-                <a href="#" class="inline-flex items-center font-bold text-[#0a2622] hover:text-[#ff8a65] transition-colors group">
+                <a href="{{ url('/about') }}" class="inline-flex items-center font-bold text-[#0a2622] hover:text-[#ff8a65] transition-colors group">
                     Pelajari Lebih Lanjut
                     <x-lucide-move-right class="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
@@ -99,12 +95,12 @@
 
                     <!-- KANAN TENGAH-BELAKANG: Gambar Kedua Tanpa Border Putih -->
                     <div class="absolute top-1/4 right-0 w-[50%] z-10 opacity-90 shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-                        <img src="{{ asset('images/pantai.png') }}" alt="Secondary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
+                        <img src="{{ asset('images/culture/culture07-old-2.jpg') }}" alt="Secondary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
                     </div>
 
                     <!-- KIRI BAWAH: Gambar Ketiga Tanpa Border Putih -->
                     <div class="absolute bottom-0 left-[20%] w-[55%] z-30 shadow-2xl shadow-black/10 transition-transform duration-300 hover:scale-[1.02]">
-                        <img src="{{ asset('images/pantai.png') }}" alt="Tertiary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
+                        <img src="{{ asset('images/culture/culture06-old.jpg') }}" alt="Tertiary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
                     </div>
 
                 </div>

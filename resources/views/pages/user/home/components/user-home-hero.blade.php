@@ -15,9 +15,9 @@
             Jelajahi Permata Tersembunyi Madura
         </h1>
 
-        <div class="relative max-w-3xl mx-auto bg-white/20 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl">
+        <!-- <div class="relative max-w-3xl mx-auto bg-white/20 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl">
             
-            <!-- Search -->
+    
             <div class="pl-4 pr-2 flex items-center pointer-events-none text-white/90">
                 <i data-lucide="search" class="w-5 h-5 stroke-[2.5] drop-shadow-md"></i>
             </div>
@@ -31,7 +31,7 @@
                 Cari
             </button>
             
-        </div>
+        </div> -->
     </div>
 
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
