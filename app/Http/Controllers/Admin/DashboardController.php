@@ -26,6 +26,6 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentPending'));
+        return view('pages.admin.admin-home-index', compact('stats', 'recentPending'));
     }
 }

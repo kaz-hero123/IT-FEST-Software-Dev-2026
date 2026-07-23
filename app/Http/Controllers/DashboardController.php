@@ -31,6 +31,6 @@ class DashboardController extends Controller
             ->latest()
             ->paginate(12);
 
-        return view('dashboard.index', compact('stats', 'contents'));
+        return view('pages.contributor.home.contributor-home-index', compact('stats', 'contents'));
     }
 }

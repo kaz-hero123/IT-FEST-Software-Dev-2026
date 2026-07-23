@@ -45,7 +45,7 @@ class ContentController extends Controller
             ->limit(4)
             ->get();
 
-        return view('explore.detail', compact('content', 'relatedContents'));
+        return view('pages.user.explore.components.user-explore-detail', compact('content', 'relatedContents'));
     }
 
     /**
@@ -57,7 +57,7 @@ class ContentController extends Controller
         $categories = Category::all();
         $regencies = Regency::all();
 
-        return view('contents.create', compact('categories', 'regencies'));
+        return view('pages.contributor.form.contributor-create', compact('categories', 'regencies'));
     }
 
     /**
@@ -78,6 +78,8 @@ class ContentController extends Controller
             'description'  => $request->description,
             'address'      => $request->address,
             'maps_url'     => $request->maps_url,
+            'open_time'    => $request->open_time,
+            'close_time'   => $request->close_time,
             'status'       => 'pending',
             'was_approved' => false,
         ]);
@@ -110,7 +112,7 @@ class ContentController extends Controller
         $categories = Category::all();
         $regencies = Regency::all();
 
-        return view('contents.edit', compact('content', 'categories', 'regencies'));
+        return view('pages.contributor.form.contributor-edit', compact('content', 'categories', 'regencies'));
     }
 
     /**
@@ -135,6 +137,8 @@ class ContentController extends Controller
             'description' => $request->description,
             'address'     => $request->address,
             'maps_url'    => $request->maps_url,
+            'open_time'   => $request->open_time,
+            'close_time'  => $request->close_time,
             'status'      => 'pending', // Paksa reset ke pending setelah edit
         ]);
 

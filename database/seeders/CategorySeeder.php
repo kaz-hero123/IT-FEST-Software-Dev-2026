@@ -16,6 +16,6 @@ class CategorySeeder extends Seeder
             ['name' => 'Spot Foto', 'slug' => 'spot-foto'],
         ];
 
-        DB::table('categories')->insert($categories);
+        DB::table('categories')->upsert($categories, ['slug'], ['name']);
     }
 }

@@ -26,7 +26,7 @@ class ModerationController extends Controller
             ->oldest() // FIFO — konten paling lama dulu
             ->paginate(12);
 
-        return view('admin.moderation.index', compact('contents'));
+        return view('pages.admin.moderation.index', compact('contents'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ModerationController extends Controller
             ->latest('created_at')
             ->get();
 
-        return view('admin.moderation.show', compact('content', 'moderationNotes'));
+        return view('pages.admin.moderation.show', compact('content', 'moderationNotes'));
     }
 
     /**

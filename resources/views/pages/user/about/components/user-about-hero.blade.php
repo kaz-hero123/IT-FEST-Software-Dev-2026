@@ -1,0 +1,34 @@
+<section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="{{ asset('images/culture/culture03.jpg') }}" 
+             alt="culture" 
+             data-parallax
+             data-parallax-speed="0.25"
+             data-parallax-scale="1.35"
+             class="w-full h-full object-cover origin-center will-change-transform">
+        <div class="absolute inset-0 bg-[#0a2622]/40 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/60 via-[#0a2622]/30 to-gray-50/20"></div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto mt-4">
+        <!-- Heading Utama -->
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide min-h-[1.3em]">
+            <span class="inline-block text-white"
+                  data-typing='["Tentang Jelajah Madura"]'
+                  data-typing-speed="90"
+                  data-loop="false">
+                <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-white ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
+            </span>
+        </h1>
+
+        <!-- Sub-deskripsi -->
+        <p class="text-sm md:text-lg text-white/90 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-sm">
+            Menghubungkan keindahan budaya, pesona alam, dan potensi lokal Madura melalui ekosistem pariwisata digital yang cerdas dan terkurasi.
+        </p>
+    </div>
+
+    <!-- Gradient Overlay bawah untuk smooth transition -->
+    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
+</section>

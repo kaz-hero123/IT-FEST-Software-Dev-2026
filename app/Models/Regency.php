@@ -14,6 +14,7 @@ class Regency extends Model
     protected $fillable = [
         'name',
         'slug',
+        'img',
     ];
 
     public function contents()

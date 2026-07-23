@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\ContentController as AdminContentController;
 
 // PUBLIC ROUTES
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/about', [LandingController::class, 'about']);
+Route::get('/question', [LandingController::class, 'question']);
 Route::get('/explore', [ExploreController::class, 'index']);
 Route::get('/explore/{regency}', [ExploreController::class, 'show']);
 Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);

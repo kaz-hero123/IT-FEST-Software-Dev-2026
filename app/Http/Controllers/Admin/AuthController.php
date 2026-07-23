@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
-        return view('admin.auth.login');
+        return view('pages.admin.auth.login');
     }
 
     /**
@@ -60,6 +60,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return redirect('/');
     }
 }
