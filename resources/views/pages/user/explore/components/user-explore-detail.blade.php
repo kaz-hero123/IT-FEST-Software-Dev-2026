@@ -16,10 +16,6 @@
                         <x-lucide-utensils class="w-3.5 h-3.5 mr-1.5" />
                         {{ $content->category->name }}
                     </span>
-                    <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-200/70 text-gray-700 text-xs font-semibold">
-                        <x-lucide-eye class="w-3.5 h-3.5 mr-1.5" />
-                        {{ number_format($content->view_count, 1, ',', '.') }}k views
-                    </span>
                 </div>
                 <!-- Title & Address -->
                 <h1 class="text-3xl md:text-4xl font-extrabold text-[#0a2622] mb-2 tracking-tight">
@@ -31,17 +27,7 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="flex gap-3 mt-4 md:mt-0">
-                <button class="flex items-center px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold text-sm shadow-sm hover:bg-gray-50 transition-colors">
-                    <x-lucide-share-2 class="w-4 h-4 mr-2" />
-                    Bagikan
-                </button>
-                <button class="flex items-center px-4 py-2 rounded-xl bg-[#0a2622] text-white font-semibold text-sm shadow-sm hover:bg-[#071b17] transition-colors">
-                    <x-lucide-bookmark class="w-4 h-4 mr-2" />
-                    Simpan
-                </button>
-            </div>
+
         </div>
 
         <!-- Photo Gallery (Grid) -->
@@ -155,14 +141,18 @@
                 <div class="bg-white rounded-3xl p-6 md:p-7 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
                     <h3 class="text-base font-extrabold text-[#0a2622] mb-4">Lokasi & Kontak</h3>
                     
-                    <!-- Static Maps Placeholder Image -->
-                    <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 overflow-hidden relative">
-                       <img src="{{ asset('images/pantai.png') }}" class="w-full h-full object-cover grayscale opacity-60">
-                       <div class="absolute inset-0 flex items-center justify-center">
-                           <div class="bg-white/90 backdrop-blur px-4 py-2 rounded-lg font-bold text-[#d35a39] shadow-sm flex items-center">
-                               <x-lucide-map-pin class="w-4 h-4 mr-2" /> Bebek Sinjay Asli
-                           </div>
-                       </div>
+                    <!-- Real Interactive Google Maps Embed -->
+                    <div class="w-full h-52 bg-gray-100 rounded-2xl mb-4 overflow-hidden relative border border-gray-200 shadow-sm">
+                        @php
+                            $mapLocationQuery = urlencode(($content->title ?? '') . ', ' . ($content->address ?? 'Madura'));
+                        @endphp
+                        <iframe 
+                            class="w-full h-full border-0" 
+                            src="https://maps.google.com/maps?q={{ $mapLocationQuery }}&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
 
                     <!-- Address Text -->
