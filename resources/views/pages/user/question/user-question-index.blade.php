@@ -27,12 +27,13 @@
     
         <!-- Hero Content -->
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-12 w-full">
-            <span class="inline-flex items-center py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[13px] font-semibold mb-5 tracking-wide shadow-sm">
-                <x-lucide-message-circle-question class="w-4 h-4 mr-2" />
-                Pusat Edukasi & Bantuan
-            </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] tracking-tight">
-                Bagaimana Kami Membantu?
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide min-h-[1.3em]">
+                <span class="inline-block text-white"
+                      data-typing='["Bagaimana Kami Membantu?"]'
+                      data-typing-speed="90"
+                      data-loop="false">
+                    <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-white ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
+                </span>
             </h1>
             <p class="text-base md:text-lg text-gray-200 max-w-2xl mx-auto drop-shadow-md leading-relaxed">
                 Temukan seluruh jawaban atas pertanyaan Anda seputar fitur Jelajah Madura, panduan rekomendasi tempat wisata favorit, hingga persyaratan menjadi kontributor penulis.

@@ -14,9 +14,21 @@
     <!-- Content Container -->
     <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto">
         
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide">
-            Jelajahi Permata Tersembunyi Madura
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide">
+            Jelajahi 
+            <span class="text-white">Madura</span>
         </h1>
+        <div class="text-2xl md:text-4xl lg:text-5xl font-bold text-[#ed8a53] mb-8 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide min-h-[1.3em] mt-2">
+            <span class="inline-block"
+                  data-typing='["Permata Tersembunyi", "Wisata Bahari & Alam", "Kuliner Otentik Khas", "Warisan Budaya"]'
+                  data-typing-speed="90"
+                  data-typing-pause="2200"
+                  data-typing-delete-speed="40"
+                  data-loop="true">
+                <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-amber-400 ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
+            </span> 
+        </div>
+
 
         <!-- <div class="relative max-w-3xl mx-auto bg-white/20 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl">
             

@@ -1,12 +1,131 @@
 import './auth';
 
-// Lucide Icons Initialization
+// Initialization on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
-    window.initParallaxScroll();
+    if (typeof window.initParallaxScroll === 'function') {
+        window.initParallaxScroll();
+    }
+    if (typeof window.initTypewriter === 'function') {
+        window.initTypewriter();
+    }
 });
+
+// Typewriter Animation Component for Hero sections
+window.initTypewriter = function () {
+    const elements = document.querySelectorAll('[data-typing]');
+    elements.forEach((el) => {
+        if (el.dataset.typewriterInitialized) return;
+        el.dataset.typewriterInitialized = 'true';
+
+        let phrases = [];
+        try {
+            phrases = JSON.parse(el.dataset.typing);
+        } catch (e) {
+            phrases = [el.innerText.trim()];
+        }
+
+        if (!phrases.length) return;
+
+        const targetEl = el.querySelector('.typing-target') || el;
+        const speed = parseInt(el.dataset.typingSpeed) || 90;
+        const pause = parseInt(el.dataset.typingPause) || 2200;
+        const deleteSpeed = parseInt(el.dataset.typingDeleteSpeed) || 40;
+
+        // Loop setting: if data-loop="false" OR if phrases has only 1 item and data-loop is not "true", do not loop
+        const loopAttr = el.dataset.loop;
+        const shouldLoop = loopAttr !== undefined ? (loopAttr === 'true') : (phrases.length > 1);
+
+        // Clear target content immediately on init so it starts empty on refresh
+        targetEl.textContent = '';
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        // Start typing after a short delay on refresh
+        setTimeout(() => {
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+
+                targetEl.textContent = currentPhrase.substring(0, charIndex);
+
+                let nextSpeed = isDeleting ? deleteSpeed : speed;
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    if (!shouldLoop) {
+                        // Single text typing complete -> stay permanent!
+                        return;
+                    }
+                    nextSpeed = pause;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    nextSpeed = 350;
+                }
+
+                setTimeout(type, nextSpeed);
+            }
+            type();
+        }, 300);
+    });
+};
+
+// Alpine.js Typewriter Component registration if Alpine is present
+document.addEventListener('alpine:init', () => {
+    if (typeof Alpine !== 'undefined') {
+        Alpine.data('typewriter', (phrases = [], speed = 90, pause = 2200, deleteSpeed = 40, loop = null) => ({
+            phrases: phrases.length ? phrases : ['Permata Tersembunyi'],
+            displayText: '',
+            phraseIndex: 0,
+            charIndex: 0,
+            isDeleting: false,
+            shouldLoop: loop !== null ? loop : (phrases.length > 1),
+
+            init() {
+                setTimeout(() => this.type(), 300);
+            },
+
+            type() {
+                const currentPhrase = this.phrases[this.phraseIndex];
+
+                if (this.isDeleting) {
+                    this.displayText = currentPhrase.substring(0, this.charIndex - 1);
+                    this.charIndex--;
+                } else {
+                    this.displayText = currentPhrase.substring(0, this.charIndex + 1);
+                    this.charIndex++;
+                }
+
+                let currentSpeed = this.isDeleting ? deleteSpeed : speed;
+
+                if (!this.isDeleting && this.charIndex === currentPhrase.length) {
+                    if (!this.shouldLoop) {
+                        return;
+                    }
+                    currentSpeed = pause;
+                    this.isDeleting = true;
+                } else if (this.isDeleting && this.charIndex === 0) {
+                    this.isDeleting = false;
+                    this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
+                    currentSpeed = 350;
+                }
+
+                setTimeout(() => this.type(), currentSpeed);
+            }
+        }));
+    }
+});
+
 
 // Parallax Scroll Effect for Banners
 window.initParallaxScroll = function () {
