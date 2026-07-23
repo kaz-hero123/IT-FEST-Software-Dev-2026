@@ -16,6 +16,6 @@ class RegencySeeder extends Seeder
             ['name' => 'Sumenep',    'slug' => 'sumenep',   'img' => 'images/culture/culture07.jpg'],
         ];
 
-        DB::table('regencies')->insert($regencies);
+        DB::table('regencies')->upsert($regencies, ['slug'], ['name', 'img']);
     }
 }

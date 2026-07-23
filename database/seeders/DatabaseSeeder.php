@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             RegencySeeder::class,
             CategorySeeder::class,
             UserSeeder::class,
+            WisataSeeder::class,
+            UserExploreDetailSeeder::class,
         ]);
     }
 }

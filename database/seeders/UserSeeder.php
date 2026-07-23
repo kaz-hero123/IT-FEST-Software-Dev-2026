@@ -10,23 +10,22 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
+        \App\Models\User::firstOrCreate(
+            ['email' => 'admin@admin.com'],
             [
-                'name'       => 'Admin Jelajah',
-                'email'      => 'admin@admin.com',
-                'password'   => Hash::make('password'),
-                'role'       => 'admin',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                'name'     => 'Admin Jelajah',
+                'password' => Hash::make('password'),
+                'role'     => 'admin',
+            ]
+        );
+
+        \App\Models\User::firstOrCreate(
+            ['email' => 'kontributor@kontributor.com'],
             [
-                'name'       => 'Kontributor Test',
-                'email'      => 'kontributor@kontributor.com',
-                'password'   => Hash::make('password'),
-                'role'       => 'contributor',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+                'name'     => 'Kontributor Test',
+                'password' => Hash::make('password'),
+                'role'     => 'contributor',
+            ]
+        );
     }
 }
