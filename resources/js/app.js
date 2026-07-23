@@ -1,3 +1,5 @@
+import './auth';
+
 // Lucide Icons Initialization
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') {
