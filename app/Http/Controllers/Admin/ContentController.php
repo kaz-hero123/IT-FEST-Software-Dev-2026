@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UnpublishContentRequest;
 use App\Models\Content;
-use App\Models\ModerationNote;
-use Illuminate\Support\Facades\Auth;
 
 class ContentController extends Controller
 {
@@ -26,7 +24,7 @@ class ContentController extends Controller
             ->latest('updated_at')
             ->paginate(12);
 
-        return view('admin.contents.index', compact('contents'));
+        return view('pages.admin.contents.index', compact('contents'));
     }
 
     /**
@@ -40,13 +38,7 @@ class ContentController extends Controller
             // was_approved tetap true — pernah di-approve sebelumnya
         ]);
 
-        ModerationNote::create([
-            'content_id' => $content->id,
-            'admin_id'   => Auth::id(),
-            'action'     => 'unpublished',
-            'note'       => $request->note,
-            'created_at' => now(),
-        ]);
+        $content->logModeration('unpublished', $request->note);
 
         return redirect('/admin/contents')->with('success', 'Konten berhasil di-unpublish.');
     }
@@ -57,16 +49,8 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
-        $content->update(['status' => 'deleted']);
-        $content->delete(); // Soft delete — isi deleted_at
-
-        ModerationNote::create([
-            'content_id' => $content->id,
-            'admin_id'   => Auth::id(),
-            'action'     => 'deleted',
-            'note'       => null,
-            'created_at' => now(),
-        ]);
+        $content->softDeleteWithStatus();
+        $content->logModeration('deleted');
 
         return redirect('/admin/contents')->with('success', 'Konten berhasil dihapus.');
     }

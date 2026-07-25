@@ -11,7 +11,7 @@ class EnsureContributor
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || (Auth::user() && Auth::user()->role !== 'contributor')) {
+        if (!Auth::check() || Auth::user()->role !== 'contributor') {
             abort(403, 'Akses ditolak.');
         }
 

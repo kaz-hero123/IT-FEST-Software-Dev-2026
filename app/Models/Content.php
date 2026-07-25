@@ -79,4 +79,29 @@ class Content extends Model
     {
         return $this->hasOne(ModerationNote::class)->latestOfMany('created_at');
     }
+
+    /**
+     * Log aksi moderasi (approve/reject/unpublish/delete) ke tabel moderation_notes.
+     * Menggantikan 4× copy-paste ModerationNote::create() di admin controllers. (F-06)
+     */
+    public function logModeration(string $action, ?string $note = null): ModerationNote
+    {
+        return ModerationNote::create([
+            'content_id' => $this->id,
+            'admin_id'   => \Illuminate\Support\Facades\Auth::id(),
+            'action'     => $action,
+            'note'       => $note,
+            'created_at' => now(),
+        ]);
+    }
+
+    /**
+     * Soft delete dengan set status ke 'deleted'.
+     * Menggabungkan pattern duplicate di ContentController@destroy dan Admin\ContentController@destroy. (F-05)
+     */
+    public function softDeleteWithStatus(): bool
+    {
+        $this->update(['status' => 'deleted']);
+        return $this->delete();
+    }
 }

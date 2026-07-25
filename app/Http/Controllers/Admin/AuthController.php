@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,14 +22,9 @@ class AuthController extends Controller
      * Proses login admin.
      * URL: POST /admin/login
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt($request->validated())) {
             return back()
                 ->withErrors(['email' => 'Email atau password salah.'])
                 ->withInput();

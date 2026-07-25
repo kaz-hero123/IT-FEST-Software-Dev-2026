@@ -15,10 +15,17 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
 
+        // Single query: GROUP BY status instead of 3 separate COUNT queries (F-07a)
+        $statusCounts = Content::query()
+            ->where('user_id', $userId)
+            ->selectRaw('status, count(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
         $stats = [
-            'approved' => Content::query()->where('user_id', $userId)->where('status', 'approved')->count(),
-            'pending'  => Content::query()->where('user_id', $userId)->where('status', 'pending')->count(),
-            'rejected' => Content::query()->where('user_id', $userId)->where('status', 'rejected')->count(),
+            'approved' => $statusCounts->get('approved', 0),
+            'pending'  => $statusCounts->get('pending', 0),
+            'rejected' => $statusCounts->get('rejected', 0),
         ];
 
         $contents = Content::with([
@@ -34,3 +41,4 @@ class DashboardController extends Controller
         return view('pages.contributor.home.contributor-home-index', compact('stats', 'contents'));
     }
 }
+

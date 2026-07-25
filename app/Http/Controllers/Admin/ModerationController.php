@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RejectContentRequest;
 use App\Models\Content;
 use App\Models\ModerationNote;
-use Illuminate\Support\Facades\Auth;
 
 class ModerationController extends Controller
 {
@@ -56,13 +55,7 @@ class ModerationController extends Controller
             'was_approved' => true,
         ]);
 
-        ModerationNote::create([
-            'content_id' => $content->id,
-            'admin_id'   => Auth::id(),
-            'action'     => 'approved',
-            'note'       => null,
-            'created_at' => now(),
-        ]);
+        $content->logModeration('approved');
 
         return redirect('/admin/moderation')->with('success', 'Konten berhasil di-approve.');
     }
@@ -77,13 +70,7 @@ class ModerationController extends Controller
             'status' => 'rejected',
         ]);
 
-        ModerationNote::create([
-            'content_id' => $content->id,
-            'admin_id'   => Auth::id(),
-            'action'     => 'rejected',
-            'note'       => $request->note,
-            'created_at' => now(),
-        ]);
+        $content->logModeration('rejected', $request->note);
 
         return redirect('/admin/moderation')->with('success', 'Konten berhasil di-reject.');
     }

@@ -103,10 +103,7 @@ class ContentController extends Controller
      */
     public function edit(Content $content)
     {
-        // Cek kepemilikan
-        if ($content->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorizeOwner($content);
 
         $content->load(['photos', 'category', 'regency']);
         $categories = Category::all();
@@ -121,10 +118,7 @@ class ContentController extends Controller
      */
     public function update(UpdateContentRequest $request, Content $content)
     {
-        // Cek kepemilikan
-        if ($content->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorizeOwner($content);
 
         // Re-generate slug dari title baru (exclude current content dari uniqueness check)
         $slug = $this->generateUniqueSlug($request->title, $content->id);
@@ -171,15 +165,21 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
-        // Cek kepemilikan
+        $this->authorizeOwner($content);
+
+        $content->softDeleteWithStatus();
+
+        return redirect('/dashboard')->with('success', 'Konten berhasil dihapus.');
+    }
+
+    /**
+     * Cek kepemilikan konten — abort 403 jika bukan milik user login. (F-04)
+     */
+    private function authorizeOwner(Content $content): void
+    {
         if ($content->user_id !== Auth::id()) {
             abort(403);
         }
-
-        $content->update(['status' => 'deleted']);
-        $content->delete(); // Soft delete — isi deleted_at
-
-        return redirect('/dashboard')->with('success', 'Konten berhasil dihapus.');
     }
 
     /**
