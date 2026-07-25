@@ -104,7 +104,7 @@
                     {{-- Thumbnail --}}
                     <div class="w-14 h-14 rounded-xl overflow-hidden bg-gray-100 shrink-0">
                         @if($content->photos->count() > 0)
-                            <img src="{{ $content->photos->first()->url }}"
+                            <img src="{{ Storage::url($content->photos->first()->file_path) }}"
                                  alt="{{ $content->title }}"
                                  class="w-full h-full object-cover"
                                  onerror="this.src='{{ asset('images/culture/culture04.jpg') }}'">

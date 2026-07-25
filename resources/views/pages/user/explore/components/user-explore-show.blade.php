@@ -64,7 +64,7 @@
                         <!-- Thumbnail -->
                         <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
                             @if($item->photos->count() > 0)
-                                <img src="{{ asset('storage/' . $item->photos->first()->image_path) }}" 
+                                <img src="{{ Storage::url($item->photos->first()->file_path) }}" 
                                      alt="{{ $item->title }}" 
                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @else
@@ -85,7 +85,7 @@
                                 {{ $item->title }}
                             </h3>
                             <p class="text-sm text-gray-500 mb-4 line-clamp-3">
-                                {{ $item->meta_desc ?? Str::limit(strip_tags($item->body), 100) }}
+                                {{ Str::limit(strip_tags($item->description), 100) }}
                             </p>
                             
                             <div class="mt-auto">
