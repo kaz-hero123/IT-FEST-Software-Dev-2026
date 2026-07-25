@@ -213,6 +213,9 @@
                     </div>
                     <x-lucide-badge-check class="w-6 h-6 text-green-500 shrink-0" />
                 </div>
+
+                {{-- Eco-Tourism Tips --}}
+                @include('components.eco-tips')
             </div>
         </div>
 
