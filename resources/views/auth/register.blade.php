@@ -63,7 +63,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-1.5">
                         <label for="login-password" class="text-xs md:text-sm font-semibold text-[#0f172a]">Kata Sandi</label>
-                        <a href="#" class="text-xs text-[#af4926] font-semibold hover:underline">Lupa password?</a>
+                        <span class="text-xs text-gray-400 font-medium">Min. 8 karakter</span>
                     </div>
                     <div class="relative">
                         <input id="login-password" type="password" name="password" required autocomplete="current-password"
@@ -208,7 +208,7 @@
                 <div class="flex items-start gap-2 pt-0.5">
                     <input id="terms" type="checkbox" name="terms" required class="mt-0.5 accent-[#af4926] w-4 h-4 shrink-0 cursor-pointer">
                     <label for="terms" class="text-xs text-gray-500 leading-tight cursor-pointer">
-                        Saya menyetujui <a href="#" class="text-[#af4926] font-semibold hover:underline">Syarat &amp; Ketentuan</a> dan <a href="#" class="text-[#af4926] font-semibold hover:underline">Kebijakan Privasi</a>.
+                        Saya menyetujui <span class="text-[#af4926] font-semibold">Syarat &amp; Ketentuan</span> dan <span class="text-[#af4926] font-semibold">Kebijakan Privasi</span>.
                     </label>
                 </div>
 

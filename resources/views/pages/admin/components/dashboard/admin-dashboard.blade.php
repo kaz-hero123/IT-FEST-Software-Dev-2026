@@ -12,11 +12,8 @@
             </div>
         </div>
         <h3 class="text-[24px] md:text-[30px] font-bold text-[#0f172a] leading-none mb-1.5 md:mb-2">{{ number_format($stats['total']) }}</h3>
-        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-green-600 flex items-center gap-1">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-            </svg>
-            +12% this month
+        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">
+            Total submissions
         </p>
     </div>
 
