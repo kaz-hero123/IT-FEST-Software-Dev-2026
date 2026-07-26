@@ -11,6 +11,9 @@
     {{-- Visi --}}
     @include('pages.user.home.components.user-home-visi')
 
+    {{-- Peta Interaktif Madura --}}
+    @include('pages.user.home.components.user-home-map')
+
     {{-- Popular --}}
     @include('pages.user.home.components.user-home-popular')
 
