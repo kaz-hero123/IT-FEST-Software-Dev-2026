@@ -12,7 +12,7 @@
         
         {{-- Section Header --}}
         <div class="text-center mb-14">
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#ecfdf5] text-[#0d9488] text-[11px] font-bold rounded-full mb-5 uppercase tracking-wider">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#f0fdfa] text-[#0d9488] text-[11px] font-semibold rounded-full mb-5 uppercase tracking-wider">
                 <x-lucide-bar-chart-3 class="w-3.5 h-3.5" />
                 Platform Impact
             </span>
