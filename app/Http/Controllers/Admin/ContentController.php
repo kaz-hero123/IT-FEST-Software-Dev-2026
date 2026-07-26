@@ -6,14 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UnpublishContentRequest;
 use App\Models\Content;
 
+use Illuminate\Http\Request;
+
 class ContentController extends Controller
 {
     /**
      * List semua konten yang sudah approved.
+     * Supports: ?search=xxx
      * URL: GET /admin/contents
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
         $contents = Content::with([
                 'user',
                 'category',
@@ -21,10 +26,17 @@ class ContentController extends Controller
                 'photos' => fn($q) => $q->where('is_primary', true),
             ])
             ->where('status', 'approved')
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                          ->orWhereHas('user', fn($u) => $u->where('name', 'like', "%{$search}%"));
+                });
+            })
             ->latest('updated_at')
-            ->paginate(12);
+            ->paginate(12)
+            ->appends(['search' => $search]);
 
-        return view('pages.admin.contents.index', compact('contents'));
+        return view('pages.admin.contents.index', compact('contents', 'search'));
     }
 
     /**

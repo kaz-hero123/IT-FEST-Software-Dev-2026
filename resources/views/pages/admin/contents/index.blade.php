@@ -13,6 +13,25 @@
                 Manage all approved and published content on the platform.
             </p>
         </div>
+
+        {{-- Search --}}
+        <form method="GET" action="/admin/contents" class="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <div class="relative flex-1 sm:flex-none">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Search content..."
+                       class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-medium text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:w-44 md:w-56">
+            </div>
+            <button type="submit" class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-bold text-[#374151] hover:bg-gray-50 transition-colors shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                Search
+            </button>
+        </form>
     </div>
 
     @if(session('success'))

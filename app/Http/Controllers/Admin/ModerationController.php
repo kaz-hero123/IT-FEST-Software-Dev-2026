@@ -7,25 +7,41 @@ use App\Http\Requests\Admin\RejectContentRequest;
 use App\Models\Content;
 use App\Models\ModerationNote;
 
+use Illuminate\Http\Request;
+
 class ModerationController extends Controller
 {
     /**
-     * List semua konten pending (antrian moderasi).
+     * List konten berdasarkan filter.
+     * Default: pending (antrian moderasi).
+     * Supports: ?search=xxx, ?status=pending|approved|rejected
      * URL: GET /admin/moderation
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status = $request->input('status', 'pending');
+        $search = $request->input('search');
+
         $contents = Content::with([
                 'user',
                 'category',
                 'regency',
                 'photos' => fn($q) => $q->where('is_primary', true),
             ])
-            ->where('status', 'pending')
-            ->oldest() // FIFO — konten paling lama dulu
-            ->paginate(12);
+            ->when($status !== 'all', function ($q) use ($status) {
+                $q->where('status', $status);
+            })
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                          ->orWhereHas('user', fn($u) => $u->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->oldest()
+            ->paginate(12)
+            ->appends(['search' => $search, 'status' => $status]);
 
-        return view('pages.admin.moderation.index', compact('contents'));
+        return view('pages.admin.moderation.index', compact('contents', 'status', 'search'));
     }
 
     /**

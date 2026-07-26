@@ -14,24 +14,46 @@
             </p>
         </div>
 
-        {{-- Search & Filter --}}
-        <div class="flex items-center gap-2 w-full sm:w-auto shrink-0">
+        {{-- Search --}}
+        <form method="GET" action="/admin/moderation" class="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <input type="hidden" name="status" value="{{ $status ?? 'pending' }}">
             <div class="relative flex-1 sm:flex-none">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
-                <input type="text" placeholder="Search queue..."
+                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Search by title or contributor..."
                        class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-medium text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:w-44 md:w-56">
             </div>
-            <button class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-bold text-[#374151] hover:bg-gray-50 transition-colors shrink-0">
+            <button type="submit" class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-bold text-[#374151] hover:bg-gray-50 transition-colors shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
-                Filter
+                Search
             </button>
-        </div>
+        </form>
+    </div>
+
+    {{-- Status Filter Tabs --}}
+    <div class="flex items-center gap-2 mb-6 overflow-x-auto">
+        @php
+            $filters = [
+                'pending' => ['label' => 'Pending', 'color' => 'amber'],
+                'approved' => ['label' => 'Approved', 'color' => 'green'],
+                'rejected' => ['label' => 'Rejected', 'color' => 'red'],
+                'all' => ['label' => 'Semua', 'color' => 'gray'],
+            ];
+        @endphp
+        @foreach($filters as $key => $filter)
+            <a href="/admin/moderation?status={{ $key }}{{ $search ? '&search=' . urlencode($search) : '' }}"
+               class="px-4 py-2 rounded-xl text-[12px] font-bold transition-all duration-200 shrink-0
+                      {{ ($status ?? 'pending') === $key 
+                         ? 'bg-[#0f172a] text-white shadow-sm' 
+                         : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50' }}">
+                {{ $filter['label'] }}
+            </a>
+        @endforeach
     </div>
 
     @include('pages.admin.components.moderation.admin-queue', ['contents' => $contents])
