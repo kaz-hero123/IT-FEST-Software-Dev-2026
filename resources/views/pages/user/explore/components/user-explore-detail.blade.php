@@ -111,7 +111,9 @@
                     </div>
                 </div>
 
-                <!-- Fasilitas Section (Static Example based on image) -->
+                {{-- Fasilitas section hidden — hardcoded data, semua konten menampilkan fasilitas yang sama.
+                     Akan di-uncomment setelah fasilitas dibuat dynamic per konten. --}}
+                {{--
                 <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
                     <h2 class="text-base font-bold text-gray-800 uppercase tracking-wider mb-6">FASILITAS</h2>
                     
@@ -133,6 +135,7 @@
                         </div>
                     </div>
                 </div>
+                --}}
             </div>
 
             <!-- Right Column: Lokasi & Kontributor Info -->
