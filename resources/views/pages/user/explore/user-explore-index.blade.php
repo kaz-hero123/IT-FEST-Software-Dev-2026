@@ -52,10 +52,6 @@
 @endphp
 
 <style>
-    /* =============================================
-       CINEMATIC PHOTO ACCORDION — Explore Page
-       ============================================= */
-
     .accordion-container {
         display: flex;
         gap: 6px;
@@ -63,7 +59,6 @@
         min-height: 520px;
         max-height: 700px;
     }
-
     .accordion-panel {
         position: relative;
         flex: 1;
@@ -72,61 +67,34 @@
         border-radius: 20px;
         transition: flex 0.55s cubic-bezier(0.4, 0, 0.15, 1);
     }
-
-    /* Expanded state */
     .accordion-container:hover .accordion-panel,
-    .accordion-container:focus-within .accordion-panel {
-        flex: 0.7;
-    }
+    .accordion-container:focus-within .accordion-panel { flex: 0.7; }
     .accordion-container .accordion-panel:hover,
-    .accordion-container .accordion-panel:focus-within {
-        flex: 4;
-    }
+    .accordion-container .accordion-panel:focus-within { flex: 4; }
 
-    /* Background image */
     .accordion-panel .panel-bg {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.15, 1),
-                    filter 0.5s ease;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.15, 1), filter 0.5s ease;
     }
     .accordion-panel:hover .panel-bg,
-    .accordion-panel:focus-within .panel-bg {
-        transform: scale(1.08);
-        filter: brightness(0.85);
-    }
-    .accordion-panel:not(:hover):not(:focus-within) .panel-bg {
-        filter: brightness(0.45) saturate(0.6);
-    }
+    .accordion-panel:focus-within .panel-bg { transform: scale(1.08); filter: brightness(0.85); }
+    .accordion-panel:not(:hover):not(:focus-within) .panel-bg { filter: brightness(0.45) saturate(0.6); }
 
-    /* Gradient overlay */
     .accordion-panel .panel-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-            to top,
-            rgba(10, 38, 34, 0.95) 0%,
-            rgba(10, 38, 34, 0.6) 30%,
-            rgba(10, 38, 34, 0.15) 55%,
-            transparent 100%
-        );
+        background: linear-gradient(to top, rgba(10,38,34,0.95) 0%, rgba(10,38,34,0.6) 30%, rgba(10,38,34,0.15) 55%, transparent 100%);
         transition: opacity 0.4s ease;
     }
     .accordion-panel:hover .panel-overlay,
     .accordion-panel:focus-within .panel-overlay {
-        background: linear-gradient(
-            to top,
-            rgba(10, 38, 34, 0.92) 0%,
-            rgba(10, 38, 34, 0.45) 35%,
-            rgba(10, 38, 34, 0.05) 60%,
-            transparent 100%
-        );
+        background: linear-gradient(to top, rgba(10,38,34,0.92) 0%, rgba(10,38,34,0.45) 35%, rgba(10,38,34,0.05) 60%, transparent 100%);
     }
 
-    /* Collapsed label (visible when not hovered) */
     .panel-collapsed-label {
         position: absolute;
         bottom: 0;
@@ -139,12 +107,8 @@
         z-index: 10;
     }
     .accordion-panel:hover .panel-collapsed-label,
-    .accordion-panel:focus-within .panel-collapsed-label {
-        opacity: 0;
-        transition: opacity 0.15s ease;
-    }
+    .accordion-panel:focus-within .panel-collapsed-label { opacity: 0; transition: opacity 0.15s ease; }
 
-    /* Region number (top-left) */
     .panel-number {
         position: absolute;
         top: 20px;
@@ -153,15 +117,12 @@
         font-size: 13px;
         font-weight: 800;
         letter-spacing: 0.08em;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(255,255,255,0.35);
         transition: color 0.4s ease;
     }
     .accordion-panel:hover .panel-number,
-    .accordion-panel:focus-within .panel-number {
-        color: rgba(255, 255, 255, 0.7);
-    }
+    .accordion-panel:focus-within .panel-number { color: rgba(255,255,255,0.7); }
 
-    /* Expanded content (visible on hover) */
     .panel-expanded-content {
         position: absolute;
         bottom: 0;
@@ -171,121 +132,61 @@
         z-index: 10;
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.35s ease,
-                    transform 0.45s cubic-bezier(0.4, 0, 0.15, 1);
+        transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.4, 0, 0.15, 1);
     }
     .accordion-panel:hover .panel-expanded-content,
-    .accordion-panel:focus-within .panel-expanded-content {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.15s;
-    }
+    .accordion-panel:focus-within .panel-expanded-content { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
 
-    /* Stats row */
     .stat-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
         padding: 6px 12px;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255,255,255,0.1);
         backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255,255,255,0.12);
         font-size: 12px;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(255,255,255,0.9);
         white-space: nowrap;
     }
 
-    /* CTA button */
-    .explore-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 24px;
-        border-radius: 14px;
-        background: #af4926;
-        color: white;
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: background 0.25s ease, transform 0.25s ease, gap 0.3s ease;
-        border: none;
-        cursor: pointer;
-    }
-    .explore-cta:hover {
-        background: #c85530;
-        transform: translateY(-1px);
-        gap: 12px;
-    }
-
-    /* Mobile: vertical stack */
     @media (max-width: 767px) {
-        .accordion-container {
-            flex-direction: column;
-            height: auto;
-            min-height: unset;
-            max-height: unset;
-            gap: 12px;
-        }
-        .accordion-panel {
-            flex: none !important;
-            height: 220px;
-            border-radius: 18px;
-        }
-        .accordion-panel:not(:hover) .panel-bg {
-            filter: brightness(0.6) saturate(0.8);
-        }
-        .panel-collapsed-label {
-            opacity: 1 !important;
-        }
-        .accordion-panel:hover .panel-collapsed-label {
-            opacity: 0 !important;
-        }
-        .panel-expanded-content {
-            padding: 20px 18px;
-        }
-        .accordion-panel:hover {
-            height: 360px;
-        }
+        .accordion-container { flex-direction: column; height: auto; min-height: unset; max-height: unset; gap: 12px; }
+        .accordion-panel { flex: none !important; height: 220px; border-radius: 18px; }
+        .accordion-panel:not(:hover) .panel-bg { filter: brightness(0.6) saturate(0.8); }
+        .panel-collapsed-label { opacity: 1 !important; }
+        .accordion-panel:hover .panel-collapsed-label { opacity: 0 !important; }
+        .panel-expanded-content { padding: 20px 18px; }
+        .accordion-panel:hover { height: 360px; }
     }
 </style>
 
-{{-- ========================================
-     SECTION 1: HERO BANNER
-     ======================================== --}}
-<section class="relative w-full h-[50vh] min-h-[340px] max-h-[480px] flex items-center justify-center overflow-hidden">
-    {{-- Background --}}
-    <div class="absolute inset-0">
-        <img src="{{ asset('images/culture/culture03.jpg') }}"
-             alt="Pulau Madura"
-             class="w-full h-full object-cover"
-             style="object-position: center 40%;">
+<!-- Hero Banner -->
+<section class="relative h-[50vh] min-h-[340px] max-h-[480px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="{{ asset('images/culture/culture03.jpg') }}" alt="Pulau Madura" class="w-full h-full object-cover" style="object-position: center 40%;">
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/70 via-[#0a2622]/50 to-[#0a2622]"></div>
     </div>
 
-    {{-- Content --}}
     <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1 class="text-[30px] md:text-[44px] lg:text-[52px] font-extrabold text-white leading-[1.15] mb-4 tracking-tight">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-wide mb-4">
             Empat Kabupaten,<br>
             <span class="text-[#ed8a53]">Satu Petualangan</span>
         </h1>
-        <p class="text-[14px] md:text-[16px] text-white/65 leading-relaxed max-w-lg mx-auto">
-            Pilih destinasi impianmu. Hover untuk mengintip, klik untuk memulai eksplorasi.
+        <p class="text-sm md:text-base text-white/60 leading-relaxed max-w-lg mx-auto">
+            Pilih destinasi impianmu dan mulai eksplorasi Madura.
         </p>
 
-        {{-- Scroll indicator --}}
         <div class="mt-8 flex flex-col items-center gap-2 animate-bounce">
             <x-lucide-chevron-down class="w-5 h-5 text-white/40" />
         </div>
     </div>
 </section>
 
-{{-- ========================================
-     SECTION 2: PHOTO ACCORDION
-     ======================================== --}}
+<!-- Photo Accordion -->
 <section class="bg-[#0a2622] px-3 md:px-6 pb-6 md:pb-10">
-    {{-- Accordion --}}
     <div class="accordion-container max-w-7xl mx-auto -mt-6 md:-mt-10">
         @foreach($regionData as $slug => $data)
             @php
@@ -295,47 +196,28 @@
                 $imgPath = $regency->img ?? 'images/pantai.png';
             @endphp
 
-            <a href="{{ url('/explore/' . $slug) }}"
-               class="accordion-panel group"
-               aria-label="Jelajahi {{ $name }} — {{ $count }} destinasi">
-
-                {{-- Region number --}}
+            <a href="{{ url('/explore/' . $slug) }}" class="accordion-panel group" aria-label="Jelajahi {{ $name }}">
                 <span class="panel-number">{{ $data['number'] }}</span>
 
-                {{-- Background photo --}}
-                <img src="{{ asset($imgPath) }}"
-                     alt="{{ $name }}"
-                     class="panel-bg"
-                     loading="lazy"
-                     onerror="this.src='{{ asset('images/pantai.png') }}'">
-
-                {{-- Gradient overlay --}}
+                <img src="{{ asset($imgPath) }}" alt="{{ $name }}" class="panel-bg" loading="lazy" onerror="this.src='{{ asset('images/pantai.png') }}'">
                 <div class="panel-overlay"></div>
 
-                {{-- COLLAPSED STATE: vertical label --}}
+                <!-- Collapsed -->
                 <div class="panel-collapsed-label">
-                    <p class="text-white font-extrabold text-[16px] md:text-[18px] tracking-wide mb-1">{{ $name }}</p>
-                    <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest">{{ $data['tagline'] }}</p>
+                    <p class="text-white font-bold text-base md:text-lg tracking-wide mb-1">{{ $name }}</p>
+                    <p class="text-white/50 text-xs font-semibold uppercase tracking-widest">{{ $data['tagline'] }}</p>
                 </div>
 
-                {{-- EXPANDED STATE: full details --}}
+                <!-- Expanded -->
                 <div class="panel-expanded-content">
-                    {{-- Tagline badge --}}
                     <span class="inline-block rounded-full bg-[#ed8a53]/20 border border-[#ed8a53]/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#ed8a53] mb-3">
                         {{ $data['tagline'] }}
                     </span>
 
-                    {{-- Region name --}}
-                    <h2 class="text-[28px] md:text-[34px] font-extrabold text-white leading-tight mb-2 tracking-tight">
-                        {{ $name }}
-                    </h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-2 tracking-tight">{{ $name }}</h2>
 
-                    {{-- Description --}}
-                    <p class="text-white/60 text-[13px] leading-relaxed mb-5 max-w-md">
-                        {{ $data['desc'] }}
-                    </p>
+                    <p class="text-white/60 text-sm leading-relaxed mb-5 max-w-md">{{ $data['desc'] }}</p>
 
-                    {{-- Stats row --}}
                     <div class="flex flex-wrap gap-2 mb-5">
                         @foreach($data['stats'] as $stat)
                             <span class="stat-pill">
@@ -353,8 +235,7 @@
                         @endforeach
                     </div>
 
-                    {{-- CTA --}}
-                    <span class="explore-cta">
+                    <span class="inline-flex items-center gap-2 bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm font-bold py-3 px-6 rounded-xl shadow-lg shadow-[#EF8D55]/30">
                         Mulai Jelajah
                         <x-lucide-arrow-right class="w-4 h-4" />
                     </span>
