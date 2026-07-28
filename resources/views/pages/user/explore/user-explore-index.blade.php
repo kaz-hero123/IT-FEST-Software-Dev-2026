@@ -7,443 +7,432 @@
 @section('content')
 @php
     $regencyBySlug = $regencies->keyBy('slug');
-    $mapRegions = [
+    $regionData = [
         'bangkalan' => [
-            'label' => 'Bangkalan',
             'tagline' => 'Gerbang Madura',
-            'fill' => '#0a2622',
-            'fillHover' => '#0d332d',
-            'accent' => '#f5c6a9',
-            'attributes' => [
-                ['icon' => '🏔️', 'label' => 'IKON', 'value' => 'Bukit Jaddih'],
-                ['icon' => '🌉', 'label' => 'AKSES', 'value' => 'Jembatan Suramadu'],
-                ['icon' => '🧭', 'label' => 'POSISI', 'value' => 'Barat Madura'],
+            'desc' => 'Kota pertama yang menyambut dari Jawa. Nikmati megahnya Jembatan Suramadu dan keindahan Bukit Jaddih yang memukau.',
+            'number' => '01',
+            'stats' => [
+                ['icon' => 'map-pin', 'label' => 'Destinasi'],
+                ['icon' => 'landmark', 'value' => 'Suramadu'],
+                ['icon' => 'compass', 'value' => 'Barat'],
             ],
-            // SVG zone (organic, follows island outline on west side)
-            'zone' => 'M78,281 C89,248 128,225 174,218 C214,211 247,195 290,202 C335,207 361,230 380,225 L380,560 L50,560 C60,400 70,310 78,281 Z',
-            'popupX' => 120,
-            'popupY' => 50,
         ],
         'sampang' => [
-            'label' => 'Sampang',
             'tagline' => 'Alam Tersembunyi',
-            'fill' => '#1b5148',
-            'fillHover' => '#22665b',
-            'accent' => '#d8ebe3',
-            'attributes' => [
-                ['icon' => '💧', 'label' => 'IKON', 'value' => 'Air Terjun Toroan'],
-                ['icon' => '🏖️', 'label' => 'PANTAI', 'value' => 'Camplong Beach'],
-                ['icon' => '🧭', 'label' => 'POSISI', 'value' => 'Tengah Barat'],
+            'desc' => 'Surga tersembunyi dengan air terjun Toroan yang memukau dan tradisi Karapan Sapi yang legendaris.',
+            'number' => '02',
+            'stats' => [
+                ['icon' => 'map-pin', 'label' => 'Destinasi'],
+                ['icon' => 'landmark', 'value' => 'Toroan'],
+                ['icon' => 'compass', 'value' => 'Tengah'],
             ],
-            'zone' => 'M380,225 C407,223 447,215 474,195 C490,200 510,205 540,210 L540,560 L380,560 Z',
-            'popupX' => 350,
-            'popupY' => 35,
         ],
         'pamekasan' => [
-            'label' => 'Pamekasan',
-            'tagline' => 'Batik & Budaya',
-            'fill' => '#af4926',
-            'fillHover' => '#c85530',
-            'accent' => '#fff0e5',
-            'attributes' => [
-                ['icon' => '🔥', 'label' => 'IKON', 'value' => 'Api Tak Kunjung Padam'],
-                ['icon' => '🎨', 'label' => 'BUDAYA', 'value' => 'Batik Klampar'],
-                ['icon' => '🧭', 'label' => 'POSISI', 'value' => 'Tengah Timur'],
+            'tagline' => 'Kota Batik',
+            'desc' => 'Pusat kebudayaan Madura dengan Batik Pamekasan yang mendunia dan pesona Api Tak Kunjung Padam.',
+            'number' => '03',
+            'stats' => [
+                ['icon' => 'map-pin', 'label' => 'Destinasi'],
+                ['icon' => 'landmark', 'value' => 'Batik Klampar'],
+                ['icon' => 'compass', 'value' => 'Timur'],
             ],
-            'zone' => 'M540,210 C558,207 589,228 628,221 C669,214 704,197 730,200 L730,560 L540,560 Z',
-            'popupX' => 560,
-            'popupY' => 50,
         ],
         'sumenep' => [
-            'label' => 'Sumenep',
             'tagline' => 'Mutiara Timur',
-            'fill' => '#ed8a53',
-            'fillHover' => '#f59d6e',
-            'accent' => '#7c311a',
-            'attributes' => [
-                ['icon' => '🏝️', 'label' => 'IKON', 'value' => 'Gili Labak'],
-                ['icon' => '🫁', 'label' => 'SPESIAL', 'value' => 'Pulau Oksigen'],
-                ['icon' => '🧭', 'label' => 'POSISI', 'value' => 'Ujung Timur'],
+            'desc' => 'Ujung timur Madura dengan kepulauan eksotis, Keraton Sumenep bersejarah, dan pantai-pantai tersembunyi.',
+            'number' => '04',
+            'stats' => [
+                ['icon' => 'map-pin', 'label' => 'Destinasi'],
+                ['icon' => 'landmark', 'value' => 'Gili Labak'],
+                ['icon' => 'compass', 'value' => 'Ujung Timur'],
             ],
-            'zone' => 'M730,200 C746,203 793,211 824,232 C868,223 907,214 944,200 C989,208 1023,214 1054,232 C1068,257 1083,283 1042,328 C1003,353 957,361 908,356 C864,352 830,339 786,345 C760,348 740,350 730,355 L730,560 Z',
-            'popupX' => 780,
-            'popupY' => 35,
         ],
     ];
 @endphp
 
 <style>
-    /* ========================================
-       INTERACTIVE MAP — Game-Inspired Styles
-       ======================================== */
+    /* =============================================
+       CINEMATIC PHOTO ACCORDION — Explore Page
+       ============================================= */
 
-    /* Region zone base */
-    .map-region-zone {
+    .accordion-container {
+        display: flex;
+        gap: 6px;
+        height: 75vh;
+        min-height: 520px;
+        max-height: 700px;
+    }
+
+    .accordion-panel {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
         cursor: pointer;
-        transition: filter 350ms cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 350ms ease;
+        border-radius: 20px;
+        transition: flex 0.55s cubic-bezier(0.4, 0, 0.15, 1);
     }
 
-    /* Region group hover — zone glow */
-    .map-region-group:hover .map-region-zone,
-    .map-region-group:focus-within .map-region-zone {
-        filter: brightness(1.25) saturate(1.15) drop-shadow(0 0 18px rgba(237, 138, 83, 0.35));
+    /* Expanded state */
+    .accordion-container:hover .accordion-panel,
+    .accordion-container:focus-within .accordion-panel {
+        flex: 0.7;
+    }
+    .accordion-container .accordion-panel:hover,
+    .accordion-container .accordion-panel:focus-within {
+        flex: 4;
     }
 
-    /* Tooltip — hidden by default */
-    .map-tooltip-group {
+    /* Background image */
+    .accordion-panel .panel-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.15, 1),
+                    filter 0.5s ease;
+    }
+    .accordion-panel:hover .panel-bg,
+    .accordion-panel:focus-within .panel-bg {
+        transform: scale(1.08);
+        filter: brightness(0.85);
+    }
+    .accordion-panel:not(:hover):not(:focus-within) .panel-bg {
+        filter: brightness(0.45) saturate(0.6);
+    }
+
+    /* Gradient overlay */
+    .accordion-panel .panel-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(10, 38, 34, 0.95) 0%,
+            rgba(10, 38, 34, 0.6) 30%,
+            rgba(10, 38, 34, 0.15) 55%,
+            transparent 100%
+        );
+        transition: opacity 0.4s ease;
+    }
+    .accordion-panel:hover .panel-overlay,
+    .accordion-panel:focus-within .panel-overlay {
+        background: linear-gradient(
+            to top,
+            rgba(10, 38, 34, 0.92) 0%,
+            rgba(10, 38, 34, 0.45) 35%,
+            rgba(10, 38, 34, 0.05) 60%,
+            transparent 100%
+        );
+    }
+
+    /* Collapsed label (visible when not hovered) */
+    .panel-collapsed-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 16px;
+        text-align: center;
+        opacity: 1;
+        transition: opacity 0.3s ease 0.1s;
+        z-index: 10;
+    }
+    .accordion-panel:hover .panel-collapsed-label,
+    .accordion-panel:focus-within .panel-collapsed-label {
         opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1),
-                    transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
-        pointer-events: none;
+        transition: opacity 0.15s ease;
     }
 
-    /* Tooltip — visible on hover */
-    .map-region-group:hover .map-tooltip-group,
-    .map-region-group:focus-within .map-tooltip-group {
+    /* Region number (top-left) */
+    .panel-number {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.35);
+        transition: color 0.4s ease;
+    }
+    .accordion-panel:hover .panel-number,
+    .accordion-panel:focus-within .panel-number {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Expanded content (visible on hover) */
+    .panel-expanded-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 32px 28px;
+        z-index: 10;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.35s ease,
+                    transform 0.45s cubic-bezier(0.4, 0, 0.15, 1);
+    }
+    .accordion-panel:hover .panel-expanded-content,
+    .accordion-panel:focus-within .panel-expanded-content {
         opacity: 1;
         transform: translateY(0);
+        transition-delay: 0.15s;
     }
 
-    /* Dashed connector line */
-    .map-connector {
+    /* Stats row */
+    .stat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        white-space: nowrap;
+    }
+
+    /* CTA button */
+    .explore-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 14px;
+        background: #af4926;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.25s ease, transform 0.25s ease, gap 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+    .explore-cta:hover {
+        background: #c85530;
+        transform: translateY(-1px);
+        gap: 12px;
+    }
+
+    /* Scan line animation */
+    @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100vh); }
+    }
+    .accordion-panel::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(237, 138, 83, 0.5), transparent);
         opacity: 0;
-        transition: opacity 300ms ease 80ms;
+        z-index: 15;
+        transition: opacity 0.3s ease;
     }
-    .map-region-group:hover .map-connector,
-    .map-region-group:focus-within .map-connector {
-        opacity: 0.7;
+    .accordion-panel:hover::after,
+    .accordion-panel:focus-within::after {
+        opacity: 1;
+        animation: scanline 2.5s linear infinite;
     }
 
-    /* Region label text */
-    .map-region-label {
-        transition: opacity 250ms ease;
+    /* Corner brackets (game UI element) */
+    .corner-bracket {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        z-index: 12;
+        opacity: 0;
+        transition: opacity 0.3s ease 0.2s;
     }
-    .map-region-group:hover .map-region-label {
+    .accordion-panel:hover .corner-bracket,
+    .accordion-panel:focus-within .corner-bracket {
         opacity: 0.5;
     }
+    .corner-bracket.tl { top: 14px; left: 14px; border-top: 2px solid #ed8a53; border-left: 2px solid #ed8a53; }
+    .corner-bracket.tr { top: 14px; right: 14px; border-top: 2px solid #ed8a53; border-right: 2px solid #ed8a53; }
+    .corner-bracket.bl { bottom: 14px; left: 14px; border-bottom: 2px solid #ed8a53; border-left: 2px solid #ed8a53; }
+    .corner-bracket.br { bottom: 14px; right: 14px; border-bottom: 2px solid #ed8a53; border-right: 2px solid #ed8a53; }
 
-    /* Focus styling for keyboard nav */
-    .map-region-group:focus { outline: none; }
-    .map-region-group:focus-within .map-region-zone {
-        filter: brightness(1.3) saturate(1.2) drop-shadow(0 0 22px rgba(237, 138, 83, 0.5));
-    }
-
-    /* Pulse animation for scan indicator */
-    @keyframes pulse-ring {
-        0% { r: 4; opacity: 0.7; }
-        100% { r: 14; opacity: 0; }
-    }
-    .scan-pulse {
-        animation: pulse-ring 2s ease-out infinite;
-    }
-
-    /* Float animation for tooltip */
-    @keyframes float-gentle {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-3px); }
-    }
-    .map-region-group:hover .map-tooltip-group {
-        animation: float-gentle 3s ease-in-out infinite;
-        animation-delay: 0.3s;
+    /* Mobile: vertical stack */
+    @media (max-width: 767px) {
+        .accordion-container {
+            flex-direction: column;
+            height: auto;
+            min-height: unset;
+            max-height: unset;
+            gap: 12px;
+        }
+        .accordion-panel {
+            flex: none !important;
+            height: 220px;
+            border-radius: 18px;
+        }
+        .accordion-panel:not(:hover) .panel-bg {
+            filter: brightness(0.6) saturate(0.8);
+        }
+        .panel-collapsed-label {
+            opacity: 1 !important;
+        }
+        .accordion-panel:hover .panel-collapsed-label {
+            opacity: 0 !important;
+        }
+        .panel-expanded-content {
+            padding: 20px 18px;
+        }
+        .accordion-panel:hover {
+            height: 360px;
+        }
+        .accordion-panel::after {
+            display: none;
+        }
+        .corner-bracket {
+            display: none;
+        }
     }
 </style>
 
-<section class="relative overflow-hidden bg-[#fafafa] py-10 md:py-16 min-h-screen">
-    {{-- Subtle radial glow at top --}}
-    <div class="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(ellipse_at_top,_rgba(224,242,241,0.95),_transparent_72%)]"></div>
+{{-- ========================================
+     SECTION 1: HERO BANNER
+     ======================================== --}}
+<section class="relative w-full h-[50vh] min-h-[340px] max-h-[480px] flex items-center justify-center overflow-hidden">
+    {{-- Background --}}
+    <div class="absolute inset-0">
+        <img src="{{ asset('images/culture/culture03.jpg') }}"
+             alt="Pulau Madura"
+             class="w-full h-full object-cover"
+             style="object-position: center 40%;">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/70 via-[#0a2622]/50 to-[#0a2622]"></div>
+    </div>
 
-    <div class="relative mx-auto w-full max-w-6xl px-4 md:px-6">
+    {{-- Content --}}
+    <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white/90 mb-5">
+            <x-lucide-compass class="w-3.5 h-3.5" />
+            Jelajahi Madura
+        </span>
+        <h1 class="text-[30px] md:text-[44px] lg:text-[52px] font-extrabold text-white leading-[1.15] mb-4 tracking-tight">
+            Empat Kabupaten,<br>
+            <span class="text-[#ed8a53]">Satu Petualangan</span>
+        </h1>
+        <p class="text-[14px] md:text-[16px] text-white/65 leading-relaxed max-w-lg mx-auto">
+            Pilih destinasi impianmu. Hover untuk mengintip, klik untuk memulai eksplorasi.
+        </p>
 
-        {{-- Header --}}
-        <header class="mx-auto mb-8 max-w-2xl text-center md:mb-10">
-            <span class="mb-5 inline-flex items-center gap-2 rounded-full bg-[#e0f2f1] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#0a2622]">
-                <x-lucide-gamepad-2 class="h-3.5 w-3.5" aria-hidden="true" />
-                Pilih zona perjalanan
-            </span>
-            <h1 class="mb-3 text-[28px] font-bold leading-tight text-[#0a2622] md:text-[38px]">
-                Temukan <span class="text-[#ed8a53]">level berikutnya</span> di Madura
-            </h1>
-            <p class="text-[13px] leading-relaxed text-gray-500 md:text-[15px]">
-                Arahkan cursor ke satu wilayah untuk melihat statistik perjalanannya, lalu klik untuk mulai menjelajah.
-            </p>
-        </header>
-
-        {{-- Map Container --}}
-        <div class="overflow-hidden rounded-[24px] border border-[#0a2622]/10 bg-white p-2.5 shadow-[0_20px_60px_-30px_rgba(10,38,34,0.35)] md:rounded-[32px] md:p-4">
-
-            {{-- Info badge --}}
-            <div class="relative overflow-hidden rounded-[18px] bg-[#e8f2ef] md:rounded-[24px]">
-                <div class="absolute left-4 top-4 z-20 hidden rounded-xl border border-white/80 bg-white/80 px-3 py-2 shadow-sm backdrop-blur-sm md:block">
-                    <p class="text-[9px] font-bold uppercase tracking-[0.12em] text-[#af4926]">Pulau Madura</p>
-                    <p class="mt-0.5 text-[10px] font-medium text-[#0a2622]/70">Hover zona untuk membuka data</p>
-                </div>
-
-                {{-- ====== SVG MAP (Desktop) ====== --}}
-                <svg viewBox="0 0 1120 560" class="hidden h-auto w-full md:block" role="img"
-                     aria-label="Peta interaktif Pulau Madura dengan empat zona kabupaten"
-                     xmlns="http://www.w3.org/2000/svg">
-
-                    <defs>
-                        {{-- Island outline --}}
-                        <path id="madura-outline"
-                              d="M78,281 C89,248 128,225 174,218 C214,211 247,195 290,202 C335,207 361,230 407,223 C447,215 474,195 515,201 C558,207 589,228 628,221 C669,214 704,197 746,203 C793,211 824,232 868,223 C907,214 944,200 989,208 C1023,214 1054,232 1068,257 C1083,283 1069,310 1042,328 C1003,353 957,361 908,356 C864,352 830,339 786,345 C739,352 702,369 658,366 C613,364 581,346 540,354 C500,361 460,371 420,362 C383,354 353,340 313,349 C270,358 235,367 193,356 C150,345 110,331 85,312 C72,302 70,292 78,281 Z" />
-                        <clipPath id="island-clip">
-                            <use href="#madura-outline" />
-                        </clipPath>
-
-                        {{-- Wave pattern for ocean --}}
-                        <pattern id="ocean-wave" width="60" height="30" patternUnits="userSpaceOnUse">
-                            <path d="M0,15 C10,7 20,7 30,15 S50,23 60,15" fill="none" stroke="#b8d8cf" stroke-width="1.2" opacity="0.6" />
-                        </pattern>
-
-                        {{-- Glow filter --}}
-                        <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur stdDeviation="3" result="blur" />
-                            <feMerge>
-                                <feMergeNode in="blur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-
-                        {{-- Tooltip shadow filter --}}
-                        <filter id="tooltip-shadow" x="-10%" y="-10%" width="130%" height="140%">
-                            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0a2622" flood-opacity="0.25" />
-                        </filter>
-                    </defs>
-
-                    {{-- Ocean background --}}
-                    <rect width="1120" height="560" fill="#e8f2ef" />
-                    <rect width="1120" height="560" fill="url(#ocean-wave)" />
-
-                    {{-- Decorative shipping lanes --}}
-                    <path d="M60,180 C280,140 500,155 700,130 C850,110 980,140 1060,175" fill="none" stroke="#c6e1d9" stroke-width="1.5" stroke-dasharray="5 12" />
-                    <path d="M80,420 C300,450 520,430 700,445 C850,458 970,440 1060,410" fill="none" stroke="#c6e1d9" stroke-width="1.5" stroke-dasharray="5 12" />
-
-                    {{-- Island drop shadow --}}
-                    <use href="#madura-outline" transform="translate(3,8)" fill="#0a2622" opacity="0.12" />
-
-                    {{-- ====== INTERACTIVE REGIONS ====== --}}
-                    @foreach($mapRegions as $slug => $region)
-                        @php
-                            $regency = $regencyBySlug->get($slug);
-                            $name = $regency->name ?? $region['label'];
-                            $count = $regency->approved_contents_count ?? 0;
-                            $attrs = array_merge(
-                                [['icon' => '📍', 'label' => 'DESTINASI', 'value' => $count . ' lokasi']],
-                                $region['attributes']
-                            );
-                        @endphp
-
-                        <a href="{{ url('/explore/' . $slug) }}"
-                           class="map-region-group"
-                           tabindex="0"
-                           aria-label="Jelajahi {{ $name }} — {{ $count }} destinasi">
-
-                            {{-- Colored zone inside island clip --}}
-                            <g clip-path="url(#island-clip)">
-                                <path d="{{ $region['zone'] }}"
-                                      fill="{{ $region['fill'] }}"
-                                      class="map-region-zone" />
-                            </g>
-
-                            {{-- Region label (always visible) --}}
-                            <text x="{{ $region['popupX'] + 55 }}"
-                                  y="{{ ($slug === 'sumenep') ? 290 : 310 }}"
-                                  text-anchor="middle"
-                                  fill="white"
-                                  font-size="17"
-                                  font-weight="700"
-                                  class="map-region-label pointer-events-none"
-                                  style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">{{ $name }}</text>
-                            <text x="{{ $region['popupX'] + 55 }}"
-                                  y="{{ ($slug === 'sumenep') ? 308 : 328 }}"
-                                  text-anchor="middle"
-                                  fill="white"
-                                  font-size="10.5"
-                                  font-weight="600"
-                                  opacity="0.75"
-                                  class="map-region-label pointer-events-none">{{ $region['tagline'] }} · {{ $count }} destinasi</text>
-
-                            {{-- Scan pulse dot (always visible center of zone) --}}
-                            <circle cx="{{ $region['popupX'] + 55 }}"
-                                    cy="{{ ($slug === 'sumenep') ? 260 : 280 }}"
-                                    r="4" fill="{{ $region['accent'] }}"
-                                    class="pointer-events-none" />
-                            <circle cx="{{ $region['popupX'] + 55 }}"
-                                    cy="{{ ($slug === 'sumenep') ? 260 : 280 }}"
-                                    r="4" fill="none" stroke="{{ $region['accent'] }}"
-                                    stroke-width="1.5"
-                                    class="scan-pulse pointer-events-none" />
-
-                            {{-- Connector line (hover only) --}}
-                            <line x1="{{ $region['popupX'] + 55 }}"
-                                  y1="{{ ($slug === 'sumenep') ? 255 : 275 }}"
-                                  x2="{{ $region['popupX'] + 100 }}"
-                                  y2="{{ $region['popupY'] + 140 }}"
-                                  stroke="{{ $region['accent'] }}"
-                                  stroke-width="1.5"
-                                  stroke-dasharray="4 6"
-                                  class="map-connector pointer-events-none" />
-
-                            {{-- ====== RPG TOOLTIP (hover only) ====== --}}
-                            <g class="map-tooltip-group" filter="url(#tooltip-shadow)">
-                                {{-- Tooltip body --}}
-                                <rect x="{{ $region['popupX'] }}"
-                                      y="{{ $region['popupY'] }}"
-                                      width="210"
-                                      height="136"
-                                      rx="12"
-                                      fill="#09201c"
-                                      stroke="{{ $region['accent'] }}"
-                                      stroke-width="1.5"
-                                      opacity="0.97" />
-
-                                {{-- Header bar --}}
-                                <rect x="{{ $region['popupX'] }}"
-                                      y="{{ $region['popupY'] }}"
-                                      width="210"
-                                      height="34"
-                                      rx="12"
-                                      fill="{{ $region['fill'] }}" />
-                                {{-- Flatten bottom corners of header --}}
-                                <rect x="{{ $region['popupX'] }}"
-                                      y="{{ $region['popupY'] + 22 }}"
-                                      width="210"
-                                      height="12"
-                                      fill="{{ $region['fill'] }}" />
-
-                                {{-- "REGION UNLOCKED" badge --}}
-                                <rect x="{{ $region['popupX'] + 9 }}"
-                                      y="{{ $region['popupY'] + 8 }}"
-                                      width="8" height="8" rx="2"
-                                      fill="{{ $region['accent'] }}" />
-                                <text x="{{ $region['popupX'] + 23 }}"
-                                      y="{{ $region['popupY'] + 16 }}"
-                                      fill="{{ $region['accent'] }}"
-                                      font-size="8.5"
-                                      font-weight="700"
-                                      letter-spacing="1.1">REGION UNLOCKED</text>
-
-                                {{-- Region number --}}
-                                <text x="{{ $region['popupX'] + 197 }}"
-                                      y="{{ $region['popupY'] + 16 }}"
-                                      text-anchor="end"
-                                      fill="{{ $region['accent'] }}"
-                                      font-size="9"
-                                      font-weight="700"
-                                      opacity="0.6">{{ sprintf('%02d', $loop->iteration) }}</text>
-
-                                {{-- Divider after header --}}
-                                <line x1="{{ $region['popupX'] + 9 }}"
-                                      y1="{{ $region['popupY'] + 34 }}"
-                                      x2="{{ $region['popupX'] + 201 }}"
-                                      y2="{{ $region['popupY'] + 34 }}"
-                                      stroke="white" stroke-opacity="0.1" />
-
-                                {{-- Region name large --}}
-                                <text x="{{ $region['popupX'] + 12 }}"
-                                      y="{{ $region['popupY'] + 53 }}"
-                                      fill="white"
-                                      font-size="15"
-                                      font-weight="800">{{ strtoupper($name) }}</text>
-
-                                {{-- Stat rows --}}
-                                @foreach($attrs as $i => $attr)
-                                    <text x="{{ $region['popupX'] + 12 }}"
-                                          y="{{ $region['popupY'] + 74 + ($i * 16) }}"
-                                          fill="{{ $region['accent'] }}"
-                                          font-size="8"
-                                          font-weight="700">{{ $attr['icon'] ?? '' }} {{ $attr['label'] }}</text>
-                                    <text x="{{ $region['popupX'] + 88 }}"
-                                          y="{{ $region['popupY'] + 74 + ($i * 16) }}"
-                                          fill="white"
-                                          font-size="9"
-                                          font-weight="600">{{ $attr['value'] }}</text>
-                                @endforeach
-
-                                {{-- "KLIK UNTUK MASUK" footer --}}
-                                <text x="{{ $region['popupX'] + 105 }}"
-                                      y="{{ $region['popupY'] + 130 }}"
-                                      text-anchor="middle"
-                                      fill="{{ $region['accent'] }}"
-                                      font-size="7.5"
-                                      font-weight="700"
-                                      letter-spacing="0.8"
-                                      opacity="0.7">▶ KLIK UNTUK MASUK</text>
-                            </g>
-                        </a>
-                    @endforeach
-
-                    {{-- ====== ZONE DIVIDERS (on top of zones, inside clip) ====== --}}
-                    <g clip-path="url(#island-clip)" fill="none" stroke="#fffaf4" stroke-linecap="round" opacity="0.55">
-                        <line x1="380" y1="195" x2="380" y2="560" stroke-width="2" stroke-dasharray="6 8" />
-                        <line x1="540" y1="195" x2="540" y2="560" stroke-width="2" stroke-dasharray="6 8" />
-                        <line x1="730" y1="195" x2="730" y2="560" stroke-width="2" stroke-dasharray="6 8" />
-                    </g>
-
-                    {{-- Island outline stroke --}}
-                    <use href="#madura-outline" fill="none" stroke="#fffaf4" stroke-width="3.5" stroke-linejoin="round" />
-
-                    {{-- ====== KEPULAUAN SUMENEP (decorative small islands) ====== --}}
-                    <g fill="#ed8a53" stroke="#7c311a" stroke-width="1.5">
-                        <ellipse cx="900" cy="400" rx="16" ry="10" />
-                        <ellipse cx="940" cy="418" rx="11" ry="7" />
-                        <ellipse cx="975" cy="395" rx="8" ry="5" />
-                        <ellipse cx="998" cy="414" rx="5" ry="3.5" />
-                    </g>
-                    <path d="M915,375 C930,385 938,395 940,408" fill="none" stroke="#af4926" stroke-width="1.3" stroke-dasharray="3 5" opacity="0.5" />
-                    <text x="950" y="445" text-anchor="middle" fill="#6b9b8e" font-size="10" font-style="italic">Kepulauan Sumenep</text>
-
-                    {{-- Ocean labels --}}
-                    <text x="480" y="490" text-anchor="middle" fill="#9ec3b8" font-size="12" font-style="italic" opacity="0.8">Laut Jawa</text>
-                    <text x="350" y="185" text-anchor="middle" fill="#9ec3b8" font-size="11" font-style="italic" opacity="0.6">Selat Madura</text>
-
-                    {{-- Compass --}}
-                    <g transform="translate(72,470)">
-                        <circle r="20" fill="white" fill-opacity="0.85" stroke="#b8d8cf" stroke-width="1.2" />
-                        <path d="M0,-14 L4,0 L0,14 L-4,0 Z" fill="#af4926" />
-                        <line x1="-12" y1="0" x2="12" y2="0" stroke="#1b5148" stroke-width="1.2" />
-                        <text x="0" y="-24" text-anchor="middle" fill="#1b5148" font-size="9" font-weight="700">N</text>
-                    </g>
-                </svg>
-
-                {{-- ====== MOBILE FALLBACK ====== --}}
-                <div class="grid grid-cols-2 gap-3 p-4 md:hidden" aria-label="Pilih kabupaten di Madura">
-                    @foreach($mapRegions as $slug => $region)
-                        @php
-                            $regency = $regencyBySlug->get($slug);
-                            $name = $regency->name ?? $region['label'];
-                            $count = $regency->approved_contents_count ?? 0;
-                        @endphp
-                        <a href="{{ url('/explore/' . $slug) }}"
-                           class="group rounded-2xl border border-white/80 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#af4926]/30 hover:bg-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#af4926]/50 focus:ring-offset-2">
-                            <span class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-sm" style="background-color: {{ $region['fill'] }}">
-                                <x-lucide-map-pin class="h-4.5 w-4.5" aria-hidden="true" />
-                            </span>
-                            <span class="block text-[14px] font-bold text-[#0a2622]">{{ $name }}</span>
-                            <span class="mt-1 block text-[11px] font-medium text-gray-500">{{ $region['tagline'] }} · {{ $count }} destinasi</span>
-                            <span class="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#af4926] group-hover:gap-2 transition-all">
-                                Mulai jelajah
-                                <x-lucide-arrow-right class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                            </span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Footer bar --}}
-            <div class="flex flex-col gap-2 px-2 pb-1 pt-4 md:flex-row md:items-center md:justify-between md:px-3">
-                <div class="flex items-center gap-2 text-[12px] text-gray-500">
-                    <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#e0f2f1] text-[#0a2622]">
-                        <x-lucide-crosshair class="h-3.5 w-3.5" aria-hidden="true" />
-                    </span>
-                    <span><strong class="font-bold text-[#0a2622]">4 zona perjalanan</strong> siap dijelajahi</span>
-                </div>
-                <p class="text-[10px] font-medium text-gray-400">Hover atau gunakan Tab untuk membuka data wilayah · Klik untuk masuk</p>
-            </div>
+        {{-- Scroll indicator --}}
+        <div class="mt-8 flex flex-col items-center gap-2 animate-bounce">
+            <x-lucide-chevron-down class="w-5 h-5 text-white/40" />
         </div>
+    </div>
+</section>
+
+{{-- ========================================
+     SECTION 2: PHOTO ACCORDION
+     ======================================== --}}
+<section class="bg-[#0a2622] px-3 md:px-6 pb-6 md:pb-10">
+    {{-- Accordion --}}
+    <div class="accordion-container max-w-7xl mx-auto -mt-6 md:-mt-10">
+        @foreach($regionData as $slug => $data)
+            @php
+                $regency = $regencyBySlug->get($slug);
+                $name = $regency->name ?? ucfirst($slug);
+                $count = $regency->approved_contents_count ?? 0;
+                $imgPath = $regency->img ?? 'images/pantai.png';
+            @endphp
+
+            <a href="{{ url('/explore/' . $slug) }}"
+               class="accordion-panel group"
+               aria-label="Jelajahi {{ $name }} — {{ $count }} destinasi">
+
+                {{-- Corner brackets (game UI) --}}
+                <div class="corner-bracket tl"></div>
+                <div class="corner-bracket tr"></div>
+                <div class="corner-bracket bl"></div>
+                <div class="corner-bracket br"></div>
+
+                {{-- Region number --}}
+                <span class="panel-number">{{ $data['number'] }}</span>
+
+                {{-- Background photo --}}
+                <img src="{{ asset($imgPath) }}"
+                     alt="{{ $name }}"
+                     class="panel-bg"
+                     loading="lazy"
+                     onerror="this.src='{{ asset('images/pantai.png') }}'">
+
+                {{-- Gradient overlay --}}
+                <div class="panel-overlay"></div>
+
+                {{-- COLLAPSED STATE: vertical label --}}
+                <div class="panel-collapsed-label">
+                    <p class="text-white font-extrabold text-[16px] md:text-[18px] tracking-wide mb-1">{{ $name }}</p>
+                    <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest">{{ $data['tagline'] }}</p>
+                </div>
+
+                {{-- EXPANDED STATE: full details --}}
+                <div class="panel-expanded-content">
+                    {{-- Tagline badge --}}
+                    <span class="inline-block rounded-full bg-[#ed8a53]/20 border border-[#ed8a53]/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#ed8a53] mb-3">
+                        {{ $data['tagline'] }}
+                    </span>
+
+                    {{-- Region name --}}
+                    <h2 class="text-[28px] md:text-[34px] font-extrabold text-white leading-tight mb-2 tracking-tight">
+                        {{ $name }}
+                    </h2>
+
+                    {{-- Description --}}
+                    <p class="text-white/60 text-[13px] leading-relaxed mb-5 max-w-md">
+                        {{ $data['desc'] }}
+                    </p>
+
+                    {{-- Stats row --}}
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        @foreach($data['stats'] as $stat)
+                            <span class="stat-pill">
+                                @if($stat['icon'] === 'map-pin')
+                                    <x-lucide-map-pin class="w-3.5 h-3.5 text-[#ed8a53]" />
+                                    <span>{{ $count }} {{ $stat['label'] }}</span>
+                                @elseif($stat['icon'] === 'landmark')
+                                    <x-lucide-landmark class="w-3.5 h-3.5 text-[#ed8a53]" />
+                                    <span>{{ $stat['value'] }}</span>
+                                @else
+                                    <x-lucide-compass class="w-3.5 h-3.5 text-[#ed8a53]" />
+                                    <span>{{ $stat['value'] }}</span>
+                                @endif
+                            </span>
+                        @endforeach
+                    </div>
+
+                    {{-- CTA --}}
+                    <span class="explore-cta">
+                        Mulai Jelajah
+                        <x-lucide-arrow-right class="w-4 h-4" />
+                    </span>
+                </div>
+            </a>
+        @endforeach
+    </div>
+
+    {{-- Bottom stat bar --}}
+    <div class="max-w-7xl mx-auto mt-5 md:mt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-2">
+        <div class="flex items-center gap-3">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[#ed8a53]">
+                <x-lucide-gamepad-2 class="h-4 w-4" />
+            </span>
+            <span class="text-[13px] text-white/50">
+                <strong class="font-bold text-white/80">4 zona perjalanan</strong> siap dijelajahi
+            </span>
+        </div>
+        <p class="text-[11px] font-medium text-white/30">
+            Hover untuk mengintip · Klik untuk masuk · Tab untuk navigasi keyboard
+        </p>
     </div>
 </section>
 @endsection
