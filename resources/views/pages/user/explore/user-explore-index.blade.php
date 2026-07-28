@@ -219,47 +219,6 @@
         gap: 12px;
     }
 
-    /* Scan line animation */
-    @keyframes scanline {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100vh); }
-    }
-    .accordion-panel::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(237, 138, 83, 0.5), transparent);
-        opacity: 0;
-        z-index: 15;
-        transition: opacity 0.3s ease;
-    }
-    .accordion-panel:hover::after,
-    .accordion-panel:focus-within::after {
-        opacity: 1;
-        animation: scanline 2.5s linear infinite;
-    }
-
-    /* Corner brackets (game UI element) */
-    .corner-bracket {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        z-index: 12;
-        opacity: 0;
-        transition: opacity 0.3s ease 0.2s;
-    }
-    .accordion-panel:hover .corner-bracket,
-    .accordion-panel:focus-within .corner-bracket {
-        opacity: 0.5;
-    }
-    .corner-bracket.tl { top: 14px; left: 14px; border-top: 2px solid #ed8a53; border-left: 2px solid #ed8a53; }
-    .corner-bracket.tr { top: 14px; right: 14px; border-top: 2px solid #ed8a53; border-right: 2px solid #ed8a53; }
-    .corner-bracket.bl { bottom: 14px; left: 14px; border-bottom: 2px solid #ed8a53; border-left: 2px solid #ed8a53; }
-    .corner-bracket.br { bottom: 14px; right: 14px; border-bottom: 2px solid #ed8a53; border-right: 2px solid #ed8a53; }
-
     /* Mobile: vertical stack */
     @media (max-width: 767px) {
         .accordion-container {
@@ -289,12 +248,6 @@
         .accordion-panel:hover {
             height: 360px;
         }
-        .accordion-panel::after {
-            display: none;
-        }
-        .corner-bracket {
-            display: none;
-        }
     }
 </style>
 
@@ -313,10 +266,6 @@
 
     {{-- Content --}}
     <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white/90 mb-5">
-            <x-lucide-compass class="w-3.5 h-3.5" />
-            Jelajahi Madura
-        </span>
         <h1 class="text-[30px] md:text-[44px] lg:text-[52px] font-extrabold text-white leading-[1.15] mb-4 tracking-tight">
             Empat Kabupaten,<br>
             <span class="text-[#ed8a53]">Satu Petualangan</span>
@@ -349,12 +298,6 @@
             <a href="{{ url('/explore/' . $slug) }}"
                class="accordion-panel group"
                aria-label="Jelajahi {{ $name }} — {{ $count }} destinasi">
-
-                {{-- Corner brackets (game UI) --}}
-                <div class="corner-bracket tl"></div>
-                <div class="corner-bracket tr"></div>
-                <div class="corner-bracket bl"></div>
-                <div class="corner-bracket br"></div>
 
                 {{-- Region number --}}
                 <span class="panel-number">{{ $data['number'] }}</span>
@@ -418,21 +361,6 @@
                 </div>
             </a>
         @endforeach
-    </div>
-
-    {{-- Bottom stat bar --}}
-    <div class="max-w-7xl mx-auto mt-5 md:mt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-2">
-        <div class="flex items-center gap-3">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[#ed8a53]">
-                <x-lucide-gamepad-2 class="h-4 w-4" />
-            </span>
-            <span class="text-[13px] text-white/50">
-                <strong class="font-bold text-white/80">4 zona perjalanan</strong> siap dijelajahi
-            </span>
-        </div>
-        <p class="text-[11px] font-medium text-white/30">
-            Hover untuk mengintip · Klik untuk masuk · Tab untuk navigasi keyboard
-        </p>
     </div>
 </section>
 @endsection
