@@ -20,10 +20,7 @@
     </div>
 
     <!-- Hero Content -->
-    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-        <span class="inline-block py-1.5 px-4 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-semibold mb-4 tracking-wide uppercase shadow-sm">
-            Eksplorasi Destinasi
-        </span>
+    <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto mt-4">
         <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide min-h-[1.3em]">
             <span class="inline-block text-white"
                   data-typing='["Pesonanya {{ $regency->name }}"]'
@@ -32,7 +29,7 @@
                 <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-white ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
             </span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow">
+        <p class="text-sm md:text-lg text-white/80 max-w-xl mx-auto font-medium leading-relaxed drop-shadow-sm">
             Jelajahi keindahan budaya, alam, dan kuliner tersembunyi yang ada di wilayah {{ $regency->name }}.
         </p>
     </div>
