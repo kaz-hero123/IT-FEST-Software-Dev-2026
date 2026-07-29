@@ -166,12 +166,19 @@
 <!-- Hero Banner -->
 <section class="relative h-[50vh] min-h-[340px] max-h-[480px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0 overflow-hidden">
-        <img src="{{ asset('images/culture/culture03.jpg') }}" alt="Pulau Madura" class="w-full h-full object-cover" style="object-position: center 40%;">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/70 via-[#0a2622]/50 to-[#0a2622]"></div>
+        <img src="{{ asset('images/culture/culture03.jpg') }}" 
+             alt="Pulau Madura" 
+             data-parallax
+             data-parallax-speed="0.25"
+             data-parallax-scale="1.35"
+             class="w-full h-full object-cover origin-center will-change-transform" 
+             style="object-position: center 40%;">
+        <div class="absolute inset-0 bg-[#0a2622]/30 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/70 via-[#0a2622]/40 to-[#0a2622]"></div>
     </div>
 
     <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-wide mb-4">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide mb-4">
             Empat Kabupaten,<br>
             <span class="text-[#ed8a53]">Satu Petualangan</span>
         </h1>
