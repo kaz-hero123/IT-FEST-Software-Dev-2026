@@ -9,9 +9,7 @@
     $regencyBySlug = $regencies->keyBy('slug');
     $regionData = [
         'bangkalan' => [
-            'tagline' => 'Gerbang Madura',
             'desc' => 'Kota pertama yang menyambut dari Jawa. Nikmati megahnya Jembatan Suramadu dan keindahan Bukit Jaddih yang memukau.',
-            'number' => '01',
             'stats' => [
                 ['icon' => 'map-pin', 'label' => 'Destinasi'],
                 ['icon' => 'landmark', 'value' => 'Suramadu'],
@@ -19,9 +17,7 @@
             ],
         ],
         'sampang' => [
-            'tagline' => 'Alam Tersembunyi',
             'desc' => 'Surga tersembunyi dengan air terjun Toroan yang memukau dan tradisi Karapan Sapi yang legendaris.',
-            'number' => '02',
             'stats' => [
                 ['icon' => 'map-pin', 'label' => 'Destinasi'],
                 ['icon' => 'landmark', 'value' => 'Toroan'],
@@ -29,9 +25,7 @@
             ],
         ],
         'pamekasan' => [
-            'tagline' => 'Kota Batik',
             'desc' => 'Pusat kebudayaan Madura dengan Batik Pamekasan yang mendunia dan pesona Api Tak Kunjung Padam.',
-            'number' => '03',
             'stats' => [
                 ['icon' => 'map-pin', 'label' => 'Destinasi'],
                 ['icon' => 'landmark', 'value' => 'Batik Klampar'],
@@ -39,9 +33,7 @@
             ],
         ],
         'sumenep' => [
-            'tagline' => 'Mutiara Timur',
             'desc' => 'Ujung timur Madura dengan kepulauan eksotis, Keraton Sumenep bersejarah, dan pantai-pantai tersembunyi.',
-            'number' => '04',
             'stats' => [
                 ['icon' => 'map-pin', 'label' => 'Destinasi'],
                 ['icon' => 'landmark', 'value' => 'Gili Labak'],
@@ -164,37 +156,50 @@
 </style>
 
 <!-- Hero Banner -->
-<section class="relative h-[50vh] min-h-[340px] max-h-[480px] flex items-center justify-center overflow-hidden">
+<section class="relative h-[85vh] flex items-center justify-center overflow-hidden ">
+    <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-        <img src="{{ asset('images/culture/culture03.jpg') }}" 
-             alt="Pulau Madura" 
+        <img src="{{ asset('images/culture/culture03.jpg') }}"
+             alt="Eksplorasi Madura"
              data-parallax
              data-parallax-speed="0.25"
              data-parallax-scale="1.35"
-             class="w-full h-full object-cover origin-center will-change-transform" 
-             style="object-position: center 40%;">
-        <div class="absolute inset-0 bg-[#0a2622]/30 mix-blend-overlay"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/70 via-[#0a2622]/40 to-[#0a2622]"></div>
+             class="w-full h-full object-cover origin-center will-change-transform">
+        <div class="absolute inset-0 bg-[#0a2622]/40 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a2622]/60 via-[#0a2622]/30 to-[#0a2622]"></div>
     </div>
 
-    <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide mb-4">
-            Empat Kabupaten,<br>
-            <span class="text-[#ed8a53]">Satu Petualangan</span>
+    <!-- Content -->
+    <div class="relative z-10 w-full max-w-4xl px-4 text-center mx-auto mt-4">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] leading-tight tracking-wide min-h-[1.3em]">
+            <span class="inline-block text-white"
+                  data-typing='["Empat Kabupaten, Satu Petualangan"]'
+                  data-typing-speed="80"
+                  data-loop="false">
+                <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-white ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
+            </span>
         </h1>
-        <p class="text-sm md:text-base text-white/60 leading-relaxed max-w-lg mx-auto">
-            Pilih destinasi impianmu dan mulai eksplorasi Madura.
+        <p class="text-sm md:text-lg text-white/80 max-w-xl mx-auto font-medium leading-relaxed drop-shadow-sm">
+            Pilih destinasi impianmu dan mulai eksplorasi keindahan Madura.
         </p>
-
-        <div class="mt-8 flex flex-col items-center gap-2 animate-bounce">
-            <x-lucide-chevron-down class="w-5 h-5 text-white/40" />
-        </div>
     </div>
+
+    <!-- Fade ke hijau -->
+    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0a2622] via-[#0a2622]/80 to-transparent"></div>
 </section>
 
 <!-- Photo Accordion -->
-<section class="bg-[#0a2622] px-3 md:px-6 pb-6 md:pb-10">
-    <div class="accordion-container max-w-7xl mx-auto -mt-6 md:-mt-10">
+<section class="bg-[#0a2622] px-4 md:px-6 pb-10 pt-8">
+    <!-- Section Header -->
+    <div class="max-w-7xl mx-auto text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
+            Pilih Kabupaten Tujuanmu
+        </h2>
+        <p class="text-sm md:text-base text-white/60 max-w-xl mx-auto leading-relaxed">
+            Madura terdiri dari empat kabupaten dengan keunikan dan daya tariknya masing-masing.
+        </p>
+    </div>
+    <div class="accordion-container max-w-7xl mx-auto">
         @foreach($regionData as $slug => $data)
             @php
                 $regency = $regencyBySlug->get($slug);
@@ -204,7 +209,6 @@
             @endphp
 
             <a href="{{ url('/explore/' . $slug) }}" class="accordion-panel group" aria-label="Jelajahi {{ $name }}">
-                <span class="panel-number">{{ $data['number'] }}</span>
 
                 <img src="{{ asset($imgPath) }}" alt="{{ $name }}" class="panel-bg" loading="lazy" onerror="this.src='{{ asset('images/pantai.png') }}'">
                 <div class="panel-overlay"></div>
@@ -212,14 +216,10 @@
                 <!-- Collapsed -->
                 <div class="panel-collapsed-label">
                     <p class="text-white font-bold text-base md:text-lg tracking-wide mb-1">{{ $name }}</p>
-                    <p class="text-white/50 text-xs font-semibold uppercase tracking-widest">{{ $data['tagline'] }}</p>
                 </div>
 
                 <!-- Expanded -->
                 <div class="panel-expanded-content">
-                    <span class="inline-block rounded-full bg-[#ed8a53]/20 border border-[#ed8a53]/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#ed8a53] mb-3">
-                        {{ $data['tagline'] }}
-                    </span>
 
                     <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-2 tracking-tight">{{ $name }}</h2>
 
@@ -242,7 +242,7 @@
                         @endforeach
                     </div>
 
-                    <span class="inline-flex items-center gap-2 bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm font-bold py-3 px-6 rounded-xl shadow-lg shadow-[#EF8D55]/30">
+                    <span class="inline-flex items-center gap-2 bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm font-bold py-3 px-6 rounded-xl shadow-lg">
                         Mulai Jelajah
                         <x-lucide-arrow-right class="w-4 h-4" />
                     </span>
@@ -250,5 +250,6 @@
             </a>
         @endforeach
     </div>
+    <p class="text-center mt-8 text-sm text-white/40 italic"> Arahkan kursor ke panel untuk melihat lebih lanjut.</p>
 </section>
 @endsection
