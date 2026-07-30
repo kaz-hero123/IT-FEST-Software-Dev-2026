@@ -79,10 +79,6 @@
 
     {{-- Bottom --}}
     <div class="px-4 pb-7 space-y-2">
-        <a href="/contents/create"
-           class="flex items-center justify-center w-full py-2.5 bg-[#0a1512] hover:bg-black text-white text-[12.5px] font-bold rounded-xl transition-colors">
-            Add Content
-        </a>
         <form method="POST" action="/admin/logout">
             @csrf
             <button type="submit"
