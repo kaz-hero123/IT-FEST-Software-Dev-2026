@@ -37,26 +37,28 @@ Namun, bintang utama yang membuat Bebek Sinjay tak terlupakan adalah **Sambal Pe
 Tempat makannya sangat luas dan selalu ramai, terutama saat jam makan siang dan akhir pekan. Sistem pemesanannya cukup efisien meskipun antrean panjang sering terjadi. Pastikan untuk datang lebih awal jika tidak ingin kehabisan, karena porsi yang disediakan setiap harinya seringkali ludes terjual sebelum sore hari.
 EOD;
 
-        $mainContent = Content::create([
-            'user_id' => $user->id,
-            'category_id' => $category->id,
-            'regency_id' => $regency->id,
-            'title' => 'Bebek Sinjay Asli Bangkalan',
-            'slug' => 'bebek-sinjay-asli-bangkalan',
-            'description' => $description,
-            'address' => 'Jl. Raya Ketengan No.45, Tunjung, Kec. Burneh, Kabupaten Bangkalan',
-            'maps_url' => 'https://maps.google.com/?q=-7.050,112.750',
-            'status' => 'approved',
-            'was_approved' => true,
-            'view_count' => 12500
-        ]);
+        $mainContent = Content::updateOrCreate(
+            ['slug' => 'bebek-sinjay-asli-bangkalan'],
+            [
+                'user_id' => $user->id,
+                'category_id' => $category->id,
+                'regency_id' => $regency->id,
+                'title' => 'Bebek Sinjay Asli Bangkalan',
+                'description' => $description,
+                'address' => 'Jl. Raya Ketengan No.45, Tunjung, Kec. Burneh, Kabupaten Bangkalan',
+                'maps_url' => 'https://maps.google.com/?q=-7.050,112.750',
+                'status' => 'approved',
+                'was_approved' => true,
+                'view_count' => 12500
+            ]
+        );
 
         // Dummy Photos for Bebek Sinjay
-        Photo::create(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture01.jpg', 'is_primary' => true]);
-        Photo::create(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture02.jpg', 'is_primary' => false]);
-        Photo::create(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture03.jpg', 'is_primary' => false]);
-        Photo::create(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture04.jpg', 'is_primary' => false]);
-        Photo::create(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture05.jpg', 'is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture01.jpg'], ['is_primary' => true]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture02.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture03.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture04.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture05.jpg'], ['is_primary' => false]);
 
         // 2. Konten Terkait (Sate Madura H. Toha)
         $related1 = Content::updateOrCreate(

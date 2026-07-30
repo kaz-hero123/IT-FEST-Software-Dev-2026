@@ -25,9 +25,9 @@ Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
 // Auth — hanya untuk guest (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
     Route::get('/register', [AuthController::class, 'registerForm']);
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:6,1');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
@@ -36,7 +36,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::middleware(['auth', 'contributor'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/contents/create', [ContentController::class, 'create']);
-    Route::post('/contents', [ContentController::class, 'store']);
+    Route::post('/contents', [ContentController::class, 'store'])->middleware('throttle:6,1');
     Route::get('/contents/{content}/edit', [ContentController::class, 'edit']);
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'destroy']);
