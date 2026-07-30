@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     @else
-                        <a href="/register" class="inline-flex items-center h-10 bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white px-6 rounded-full hover:opacity-90 transition-all shadow-sm font-semibold text-sm">
+                        <a href="/register" class="inline-flex items-center h-10 bg-[#ed8a53] hover:bg-[#d87843] text-white px-6 rounded-full transition-all shadow-sm font-semibold text-sm">
                             Promosikan Tempatmu
                         </a>
                     @endauth
@@ -104,7 +104,7 @@
                     </button>
                 </form>
             @else
-                <a href="/register" class="block w-full text-center bg-gradient-to-r from-[#ed8a53] to-[#0a2622] text-white py-3 rounded-xl font-semibold">
+                <a href="/register" class="block w-full text-center bg-[#ed8a53] hover:bg-[#d87843] text-white py-3 rounded-xl font-semibold">
                     Promosikan Tempatmu
                 </a>
             @endauth

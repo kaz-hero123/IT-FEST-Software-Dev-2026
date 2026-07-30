@@ -13,7 +13,7 @@
         data-parallax-speed="0.2"
         data-parallax-scale="1.15"
         class="absolute inset-0 z-0 pointer-events-none will-change-transform origin-center"
-        style="background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px), linear-gradient(110deg, #05261e 0%, #0c3c2e 45%, #6a441e 100%); background-size: 32px 32px, cover; background-position: 0 0, center;"
+        style="background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px), linear-gradient(110deg, #041f18 0%, #0a2622 50%, #0d3c32 100%); background-size: 32px 32px, cover; background-position: 0 0, center;"
       ></div>
       
       <!--(tampilan di mobile) -->

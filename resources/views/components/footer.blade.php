@@ -4,9 +4,11 @@
             
             <!-- Left: Brand & Description -->
             <div class="max-w-xs">
-                <div class="flex items-center gap-2 mb-4">
-                    <x-lucide-arrow-up-right class="w-8 h-8 stroke-[3] text-[#0a2622]" />
-                    <h2 class="text-3xl font-extrabold text-[#0a2622] tracking-tight">Jelajah <span class="text-[#ff8a65]">Madura</span></h2>
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-[36px] h-[28px] flex-shrink-0">
+                        <img src="{{ asset('images/jelajah_madura_logo.png') }}" alt="Logo Jelajah Madura" class="w-full h-full object-contain">
+                    </div>
+                    <h2 class="text-xl font-bold text-[#0a2622] tracking-tight">Jelajah <span class="text-[#ff8a65]">Madura</span></h2>
                 </div>
                 <p class="text-[15px] text-gray-500 leading-relaxed font-medium">
                     Platform pariwisata cerdas yang mempermudah kamu untuk mengeksplorasi keindahan Madura.
