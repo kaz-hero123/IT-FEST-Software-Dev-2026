@@ -30,23 +30,23 @@
         </div>
 
 
-        <!-- <div class="relative max-w-3xl mx-auto bg-white/20 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl">
+        <form action="/search" method="GET" class="relative max-w-3xl mx-auto bg-white/95 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl group transition-transform hover:scale-[1.01]">
             
-    
-            <div class="pl-4 pr-2 flex items-center pointer-events-none text-white/90">
-                <i data-lucide="search" class="w-5 h-5 stroke-[2.5] drop-shadow-md"></i>
+            <div class="pl-4 pr-2 flex items-center pointer-events-none text-gray-400">
+                <x-lucide-search class="w-5 h-5 stroke-[2.5]" />
             </div>
             
             <input type="text" 
+                   name="q"
                    placeholder="Cari Kuliner, Wisata, atau UMKM..." 
-                   class="block w-full h-11 bg-transparent border-none text-white placeholder-white/80 focus:outline-none text-sm md:text-base text-left pl-2 pr-24">
+                   autocomplete="off"
+                   class="block w-full h-11 bg-transparent border-none text-[#0f172a] placeholder-gray-400 focus:outline-none text-sm md:text-base text-left pl-2 pr-24">
             
-          
-            <button class="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-8 bg-[#022B22] hover:bg-[#011F18] text-white text-sm font-semibold rounded-full transition-all duration-200 shadow-md">
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-8 bg-[#af4926] hover:bg-[#8e381b] text-white text-sm font-semibold rounded-full transition-all duration-200 shadow-md">
                 Cari
             </button>
             
-        </div> -->
+        </form>
     </div>
 
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
