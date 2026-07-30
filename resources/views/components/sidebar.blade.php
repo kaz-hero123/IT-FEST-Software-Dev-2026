@@ -53,6 +53,7 @@
                 Published
             </a>
 
+            {{-- Removed Settings link as per request
             <a href="#"
                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] font-bold text-[#374151] hover:bg-gray-200/60 transition-colors">
                 <svg class="w-[18px] h-[18px] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,6 +63,7 @@
                 </svg>
                 Settings
             </a>
+            --}}
         </nav>
     </div>
 

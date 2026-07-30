@@ -18,9 +18,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         @foreach($popularContents as $index => $item)
           @php
-            $coverUrl = $item->primaryPhoto
-              ? Storage::url($item->primaryPhoto->file_path)
-              : asset('images/food.png');
+            $coverUrl = asset('images/food.png');
+            if ($item->primaryPhoto) {
+                $path = $item->primaryPhoto->file_path;
+                $coverUrl = str_starts_with($path, 'images/') ? asset($path) : Storage::url($path);
+            }
           @endphp
 
           <div class="{{ $index >= 2 ? 'hidden lg:block' : '' }} bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">
@@ -28,6 +30,7 @@
               <div class="relative aspect-video">
                 <img src="{{ $coverUrl }}"
                      alt="{{ $item->title }}"
+                     loading="lazy"
                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                      onerror="this.src='{{ asset('images/food.png') }}'"/>
                   <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">

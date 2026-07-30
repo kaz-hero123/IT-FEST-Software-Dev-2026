@@ -266,7 +266,7 @@
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>
                 <div>
-                    <p class="text-2xl font-bold text-white">100+</p>
+                    <p class="text-2xl font-bold text-white">{{ \App\Models\Content::where('status', 'approved')->count() }}+</p>
                     <p class="text-xs text-gray-300">Destinasi Wisata</p>
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>

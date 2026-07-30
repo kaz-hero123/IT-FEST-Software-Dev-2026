@@ -63,11 +63,13 @@
                             @if($item->primaryPhoto)
                                 <img src="{{ Storage::url($item->primaryPhoto->file_path) }}" 
                                      alt="{{ $item->title }}" 
+                                     loading="lazy"
                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                      onerror="this.src='{{ asset('images/culture/culture05.jpg') }}'">
                             @else
                                 <img src="{{ asset('images/placeholder.jpg') }}" 
                                      alt="Placeholder" 
+                                     loading="lazy"
                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @endif
 
