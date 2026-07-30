@@ -20,7 +20,7 @@
         {{-- Cover Image --}}
         <div class="relative h-[180px] bg-gray-100">
             @if($primaryPhoto)
-                <img src="{{ Storage::url($primaryPhoto->file_path) }}"
+                <img src="{{ $primaryPhoto->resolved_url }}"
                      alt="{{ $item->title }}"
                      class="w-full h-full object-cover">
             @else

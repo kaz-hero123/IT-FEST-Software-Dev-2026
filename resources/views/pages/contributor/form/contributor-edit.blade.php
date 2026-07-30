@@ -130,7 +130,7 @@
                         @for ($i = 0; $i < 5; $i++)
                             @if(isset($content->photos[$i]))
                                 <div class="w-[85px] h-[85px] sm:w-[95px] sm:h-[95px] md:w-[105px] md:h-[105px] rounded-lg overflow-hidden border border-gray-200 relative">
-                                    <img src="{{ Storage::url($content->photos[$i]->file_path) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $content->photos[$i]->resolved_url }}" class="w-full h-full object-cover">
                                     @if($i === 0)
                                     <div class="absolute top-1.5 left-1.5 bg-[#0f172a] text-white text-[7px] font-bold px-1.5 py-0.5 rounded-[4px] tracking-widest z-10">
                                         PRIMARY

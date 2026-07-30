@@ -18,11 +18,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         @foreach($popularContents as $index => $item)
           @php
-            $coverUrl = asset('images/food.png');
-            if ($item->primaryPhoto) {
-                $path = $item->primaryPhoto->file_path;
-                $coverUrl = str_starts_with($path, 'images/') ? asset($path) : Storage::url($path);
-            }
+            $coverUrl = $item->primaryPhoto ? $item->primaryPhoto->resolved_url : asset('images/food.png');
           @endphp
 
           <div class="{{ $index >= 2 ? 'hidden lg:block' : '' }} bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F1F1F1]">

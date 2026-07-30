@@ -35,7 +35,7 @@
             <!-- Big Image -->
             <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
                 @if($content->primaryPhoto)
-                    <img src="{{ Storage::url($content->primaryPhoto->file_path) }}" 
+                    <img src="{{ $content->primaryPhoto->resolved_url }}" 
                          alt="{{ $content->title }}" 
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                          onerror="this.src='{{ asset('images/pantai.png') }}'">
@@ -53,7 +53,7 @@
                 <!-- 1st Small Image -->
                 <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
                     @if($secondaryPhotos->values()->get(0))
-                        <img src="{{ Storage::url($secondaryPhotos->values()->get(0)->file_path) }}" 
+                        <img src="{{ $secondaryPhotos->values()->get(0)->resolved_url }}" 
                              alt="Gallery 1" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex items-center justify-center">
@@ -65,7 +65,7 @@
                 <!-- 2nd Small Image -->
                 <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
                     @if($secondaryPhotos->values()->get(1))
-                        <img src="{{ Storage::url($secondaryPhotos->values()->get(1)->file_path) }}" 
+                        <img src="{{ $secondaryPhotos->values()->get(1)->resolved_url }}" 
                              alt="Gallery 2" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex items-center justify-center">
@@ -77,7 +77,7 @@
                 <!-- 3rd Small Image with overlay -->
                 <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0 bg-gray-100">
                     @if($secondaryPhotos->values()->get(2))
-                        <img src="{{ Storage::url($secondaryPhotos->values()->get(2)->file_path) }}" 
+                        <img src="{{ $secondaryPhotos->values()->get(2)->resolved_url }}" 
                              alt="Gallery 3" class="w-full h-full object-cover">
                         <!-- Overlay hanya jika ada foto -->
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
@@ -240,7 +240,7 @@
                 @foreach($relatedContents as $related)
                 <a href="/explore/{{ $content->regency->slug }}/{{ $related->slug }}" class="group block bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
                     <div class="relative w-full aspect-[4/3] bg-gray-200">
-                        <img src="{{ $related->primaryPhoto ? Storage::url($related->primaryPhoto->file_path) : asset('images/culture/culture05.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/pantai.png') }}'">
+                        <img src="{{ $related->primaryPhoto ? $related->primaryPhoto->resolved_url : asset('images/culture/culture05.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/pantai.png') }}'">
                         <!-- Kategori Badge -->
                         <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold text-white flex items-center uppercase tracking-wider">
                             <x-lucide-tag class="w-3 h-3 mr-1" />
