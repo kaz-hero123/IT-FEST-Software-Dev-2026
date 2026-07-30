@@ -7,10 +7,12 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ChatApiController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ModerationController;
 use App\Http\Controllers\Admin\ContentController as AdminContentController;
+use App\Http\Controllers\Admin\ChatController as AdminChatController;
 
 
 // PUBLIC ROUTES
@@ -21,6 +23,12 @@ Route::get('/search', [SearchController::class, 'index']);
 Route::get('/explore', [ExploreController::class, 'index']);
 Route::get('/explore/{regency}', [ExploreController::class, 'show']);
 Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
+
+// Chat API (public - accessible without auth)
+Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
+Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
+Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
+Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
 
 // Auth — hanya untuk guest (belum login)
 Route::middleware('guest')->group(function () {
@@ -66,5 +74,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/contents', [AdminContentController::class, 'index']);
         Route::post('/contents/{content}/unpublish', [AdminContentController::class, 'unpublish']);
         Route::delete('/contents/{content}', [AdminContentController::class, 'destroy']);
+
+        // Live Chat Support
+        Route::get('/chat', [AdminChatController::class, 'index']);
     });
 });

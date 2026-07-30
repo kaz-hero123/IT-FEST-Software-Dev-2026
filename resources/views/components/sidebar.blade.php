@@ -53,6 +53,16 @@
                 Published
             </a>
 
+            <a href="/admin/chat"
+               class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] font-bold transition-colors
+                      {{ request()->is('admin/chat*') ? 'bg-[#b84c22] text-white' : 'text-[#374151] hover:bg-gray-200/60' }}">
+                <svg class="w-[18px] h-[18px] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+                Live Chat Support
+            </a>
+
             {{-- Removed Settings link as per request
             <a href="#"
                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] font-bold text-[#374151] hover:bg-gray-200/60 transition-colors">

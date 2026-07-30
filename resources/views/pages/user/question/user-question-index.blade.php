@@ -89,10 +89,10 @@
                     
                     <div class="mt-8 pt-6 border-t border-gray-100 text-center">
                         <p class="text-xs text-gray-500 mb-3">Tidak menemukan jawaban?</p>
-                        <a href="mailto:support@jelajahmadura.com" class="inline-flex items-center justify-center w-full py-2.5 rounded-xl bg-gray-50 text-[#0a2622] font-semibold text-sm hover:bg-[#d35a39] hover:text-white transition-colors duration-300 border border-gray-100 hover:border-transparent">
-                            <x-lucide-mail class="w-4 h-4 mr-2" />
+                        <button @click="$dispatch('open-admin-chat')" class="inline-flex items-center justify-center w-full py-2.5 rounded-xl bg-gray-50 text-[#0a2622] font-semibold text-sm hover:bg-[#0a2622] hover:text-white transition-colors duration-300 border border-gray-100 hover:border-transparent">
+                            <x-lucide-message-circle class="w-4 h-4 mr-2" />
                             Hubungi Kami
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -243,7 +243,5 @@
         </div>
     </div>
 </section>
-
-
 
 @endsection
