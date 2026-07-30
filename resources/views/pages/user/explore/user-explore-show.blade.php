@@ -29,9 +29,28 @@
                 <span class="typing-target"></span><span class="inline-block w-[3px] md:w-[4px] h-[0.85em] bg-white ml-1 translate-y-[2px] animate-typing-cursor align-middle"></span>
             </span>
         </h1>
-        <p class="text-sm md:text-lg text-white/80 max-w-xl mx-auto font-medium leading-relaxed drop-shadow-sm">
+        <p class="text-sm md:text-lg text-white/80 max-w-xl mx-auto font-medium leading-relaxed drop-shadow-sm mb-10">
             Jelajahi keindahan budaya, alam, dan kuliner tersembunyi yang ada di wilayah {{ $regency->name }}.
         </p>
+
+        <!-- Search Bar in Hero -->
+        <form action="{{ url()->current() }}" method="GET" class="relative max-w-2xl mx-auto bg-white/95 backdrop-blur-md border border-white/60 rounded-full p-1.5 flex items-center shadow-2xl group transition-transform hover:scale-[1.01]">
+            @if(request('category'))
+                <input type="hidden" name="category" value="{{ request('category') }}">
+            @endif
+            <div class="pl-4 pr-2 flex items-center pointer-events-none text-gray-400">
+                <x-lucide-search class="w-5 h-5 stroke-[2.5]" />
+            </div>
+            <input type="text" 
+                   name="search"
+                   value="{{ request('search') }}"
+                   placeholder="Cari destinasi di {{ $regency->name }}..." 
+                   autocomplete="off"
+                   class="block w-full h-11 bg-transparent border-none text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-0 text-sm md:text-base text-left pl-2 pr-28">
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-6 md:px-8 bg-[#af4926] hover:bg-[#8e381b] text-white text-sm font-semibold rounded-full transition-all duration-200 shadow-md">
+                Cari
+            </button>
+        </form>
     </div>
 </section>
 
@@ -39,43 +58,18 @@
 <section class="py-12 md:py-20 bg-[#fafafa] min-h-screen">
     <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
         
-        <!-- Filters & Search -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-            
-            <!-- Category Filters -->
-            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-3">
-                <a href="{{ request()->fullUrlWithQuery(['category' => null, 'page' => null]) }}" 
-                   class="px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ !request('category') ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50' }}">
-                    Semua Kategori
+        <!-- Filters -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+            <a href="{{ request()->fullUrlWithQuery(['category' => null, 'page' => null]) }}" 
+               class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ !request('category') ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50' }}">
+                Semua Kategori
+            </a>
+            @foreach($categories as $category)
+                <a href="{{ request()->fullUrlWithQuery(['category' => $category->slug, 'page' => null]) }}" 
+                   class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ request('category') === $category->slug ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300' }}">
+                    {{ $category->name }}
                 </a>
-                @foreach($categories as $category)
-                    <a href="{{ request()->fullUrlWithQuery(['category' => $category->slug, 'page' => null]) }}" 
-                       class="px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ request('category') === $category->slug ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300' }}">
-                        {{ $category->name }}
-                    </a>
-                @endforeach
-            </div>
-
-            <!-- Search Bar -->
-            <form action="{{ url()->current() }}" method="GET" class="w-full md:w-auto relative group shrink-0">
-                @if(request('category'))
-                    <input type="hidden" name="category" value="{{ request('category') }}">
-                @endif
-                <div class="relative flex items-center">
-                    <x-lucide-search class="w-4.5 h-4.5 absolute left-4 text-gray-400 group-focus-within:text-[#af4926] transition-colors" />
-                    <input type="text" 
-                           name="search" 
-                           value="{{ request('search') }}" 
-                           placeholder="Cari destinasi..." 
-                           class="w-full md:w-60 lg:w-72 pl-11 pr-4 py-2.5 rounded-full border border-gray-200 bg-white shadow-sm focus:border-[#af4926] focus:ring-1 focus:ring-[#af4926] outline-none transition-all text-sm text-gray-700">
-                    
-                    @if(request('search'))
-                        <a href="{{ request()->fullUrlWithQuery(['search' => null, 'page' => null]) }}" class="absolute right-3 p-1 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
-                            <x-lucide-x class="w-4 h-4" />
-                        </a>
-                    @endif
-                </div>
-            </form>
+            @endforeach
         </div>
 
         <!-- Contents Grid -->
