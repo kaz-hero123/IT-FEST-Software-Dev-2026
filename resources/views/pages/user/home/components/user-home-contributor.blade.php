@@ -37,9 +37,9 @@
       </div>
 
       <!-- Action Button (Kanan di Desktop, Bawah di Mobile) -->
-      <button class="relative z-10 w-full md:w-auto bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm md:text-base font-bold py-3.5 md:py-3.5 px-6 md:px-8 rounded-2xl md:rounded-xl shadow-lg shadow-[#EF8D55]/30 focus:outline-none focus:ring-4 focus:ring-[#EF8D55]/50 flex-shrink-0 whitespace-nowrap mt-2 md:mt-0 cursor-pointer">
+      <a href="/register" class="relative z-10 w-full md:w-auto bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm md:text-base font-bold py-3.5 md:py-3.5 px-6 md:px-8 rounded-2xl md:rounded-xl shadow-lg shadow-[#EF8D55]/30 focus:outline-none focus:ring-4 focus:ring-[#EF8D55]/50 flex-shrink-0 whitespace-nowrap mt-2 md:mt-0 cursor-pointer text-center inline-block">
         Daftar Kontributor
-      </button>
+      </a>
       
     </div>
 
