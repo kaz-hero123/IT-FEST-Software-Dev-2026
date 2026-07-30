@@ -39,18 +39,43 @@
 <section class="py-12 md:py-20 bg-[#fafafa] min-h-screen">
     <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
         
-        <!-- Filters -->
-        <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-            <a href="{{ url()->current() }}" 
-               class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ !request('category') ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50' }}">
-                Semua Kategori
-            </a>
-            @foreach($categories as $category)
-                <a href="{{ url()->current() }}?category={{ $category->slug }}" 
-                   class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ request('category') === $category->slug ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300' }}">
-                    {{ $category->name }}
+        <!-- Filters & Search -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-3">
+                <a href="{{ request()->fullUrlWithQuery(['category' => null, 'page' => null]) }}" 
+                   class="px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ !request('category') ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50' }}">
+                    Semua Kategori
                 </a>
-            @endforeach
+                @foreach($categories as $category)
+                    <a href="{{ request()->fullUrlWithQuery(['category' => $category->slug, 'page' => null]) }}" 
+                       class="px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 {{ request('category') === $category->slug ? 'bg-[#af4926] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300' }}">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </div>
+
+            <!-- Search Bar -->
+            <form action="{{ url()->current() }}" method="GET" class="w-full md:w-auto relative group shrink-0">
+                @if(request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
+                <div class="relative flex items-center">
+                    <x-lucide-search class="w-4.5 h-4.5 absolute left-4 text-gray-400 group-focus-within:text-[#af4926] transition-colors" />
+                    <input type="text" 
+                           name="search" 
+                           value="{{ request('search') }}" 
+                           placeholder="Cari destinasi..." 
+                           class="w-full md:w-60 lg:w-72 pl-11 pr-4 py-2.5 rounded-full border border-gray-200 bg-white shadow-sm focus:border-[#af4926] focus:ring-1 focus:ring-[#af4926] outline-none transition-all text-sm text-gray-700">
+                    
+                    @if(request('search'))
+                        <a href="{{ request()->fullUrlWithQuery(['search' => null, 'page' => null]) }}" class="absolute right-3 p-1 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
+                            <x-lucide-x class="w-4 h-4" />
+                        </a>
+                    @endif
+                </div>
+            </form>
         </div>
 
         <!-- Contents Grid -->

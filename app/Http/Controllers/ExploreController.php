@@ -29,6 +29,12 @@ class ExploreController extends Controller
                     $q->where('slug', $request->category)
                 );
             })
+            ->when($request->search, function ($q) use ($request) {
+                $q->where(function($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->search . '%')
+                          ->orWhere('description', 'like', '%' . $request->search . '%');
+                });
+            })
             ->latest()
             ->paginate(12);
 
