@@ -23,8 +23,8 @@ class FakerContentSeeder extends Seeder
 
         foreach ($regencies as $regency) {
             foreach ($categories as $category) {
-                // Buat 8 konten per kombinasi kabupaten x kategori
-                $contents = \App\Models\Content::factory(8)->create([
+                // Buat 4 konten per kombinasi kabupaten x kategori
+                $contents = \App\Models\Content::factory(4)->create([
                     'regency_id' => $regency->id,
                     'category_id' => $category->id,
                     'user_id' => $users->random()->id,
