@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             WisataSeeder::class,
             DemoContentSeeder::class,
             UserExploreDetailSeeder::class,
+            FakerContentSeeder::class,
         ]);
     }
 }
