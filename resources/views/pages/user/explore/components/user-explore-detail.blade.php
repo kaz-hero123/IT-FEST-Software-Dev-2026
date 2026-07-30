@@ -96,10 +96,10 @@
         </div>
 
         <!-- Main Content (2 Columns) -->
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col lg:flex-row gap-8 items-start relative">
             
             <!-- Left Column: Tentang & Fasilitas -->
-            <div class="w-full lg:w-2/3 space-y-8">
+            <div class="w-full lg:w-2/3 flex flex-col gap-8 lg:sticky lg:top-24">
                 
                 <!-- Tentang Section -->
                 <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
