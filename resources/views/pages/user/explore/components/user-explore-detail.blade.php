@@ -31,9 +31,13 @@
         </div>
 
         <!-- Photo Gallery (Grid) -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 mb-10 h-auto md:h-[500px]">
+        @php 
+            $secondaryPhotos = $content->photos->where('is_primary', false)->take(3);
+            $hasSecondary = $secondaryPhotos->count() > 0;
+        @endphp
+        <div class="grid grid-cols-1 {{ $hasSecondary ? 'md:grid-cols-4' : 'md:grid-cols-1' }} gap-3 md:gap-4 mb-10 h-auto md:h-[500px]">
             <!-- Big Image -->
-            <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
+            <div class="{{ $hasSecondary ? 'md:col-span-3' : 'md:col-span-1' }} rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
                 @if($content->primaryPhoto)
                     <img src="{{ $content->primaryPhoto->resolved_url }}" 
                          alt="{{ $content->title }}" 
@@ -45,54 +49,43 @@
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 @endif
             </div>
+
+            @if($hasSecondary)
             <!-- Small Images Right Column -->
             <div class="md:col-span-1 flex flex-col gap-3 md:gap-4 h-auto md:h-full min-h-0 min-w-0">
-                <!-- Fetch rest of photos, max 3 -->
-                @php $secondaryPhotos = $content->photos->where('is_primary', false)->take(3); @endphp
                 
                 <!-- 1st Small Image -->
+                @if($secondaryPhotos->values()->get(0))
                 <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(0))
-                        <img src="{{ $secondaryPhotos->values()->get(0)->resolved_url }}" 
-                             alt="Gallery 1" class="w-full h-full object-cover">
-                    @else
-                        <div class="w-full h-full flex items-center justify-center">
-                            <x-lucide-image class="w-8 h-8 text-gray-300" />
-                        </div>
-                    @endif
+                    <img src="{{ $secondaryPhotos->values()->get(0)->resolved_url }}" 
+                         alt="Gallery 1" class="w-full h-full object-cover">
                 </div>
+                @endif
                 
                 <!-- 2nd Small Image -->
+                @if($secondaryPhotos->values()->get(1))
                 <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(1))
-                        <img src="{{ $secondaryPhotos->values()->get(1)->resolved_url }}" 
-                             alt="Gallery 2" class="w-full h-full object-cover">
-                    @else
-                        <div class="w-full h-full flex items-center justify-center">
-                            <x-lucide-image class="w-8 h-8 text-gray-300" />
-                        </div>
-                    @endif
+                    <img src="{{ $secondaryPhotos->values()->get(1)->resolved_url }}" 
+                         alt="Gallery 2" class="w-full h-full object-cover">
                 </div>
+                @endif
                 
                 <!-- 3rd Small Image with overlay -->
+                @if($secondaryPhotos->values()->get(2))
                 <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(2))
-                        <img src="{{ $secondaryPhotos->values()->get(2)->resolved_url }}" 
-                             alt="Gallery 3" class="w-full h-full object-cover">
-                        <!-- Overlay hanya jika ada foto -->
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                            <span class="text-white font-semibold flex items-center">
-                                <x-lucide-image class="w-5 h-5 mr-2" />
-                                Lihat {{ $content->photos->count() }} Foto
-                            </span>
-                        </div>
-                    @else
-                        <div class="w-full h-full flex items-center justify-center">
-                            <x-lucide-image class="w-8 h-8 text-gray-300" />
-                        </div>
-                    @endif
+                    <img src="{{ $secondaryPhotos->values()->get(2)->resolved_url }}" 
+                         alt="Gallery 3" class="w-full h-full object-cover">
+                    <!-- Overlay hanya jika ada foto -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                        <span class="text-white font-semibold flex items-center">
+                            <x-lucide-image class="w-5 h-5 mr-2" />
+                            Lihat {{ $content->photos->count() }} Foto
+                        </span>
+                    </div>
                 </div>
+                @endif
             </div>
+            @endif
         </div>
 
         <!-- Main Content (2 Columns) -->
