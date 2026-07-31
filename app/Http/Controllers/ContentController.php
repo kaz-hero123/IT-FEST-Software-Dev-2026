@@ -86,7 +86,7 @@ class ContentController extends Controller
 
         // Simpan foto ke disk public, path: contents/{content_id}/
         foreach ($request->file('photos') as $index => $photo) {
-            $path = $photo->store("contents/{$content->id}", 'public');
+            $path = $this->processAndStoreImage($photo, $content->id);
             Photo::create([
                 'content_id' => $content->id,
                 'file_path'  => $path,
@@ -147,7 +147,7 @@ class ContentController extends Controller
 
             // Insert foto baru
             foreach ($request->file('photos') as $index => $photo) {
-                $path = $photo->store("contents/{$content->id}", 'public');
+                $path = $this->processAndStoreImage($photo, $content->id);
                 Photo::create([
                     'content_id' => $content->id,
                     'file_path'  => $path,
@@ -198,5 +198,64 @@ class ContentController extends Controller
         }
 
         return $slug;
+    }
+
+    /**
+     * Process image using GD: resize max 1600px width and compress 80% JPEG.
+     */
+    private function processAndStoreImage($file, $contentId): string
+    {
+        $extension = strtolower($file->getClientOriginalExtension());
+        
+        $directory = storage_path("app/public/contents/{$contentId}");
+        if (!\Illuminate\Support\Facades\File::exists($directory)) {
+            \Illuminate\Support\Facades\File::makeDirectory($directory, 0755, true);
+        }
+        
+        $filename = uniqid() . '_' . time() . '.jpg';
+        $path = $directory . '/' . $filename;
+        $relativePath = "contents/{$contentId}/" . $filename;
+        
+        $image = null;
+        $tempPath = $file->getRealPath();
+        
+        if ($extension === 'jpg' || $extension === 'jpeg') {
+            $image = @imagecreatefromjpeg($tempPath);
+        } elseif ($extension === 'png') {
+            $image = @imagecreatefrompng($tempPath);
+        } elseif ($extension === 'webp') {
+            $image = @imagecreatefromwebp($tempPath);
+        }
+        
+        if (!$image) {
+            // Fallback
+            return $file->store("contents/{$contentId}", 'public');
+        }
+        
+        $width = imagesx($image);
+        $height = imagesy($image);
+        
+        $newWidth = $width;
+        $newHeight = $height;
+        
+        if ($width > 1600) {
+            $newWidth = 1600;
+            $newHeight = floor($height * (1600 / $width));
+        }
+        
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        
+        if ($extension === 'png' || $extension === 'webp') {
+            $bg = imagecolorallocate($newImage, 255, 255, 255);
+            imagefill($newImage, 0, 0, $bg);
+        }
+        
+        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagejpeg($newImage, $path, 80);
+        
+        imagedestroy($image);
+        imagedestroy($newImage);
+        
+        return $relativePath;
     }
 }
