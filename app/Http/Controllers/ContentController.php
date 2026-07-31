@@ -201,7 +201,7 @@ class ContentController extends Controller
     }
 
     /**
-     * Process image using GD: resize max 1600px width and compress 80% JPEG.
+     * Process image using GD: resize max 1600px width and compress 80% WebP.
      */
     private function processAndStoreImage($file, $contentId): string
     {
@@ -212,7 +212,7 @@ class ContentController extends Controller
             \Illuminate\Support\Facades\File::makeDirectory($directory, 0755, true);
         }
         
-        $filename = uniqid() . '_' . time() . '.jpg';
+        $filename = uniqid() . '_' . time() . '.webp';
         $path = $directory . '/' . $filename;
         $relativePath = "contents/{$contentId}/" . $filename;
         
@@ -251,7 +251,7 @@ class ContentController extends Controller
         }
         
         imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-        imagejpeg($newImage, $path, 80);
+        imagewebp($newImage, $path, 80);
         
         imagedestroy($image);
         imagedestroy($newImage);
