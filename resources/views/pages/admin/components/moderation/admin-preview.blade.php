@@ -87,7 +87,16 @@
                     </span>
                 </div>
                 @if($photos->count() > 1)
-                <div class="grid grid-cols-3 gap-2">
+                @php
+                    $remainingCount = $photos->count() - 1;
+                    $gridCols = match($remainingCount) {
+                        1 => 'grid-cols-1',
+                        2, 4 => 'grid-cols-2',
+                        3 => 'grid-cols-3',
+                        default => 'grid-cols-3'
+                    };
+                @endphp
+                <div class="grid {{ $gridCols }} gap-2">
                     @foreach($photos->skip(1) as $photo)
                     <div class="rounded-xl overflow-hidden aspect-square bg-gray-100">
                         <img src="{{ $photo->resolved_url }}" alt="Photo" class="w-full h-full object-cover">

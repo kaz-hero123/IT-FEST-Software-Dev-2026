@@ -1,5 +1,5 @@
 
-<div x-data="adminChat(@json(auth()->check() ? auth()->user()->name : null))" x-init="init()" x-on:open-admin-chat.window="toggleChat()" class="relative z-50" x-on:keydown.escape.window="showDeleteModal = false">
+<div x-data='adminChat(@json(auth()->check() ? auth()->user()->name : null))' x-init="init()" x-on:open-admin-chat.window="toggleChat()" class="relative z-50" x-on:keydown.escape.window="showDeleteModal = false">
     <!-- Floating Trigger Button -->
     <button @click="toggleChat()" 
             class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#0a2622] hover:bg-[#0f3832] text-white px-4 py-3.5 rounded-full shadow-2xl border border-[#1e4d45] transition-all duration-300 transform hover:scale-105 active:scale-95 group"
