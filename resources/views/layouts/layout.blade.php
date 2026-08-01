@@ -39,7 +39,23 @@
     <x-admin-chat />
     <x-toast />
     <x-confirm-modal />    
+    <x-throttle-modal />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        // Global Fetch Interceptor for 429 Too Many Requests
+        (function() {
+            const originalFetch = window.fetch;
+            window.fetch = async function(...args) {
+                const response = await originalFetch.apply(this, args);
+                if (response.status === 429) {
+                    window.dispatchEvent(new CustomEvent('throttle-warning', {
+                        detail: { message: 'Terlalu banyak request di server, tolong tunggu sebentar.' }
+                    }));
+                }
+                return response;
+            };
+        })();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.initParallaxScroll === 'function') {

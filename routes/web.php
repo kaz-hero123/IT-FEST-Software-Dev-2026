@@ -52,9 +52,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::middleware(['auth', 'contributor'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/contents/create', [ContentController::class, 'create']);
-    Route::post('/contents', [ContentController::class, 'store'])->middleware('throttle:6,1');
+    Route::post('/contents', [ContentController::class, 'store'])->middleware('throttle:20,1');
     Route::get('/contents/{content}/edit', [ContentController::class, 'edit']);
-    Route::put('/contents/{content}', [ContentController::class, 'update']);
+    Route::put('/contents/{content}', [ContentController::class, 'update'])->middleware('throttle:20,1');
     Route::delete('/contents/{content}', [ContentController::class, 'destroy']);
 });
 
