@@ -203,7 +203,7 @@ class ContentController extends Controller
     /**
      * Process image using GD: resize max 1600px width and compress 80% WebP.
      */
-    private function processAndStoreImage($file, $contentId): string
+    private function processAndStoreImage(\Illuminate\Http\UploadedFile $file, int $contentId): string
     {
         $extension = strtolower($file->getClientOriginalExtension());
         
