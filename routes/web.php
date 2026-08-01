@@ -25,10 +25,12 @@ Route::get('/explore/{regency}', [ExploreController::class, 'show']);
 Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
 
 // Chat API (public - accessible without auth)
-Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
-Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
-Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
-Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
+Route::middleware('throttle:120,1')->group(function () {
+    Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
+    Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
+    Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
+    Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
+});
 
 // Auth — hanya untuk guest (belum login)
 Route::middleware('guest')->group(function () {
@@ -36,6 +38,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
     Route::get('/register', [AuthController::class, 'registerForm']);
     Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:6,1');
+    
+    // Password Reset
+    Route::get('/forgot-password', [App\Http\Controllers\PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [App\Http\Controllers\PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [App\Http\Controllers\PasswordResetController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [App\Http\Controllers\PasswordResetController::class, 'reset'])->name('password.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
