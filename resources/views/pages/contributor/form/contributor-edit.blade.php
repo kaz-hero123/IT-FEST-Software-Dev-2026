@@ -33,7 +33,15 @@
             
             <!-- FORM SECTION (Kiri) -->
             <div class="w-full lg:w-2/3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                <form action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" x-data="editForm()">
+                <form id="edit-form" action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" 
+                      x-data="editForm()"
+                      @submit.prevent="$dispatch('confirm-action', {
+                          title: 'Simpan Perubahan',
+                          message: 'Menyimpan perubahan akan mengubah status konten ini kembali menjadi Pending dan perlu dimoderasi ulang. Lanjutkan?',
+                          confirmText: 'Ya, Simpan',
+                          formId: 'edit-form',
+                          type: 'warning'
+                      })">
                 @csrf
                 @method('PUT')
                 
@@ -188,7 +196,8 @@
                     <a href="/dashboard" class="px-5 py-2.5 border border-gray-200 bg-white text-[13px] font-bold text-gray-700 hover:bg-gray-50 transition-colors rounded-xl">
                         Batal
                     </a>
-                    <button type="submit" class="px-5 py-2.5 bg-[#b24823] text-white text-[13px] font-bold hover:bg-[#8e381b] shadow-sm transition-colors rounded-xl">
+                    <button type="submit" 
+                            class="px-5 py-2.5 bg-[#b24823] text-white text-[13px] font-bold hover:bg-[#8e381b] shadow-sm transition-colors rounded-xl">
                         Simpan Perubahan
                     </button>
                 </div>

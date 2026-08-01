@@ -1,96 +1,110 @@
-{{--
-  |--------------------------------------------------------------------------
-  | Reusable Confirmation Modal Component
-  |--------------------------------------------------------------------------
-  | Props:
-  |   showVar      -> Nama variabel Alpine yang mengontrol visibilitas modal (string)
-  |   onConfirm    -> Ekspresi Alpine.js yang dijalankan saat tombol konfirmasi diklik (string)
-  |   title        -> Judul modal (string)
-  |   description  -> Teks deskripsi statis (string, opsional jika pakai slot :description)
-  |   dynamicDesc  -> Ekspresi Alpine x-text untuk deskripsi dinamis (string, opsional)
-  |   confirmLabel -> Label tombol konfirmasi (default: 'Hapus')
-  |   cancelLabel  -> Label tombol batal (default: 'Batal')
-  |
-  | Cara pakai:
-  |   <x-confirm-modal
-  |       show-var="showDeleteModal"
-  |       on-confirm="clearHistory()"
-  |       title="Hapus Riwayat Chat?"
-  |       description="Seluruh riwayat akan dihapus permanen."
-  |   />
-  |
-  |   Atau dengan deskripsi dinamis Alpine (x-text):
-  |   <x-confirm-modal
-  |       show-var="showDeleteModal"
-  |       on-confirm="clearCurrentChat()"
-  |       title="Hapus Obrolan Ini?"
-  |       dynamic-desc="'Percakapan dengan ' + activeConv.userName + ' akan dihapus.'"
-  |   />
-  |--------------------------------------------------------------------------
---}}
-@props([
-    'showVar'      => 'showModal',
-    'onConfirm'    => '',
-    'title'        => 'Konfirmasi',
-    'description'  => '',
-    'dynamicDesc'  => '',
-    'confirmLabel' => 'Hapus',
-    'cancelLabel'  => 'Batal',
-])
+<div x-data="confirmModal()" 
+     @confirm-action.window="openModal($event.detail)"
+     class="relative z-[100]" 
+     style="display: none;" 
+     x-show="isOpen">
+    
+    <style>
+        /* Fallback classes in case Tailwind JIT is not running */
+        .btn-confirm-danger { background-color: #dc2626; color: white; }
+        .btn-confirm-danger:hover { background-color: #b91c1c; }
+        .btn-confirm-warning { background-color: #b24823; color: white; }
+        .btn-confirm-warning:hover { background-color: #8e381b; }
+    </style>
 
-<div
-    x-show="{{ $showVar }}"
-    x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="opacity-0"
-    x-transition:enter-end="opacity-100"
-    x-transition:leave="transition ease-in duration-150"
-    x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-    style="display:none;">
+    <!-- Backdrop -->
+    <div x-show="isOpen"
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0 backdrop-blur-none"
+         x-transition:enter-end="opacity-100 backdrop-blur-sm"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100 backdrop-blur-sm"
+         x-transition:leave-end="opacity-0 backdrop-blur-none"
+         class="fixed inset-0 bg-black/40 transition-all"></div>
 
-    {{-- Backdrop --}}
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
-         @click="{{ $showVar }} = false"></div>
-
-    {{-- Modal Box --}}
-    <div
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 scale-95"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
-        class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
-
-        {{-- Icon --}}
-        <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center">
-            <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-            </svg>
-        </div>
-
-        {{-- Title --}}
-        <h3 class="text-base font-bold text-gray-800 mb-1">{{ $title }}</h3>
-
-        {{-- Description: static atau dinamis dari Alpine --}}
-        @if($dynamicDesc)
-            <p class="text-sm text-gray-500 mb-6" x-text="{{ $dynamicDesc }}"></p>
-        @else
-            <p class="text-sm text-gray-500 mb-6">{{ $description }}</p>
-        @endif
-
-        {{-- Actions --}}
-        <div class="flex gap-3">
-            <button @click="{{ $showVar }} = false"
-                    class="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
-                {{ $cancelLabel }}
-            </button>
-            <button @click="{{ $onConfirm }}; {{ $showVar }} = false"
-                    class="flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-sm font-semibold transition-colors">
-                {{ $confirmLabel }}
-            </button>
+    <!-- Modal Panel -->
+    <div class="fixed inset-0 z-[101] overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div x-show="isOpen"
+                 @click.away="closeModal()"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gray-100">
+                
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <!-- Icon -->
+                        <div class="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-50 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-base font-bold leading-6 text-[#0f172a]" x-text="title"></h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 font-medium" x-text="message"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="bg-gray-50/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100">
+                    <button type="button" 
+                            @click="confirm()"
+                            :class="type === 'warning' ? 'btn-confirm-warning' : 'btn-confirm-danger'"
+                            class="inline-flex w-full justify-center rounded-xl px-4 py-2.5 text-sm font-bold shadow-sm sm:ml-3 sm:w-auto transition-colors"
+                            x-text="confirmText">
+                    </button>
+                    <button type="button" 
+                            @click="closeModal()"
+                            class="mt-3 inline-flex w-full justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-[#374151] shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto transition-colors">
+                        Batal
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('confirmModal', () => ({
+        isOpen: false,
+        title: '',
+        message: '',
+        confirmText: 'Konfirmasi',
+        formId: null,
+        type: 'danger', // 'danger' or 'warning'
+        
+        openModal(detail) {
+            this.title = detail.title || 'Konfirmasi Aksi';
+            this.message = detail.message || 'Apakah Anda yakin ingin melanjutkan?';
+            this.confirmText = detail.confirmText || 'Konfirmasi';
+            this.formId = detail.formId;
+            this.type = detail.type || 'danger';
+            this.isOpen = true;
+        },
+        
+        closeModal() {
+            this.isOpen = false;
+        },
+        
+        confirm() {
+            if (this.formId) {
+                const form = document.getElementById(this.formId);
+                if (form) {
+                    form.submit();
+                }
+            }
+            this.closeModal();
+        },
+    }));
+});
+</script>

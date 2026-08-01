@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/admin/dashboard');
+        return redirect('/admin/dashboard')->with('success', 'Login berhasil. Selamat datang, Admin!');
     }
 
     /**
@@ -56,6 +56,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Anda telah berhasil logout.');
     }
 }

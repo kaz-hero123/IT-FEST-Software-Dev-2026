@@ -38,7 +38,7 @@
     <x-footer />
     <x-admin-chat />
     <x-toast />
-    
+    <x-confirm-modal />    
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

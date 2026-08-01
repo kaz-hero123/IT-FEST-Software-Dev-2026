@@ -65,5 +65,6 @@
         }
     </script>
     <x-toast />
+    <x-confirm-modal />
 </body>
 </html>

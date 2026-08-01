@@ -111,11 +111,17 @@
                         {{-- Actions --}}
                         <td class="px-5 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <form method="POST" action="/admin/contents/{{ $content->slug }}/unpublish"
-                                      onsubmit="return confirm('Unpublish konten ini?')">
+                                <form x-data id="unpublish-form-{{ $content->id }}" method="POST" action="/admin/contents/{{ $content->slug }}/unpublish">
                                     @csrf
                                     <input type="hidden" name="note" value="Unpublished by admin from content management.">
-                                    <button type="submit"
+                                    <button type="button"
+                                            @click="$dispatch('confirm-action', {
+                                                title: 'Unpublish Konten',
+                                                message: 'Konten ini akan ditarik dari halaman publik dan dikembalikan ke status Pending.',
+                                                confirmText: 'Ya, Unpublish',
+                                                formId: 'unpublish-form-{{ $content->id }}',
+                                                type: 'warning'
+                                            })"
                                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold text-amber-600 bg-amber-50 border border-amber-100 hover:bg-amber-100 transition-colors">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
@@ -123,11 +129,17 @@
                                         Unpublish
                                     </button>
                                 </form>
-                                <form method="POST" action="/admin/contents/{{ $content->slug }}"
-                                      onsubmit="return confirm('Hapus konten ini secara permanen?')">
+                                <form x-data id="delete-form-{{ $content->id }}" method="POST" action="/admin/contents/{{ $content->slug }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
+                                    <button type="button"
+                                            @click="$dispatch('confirm-action', {
+                                                title: 'Hapus Permanen',
+                                                message: 'Konten ini akan dihapus secara permanen dari sistem.',
+                                                confirmText: 'Ya, Hapus',
+                                                formId: 'delete-form-{{ $content->id }}',
+                                                type: 'danger'
+                                            })"
                                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold text-red-600 bg-red-50 border border-red-100 hover:bg-red-100 transition-colors">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
