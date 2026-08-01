@@ -160,8 +160,8 @@
                             <svg class="w-4 h-4 text-[#0f172a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                         </div>
                         <p class="text-[11.5px] font-bold text-[#0f172a]">Click to upload or drag and drop</p>
-                        <p class="text-[9.5px] text-gray-500 mt-0.5 font-medium tracking-wide">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                        <input type="file" name="photos[]" x-ref="fileInput" @change="handleFiles" multiple accept="image/jpeg, image/png, image/webp, image/gif, image/svg+xml" class="hidden">
+                        <p class="text-[11px] text-gray-500 mt-1 font-medium">Format JPG, PNG (Maks. 5MB per foto)<br>Dapat mengunggah hingga 5 foto. Foto pertama akan menjadi cover utama.</p>
+                        <input type="file" name="photos[]" x-ref="fileInput" @change="handleFiles" multiple accept="image/jpeg, image/png, image/webp" class="hidden">
                     </div>
 
                     {{-- Preview Area for replacement photos --}}
@@ -263,6 +263,10 @@ document.addEventListener('alpine:init', () => {
             }
 
             filesArray.forEach(file => {
+                if(file.size > 5 * 1024 * 1024) {
+                     alert(`File ${file.name} melebihi 5MB.`);
+                     return;
+                }
                 this.files.push(file);
                 this.previewUrls.push(URL.createObjectURL(file));
             });
