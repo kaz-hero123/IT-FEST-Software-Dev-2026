@@ -20,7 +20,7 @@
         {{-- Cover Image --}}
         <div class="relative h-[180px] bg-gray-100">
             @if($primaryPhoto)
-                <img src="{{ Storage::url($primaryPhoto->file_path) }}"
+                <img src="{{ $primaryPhoto->resolved_url }}"
                      alt="{{ $item->title }}"
                      class="w-full h-full object-cover">
             @else
@@ -33,9 +33,19 @@
 
             {{-- Status Badge --}}
             <div class="absolute top-3 left-3">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-400/90 text-yellow-900 uppercase tracking-wider">
-                    Pending
-                </span>
+                @if($item->status === 'approved')
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/90 text-white uppercase tracking-wider">
+                        Approved
+                    </span>
+                @elseif($item->status === 'rejected')
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/90 text-white uppercase tracking-wider">
+                        Rejected
+                    </span>
+                @else
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-400/90 text-yellow-900 uppercase tracking-wider">
+                        Pending
+                    </span>
+                @endif
             </div>
         </div>
 

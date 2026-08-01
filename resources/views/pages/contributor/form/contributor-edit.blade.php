@@ -33,7 +33,15 @@
             
             <!-- FORM SECTION (Kiri) -->
             <div class="w-full lg:w-2/3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                <form action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" x-data="editForm()">
+                <form id="edit-form" action="/contents/{{ $content->slug }}" method="POST" enctype="multipart/form-data" 
+                      x-data="editForm()"
+                      @submit.prevent="$dispatch('confirm-action', {
+                          title: 'Simpan Perubahan',
+                          message: 'Menyimpan perubahan akan mengubah status konten ini kembali menjadi Pending dan perlu dimoderasi ulang. Lanjutkan?',
+                          confirmText: 'Ya, Simpan',
+                          formId: 'edit-form',
+                          type: 'warning'
+                      })">
                 @csrf
                 @method('PUT')
                 
@@ -130,7 +138,7 @@
                         @for ($i = 0; $i < 5; $i++)
                             @if(isset($content->photos[$i]))
                                 <div class="w-[85px] h-[85px] sm:w-[95px] sm:h-[95px] md:w-[105px] md:h-[105px] rounded-lg overflow-hidden border border-gray-200 relative">
-                                    <img src="{{ Storage::url($content->photos[$i]->file_path) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $content->photos[$i]->resolved_url }}" class="w-full h-full object-cover">
                                     @if($i === 0)
                                     <div class="absolute top-1.5 left-1.5 bg-[#0f172a] text-white text-[7px] font-bold px-1.5 py-0.5 rounded-[4px] tracking-widest z-10">
                                         PRIMARY
@@ -160,8 +168,8 @@
                             <svg class="w-4 h-4 text-[#0f172a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                         </div>
                         <p class="text-[11.5px] font-bold text-[#0f172a]">Click to upload or drag and drop</p>
-                        <p class="text-[9.5px] text-gray-500 mt-0.5 font-medium tracking-wide">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                        <input type="file" name="photos[]" x-ref="fileInput" @change="handleFiles" multiple accept="image/jpeg, image/png, image/webp, image/gif, image/svg+xml" class="hidden">
+                        <p class="text-[11px] text-gray-500 mt-1 font-medium">Format JPG, PNG (Maks. 5MB per foto)<br>Dapat mengunggah hingga 5 foto. Foto pertama akan menjadi cover utama.</p>
+                        <input type="file" name="photos[]" x-ref="fileInput" @change="handleFiles" multiple accept="image/jpeg, image/png, image/webp" class="hidden">
                     </div>
 
                     {{-- Preview Area for replacement photos --}}
@@ -188,7 +196,8 @@
                     <a href="/dashboard" class="px-5 py-2.5 border border-gray-200 bg-white text-[13px] font-bold text-gray-700 hover:bg-gray-50 transition-colors rounded-xl">
                         Batal
                     </a>
-                    <button type="submit" class="px-5 py-2.5 bg-[#b24823] text-white text-[13px] font-bold hover:bg-[#8e381b] shadow-sm transition-colors rounded-xl">
+                    <button type="submit" 
+                            class="px-5 py-2.5 bg-[#b24823] text-white text-[13px] font-bold hover:bg-[#8e381b] shadow-sm transition-colors rounded-xl">
                         Simpan Perubahan
                     </button>
                 </div>
@@ -263,6 +272,10 @@ document.addEventListener('alpine:init', () => {
             }
 
             filesArray.forEach(file => {
+                if(file.size > 5 * 1024 * 1024) {
+                     alert(`File ${file.name} melebihi 5MB.`);
+                     return;
+                }
                 this.files.push(file);
                 this.previewUrls.push(URL.createObjectURL(file));
             });

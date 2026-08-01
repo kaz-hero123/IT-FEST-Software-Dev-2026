@@ -32,7 +32,7 @@ class UpdateContentRequest extends FormRequest
             'open_time'   => ['nullable', 'date_format:H:i'],
             'close_time'  => ['nullable', 'date_format:H:i'],
             'photos'      => ['nullable', 'array', 'max:5'],
-            'photos.*'    => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'photos.*'    => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ];
     }
 }

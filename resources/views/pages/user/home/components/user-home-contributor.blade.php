@@ -13,7 +13,7 @@
         data-parallax-speed="0.2"
         data-parallax-scale="1.15"
         class="absolute inset-0 z-0 pointer-events-none will-change-transform origin-center"
-        style="background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px), linear-gradient(110deg, #05261e 0%, #0c3c2e 45%, #6a441e 100%); background-size: 32px 32px, cover; background-position: 0 0, center;"
+        style="background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px), linear-gradient(110deg, #041f18 0%, #0a2622 50%, #0d3c32 100%); background-size: 32px 32px, cover; background-position: 0 0, center;"
       ></div>
       
       <!--(tampilan di mobile) -->
@@ -37,9 +37,9 @@
       </div>
 
       <!-- Action Button (Kanan di Desktop, Bawah di Mobile) -->
-      <button class="relative z-10 w-full md:w-auto bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm md:text-base font-bold py-3.5 md:py-3.5 px-6 md:px-8 rounded-2xl md:rounded-xl shadow-lg shadow-[#EF8D55]/30 focus:outline-none focus:ring-4 focus:ring-[#EF8D55]/50 flex-shrink-0 whitespace-nowrap mt-2 md:mt-0 cursor-pointer">
+      <a href="/register" class="relative z-10 w-full md:w-auto bg-[#EF8D55] hover:bg-[#D67C46] transition-colors duration-200 text-white text-sm md:text-base font-bold py-3.5 md:py-3.5 px-6 md:px-8 rounded-2xl md:rounded-xl shadow-lg shadow-[#EF8D55]/30 focus:outline-none focus:ring-4 focus:ring-[#EF8D55]/50 flex-shrink-0 whitespace-nowrap mt-2 md:mt-0 cursor-pointer text-center inline-block">
         Daftar Kontributor
-      </button>
+      </a>
       
     </div>
 

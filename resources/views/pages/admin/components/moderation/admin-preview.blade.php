@@ -80,17 +80,26 @@
             @php $photos = $content->photos; @endphp
             @if($photos->isNotEmpty())
                 <div class="relative rounded-xl overflow-hidden mb-3 bg-gray-100" style="aspect-ratio:4/3;">
-                    <img src="{{ Storage::url($photos->first()->file_path) }}"
+                    <img src="{{ $photos->first()->resolved_url }}"
                          alt="Cover" class="w-full h-full object-cover">
                     <span class="absolute top-2.5 right-2.5 bg-white/90 text-[#0f172a] text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">
                         Cover
                     </span>
                 </div>
                 @if($photos->count() > 1)
-                <div class="grid grid-cols-3 gap-2">
+                @php
+                    $remainingCount = $photos->count() - 1;
+                    $gridCols = match($remainingCount) {
+                        1 => 'grid-cols-1',
+                        2, 4 => 'grid-cols-2',
+                        3 => 'grid-cols-3',
+                        default => 'grid-cols-3'
+                    };
+                @endphp
+                <div class="grid {{ $gridCols }} gap-2">
                     @foreach($photos->skip(1) as $photo)
                     <div class="rounded-xl overflow-hidden aspect-square bg-gray-100">
-                        <img src="{{ Storage::url($photo->file_path) }}" alt="Photo" class="w-full h-full object-cover">
+                        <img src="{{ $photo->resolved_url }}" alt="Photo" class="w-full h-full object-cover">
                     </div>
                     @endforeach
                 </div>

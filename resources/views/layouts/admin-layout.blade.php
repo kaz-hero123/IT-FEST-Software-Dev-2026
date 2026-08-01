@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Portal - Madura Smart Island')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/chat-support.js') }}"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body { font-family: 'Satoshi', sans-serif; }
         #sidebar { transition: transform 0.25s ease; }
@@ -61,5 +64,7 @@
             setTimeout(() => overlay.classList.add('hidden'), 250);
         }
     </script>
+    <x-toast />
+    <x-confirm-modal />
 </body>
 </html>

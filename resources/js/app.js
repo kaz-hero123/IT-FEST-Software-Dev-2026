@@ -34,18 +34,15 @@ window.initTypewriter = function () {
         const pause = parseInt(el.dataset.typingPause) || 2200;
         const deleteSpeed = parseInt(el.dataset.typingDeleteSpeed) || 40;
 
-        // Loop setting: if data-loop="false" OR if phrases has only 1 item and data-loop is not "true", do not loop
         const loopAttr = el.dataset.loop;
         const shouldLoop = loopAttr !== undefined ? (loopAttr === 'true') : (phrases.length > 1);
 
-        // Clear target content immediately on init so it starts empty on refresh
         targetEl.textContent = '';
 
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
 
-        // Start typing after a short delay on refresh
         setTimeout(() => {
             function type() {
                 const currentPhrase = phrases[phraseIndex];
@@ -61,8 +58,7 @@ window.initTypewriter = function () {
                 let nextSpeed = isDeleting ? deleteSpeed : speed;
 
                 if (!isDeleting && charIndex === currentPhrase.length) {
-                    if (!shouldLoop) {
-                        // Single text typing complete -> stay permanent!
+                    if (!shouldLoop) {  
                         return;
                     }
                     nextSpeed = pause;
@@ -140,15 +136,15 @@ window.initParallaxScroll = function () {
         parallaxElements.forEach((el) => {
             const speed = parseFloat(el.dataset.parallaxSpeed) || 0.25;
             const scale = parseFloat(el.dataset.parallaxScale) || 1.35;
-            
+
             const parent = el.closest('section') || el.closest('.group') || el.parentElement;
             if (!parent) return;
 
             const rect = parent.getBoundingClientRect();
-            
+
             if (rect.bottom >= -100 && rect.top <= windowHeight + 100) {
                 const centerY = rect.top + rect.height / 2 - windowHeight / 2;
-                
+
                 // Extra height buffer from scaling = (height * (scale - 1)) / 2
                 // Keep 10px safety cushion so edges NEVER show
                 const maxTranslate = Math.max(0, (rect.height * (scale - 1)) / 2 - 10);

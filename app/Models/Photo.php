@@ -25,4 +25,13 @@ class Photo extends Model
     {
         return $this->belongsTo(Content::class);
     }
+
+    public function getResolvedUrlAttribute()
+    {
+        if (str_starts_with($this->file_path, 'images/')) {
+            return asset($this->file_path);
+        }
+        
+        return \Illuminate\Support\Facades\Storage::url($this->file_path);
+    }
 }

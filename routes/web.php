@@ -7,10 +7,12 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ChatApiController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ModerationController;
 use App\Http\Controllers\Admin\ContentController as AdminContentController;
+use App\Http\Controllers\Admin\ChatController as AdminChatController;
 
 
 // PUBLIC ROUTES
@@ -22,12 +24,26 @@ Route::get('/explore', [ExploreController::class, 'index']);
 Route::get('/explore/{regency}', [ExploreController::class, 'show']);
 Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
 
+// Chat API (public - accessible without auth)
+Route::middleware('throttle:120,1')->group(function () {
+    Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
+    Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
+    Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
+    Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
+});
+
 // Auth — hanya untuk guest (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
     Route::get('/register', [AuthController::class, 'registerForm']);
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:6,1');
+    
+    // Password Reset
+    Route::get('/forgot-password', [App\Http\Controllers\PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [App\Http\Controllers\PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [App\Http\Controllers\PasswordResetController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [App\Http\Controllers\PasswordResetController::class, 'reset'])->name('password.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
@@ -36,7 +52,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::middleware(['auth', 'contributor'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/contents/create', [ContentController::class, 'create']);
-    Route::post('/contents', [ContentController::class, 'store']);
+    Route::post('/contents', [ContentController::class, 'store'])->middleware('throttle:6,1');
     Route::get('/contents/{content}/edit', [ContentController::class, 'edit']);
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'destroy']);
@@ -66,5 +82,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/contents', [AdminContentController::class, 'index']);
         Route::post('/contents/{content}/unpublish', [AdminContentController::class, 'unpublish']);
         Route::delete('/contents/{content}', [AdminContentController::class, 'destroy']);
+
+        // Live Chat Support
+        Route::get('/chat', [AdminChatController::class, 'index']);
     });
 });

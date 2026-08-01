@@ -11,11 +11,11 @@
     {{-- Visi --}}
     @include('pages.user.home.components.user-home-visi')
 
+    {{-- Peta Interaktif Madura --}}
+    @include('pages.user.home.components.user-home-map')
+
     {{-- Popular --}}
     @include('pages.user.home.components.user-home-popular')
-
-    {{-- Smart Island Impact Dashboard --}}
-    @include('pages.user.home.components.user-home-impact')
 
     {{-- Contributor --}}
     @include('pages.user.home.components.user-home-contributor')

@@ -7,6 +7,7 @@
     <title>Masuk – Jelajah Madura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600,500,400&display=swap" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -266,7 +267,7 @@
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>
                 <div>
-                    <p class="text-2xl font-bold text-white">100+</p>
+                    <p class="text-2xl font-bold text-white">{{ \App\Models\Content::where('status', 'approved')->count() }}+</p>
                     <p class="text-xs text-gray-300">Destinasi Wisata</p>
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>
@@ -279,6 +280,6 @@
     </div>
 
 </div>
-
+<x-toast />
 </body>
 </html>

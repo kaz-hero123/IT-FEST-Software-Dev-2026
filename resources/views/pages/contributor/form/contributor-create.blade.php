@@ -22,8 +22,15 @@
             
             <!-- FORM SECTION (Kiri) -->
             <div class="w-full lg:w-2/3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                <form action="/contents" method="POST" enctype="multipart/form-data" 
-                      x-data="contentForm()">
+                <form id="create-form" action="/contents" method="POST" enctype="multipart/form-data" 
+                      x-data="contentForm()"
+                      @submit.prevent="$dispatch('confirm-action', {
+                          title: 'Kirim Konten',
+                          message: 'Apakah Anda yakin ingin mengirim konten ini? Konten akan masuk ke antrian moderasi admin.',
+                          confirmText: 'Ya, Kirim',
+                          formId: 'create-form',
+                          type: 'warning'
+                      })">
                     @csrf
                     
                     {{-- Informasi Dasar --}}

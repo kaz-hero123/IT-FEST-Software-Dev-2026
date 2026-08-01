@@ -27,10 +27,10 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->role === 'admin') {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/dashboard')->with('success', 'Selamat datang kembali, Admin!');
         }
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'Login berhasil. Selamat datang!');
     }
 
     public function registerForm()
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'Registrasi berhasil! Selamat datang di Jelajah Madura.');
     }
 
     public function logout(Request $request)
@@ -58,6 +58,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Anda telah berhasil logout.');
     }
 }
