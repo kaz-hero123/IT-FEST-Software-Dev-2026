@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Jelajah Madura</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ asset('js/chat-support.js') }}"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
@@ -27,7 +26,6 @@
         }
     </script>
     
-    @vite(['resources/js/app.js'])
 </head>
 <body class="bg-gray-50 text-[#0a2622] min-h-screen flex flex-col">
     {{-- Main Navbar --}}
@@ -39,6 +37,7 @@
 
     <x-footer />
     <x-admin-chat />
+    <x-toast />
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>

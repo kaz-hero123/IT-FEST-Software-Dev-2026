@@ -7,6 +7,7 @@
     <title>Daftar Akun – Jelajah Madura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600,500,400&display=swap" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -275,6 +276,6 @@
     </div>
 
 </div>
-
+<x-toast />
 </body>
 </html>
