@@ -25,12 +25,12 @@
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-screen w-screen overflow-hidden bg-white text-[#0f172a] antialiased">
+<body class="min-h-screen md:h-screen md:w-screen md:overflow-hidden bg-white text-[#0f172a] antialiased">
 
-<div id="auth-container" class="relative w-full h-full overflow-hidden flex flex-col md:flex-row bg-white">
+<div id="auth-container" class="relative w-full min-h-screen md:h-full md:overflow-hidden flex flex-col md:flex-row bg-white">
 
     {{-- LEFT HALF CONTAINER (Active Login Form) --}}
-    <div id="left-container" class="w-full md:w-1/2 h-full relative z-10 flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-6 overflow-hidden bg-white">
+    <div id="left-container" class="w-full md:w-1/2 min-h-screen md:h-full relative z-10 flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-8 md:py-6 overflow-y-auto md:overflow-hidden bg-white">
         
         {{-- LOGIN FORM CONTENT --}}
         <div id="login-form-wrapper" class="w-full max-w-md mx-auto my-auto flex flex-col justify-center transition-all duration-500 ease-in-out">
@@ -127,7 +127,7 @@
     </div>
 
     {{-- RIGHT HALF CONTAINER (Hidden Register Form & Banner slot) --}}
-    <div id="right-container" class="w-full md:w-1/2 h-full relative z-10 flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-6 overflow-hidden bg-white">
+    <div id="right-container" class="w-full md:w-1/2 min-h-screen md:h-full relative z-10 hidden md:flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-8 md:py-6 overflow-y-auto md:overflow-hidden bg-white">
         
         {{-- REGISTER FORM CONTENT (Hidden on Login page) --}}
         <div id="register-form-wrapper" class="w-full max-w-md mx-auto my-auto flex flex-col justify-center transition-all duration-500 ease-in-out hidden">

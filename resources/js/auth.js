@@ -24,6 +24,8 @@ function switchTo(target) {
     const regFormWrapper   = document.getElementById('register-form-wrapper');
     const bannerTitle      = document.getElementById('banner-title');
     const bannerDesc       = document.getElementById('banner-desc');
+    const leftContainer    = document.getElementById('left-container');
+    const rightContainer   = document.getElementById('right-container');
 
     if (!banner || !loginFormWrapper || !regFormWrapper) {
         window.location.href = target === 'register' ? '/register' : '/login';
@@ -41,6 +43,16 @@ function switchTo(target) {
         // Swap forms
         loginFormWrapper.classList.add('hidden');
         regFormWrapper.classList.remove('hidden');
+
+        // Swap containers on mobile
+        if (leftContainer) {
+            leftContainer.classList.remove('flex');
+            leftContainer.classList.add('hidden');
+        }
+        if (rightContainer) {
+            rightContainer.classList.remove('hidden');
+            rightContainer.classList.add('flex');
+        }
 
         setTimeout(() => {
             if (bannerTitle) bannerTitle.innerText = 'Jadilah Kontributor Jelajah Madura';
@@ -61,6 +73,16 @@ function switchTo(target) {
         // Swap forms
         regFormWrapper.classList.add('hidden');
         loginFormWrapper.classList.remove('hidden');
+
+        // Swap containers on mobile
+        if (rightContainer) {
+            rightContainer.classList.remove('flex');
+            rightContainer.classList.add('hidden');
+        }
+        if (leftContainer) {
+            leftContainer.classList.remove('hidden');
+            leftContainer.classList.add('flex');
+        }
 
         setTimeout(() => {
             if (bannerTitle) bannerTitle.innerText = 'Temukan Keindahan Tersembunyi Madura';
