@@ -61,6 +61,7 @@ function adminChat(authUserName = null) {
         pollInterval: null,
         errorCount: 0,
         showDeleteModal: false,
+        defaultReplySent: false,
 
         quickReplies: [
             'Rekomendasi Wisata 🏖️',
@@ -148,10 +149,66 @@ function adminChat(authUserName = null) {
                     this.hasUnreadAdmin = false;
                     if (this.messages.length) this.lastMsgId = this.messages[this.messages.length - 1].id;
                     this.scrollToBottom();
+
+                    // Trigger auto-reply berdasarkan keyword
+                    this.autoReply(text);
                 }
             } catch (e) {
                 console.error('[chat] sendMessage error:', e);
             }
+        },
+
+        // Auto-reply: deteksi keyword dari pesan user, balas otomatis sebagai Admin Rara
+        autoReply(userText) {
+            const t = userText.toLowerCase();
+            const rules = [
+                { keys: ['halo','hai','hi','hei','assalamu','selamat pagi','selamat siang','selamat sore','selamat malam','permisi','pagi','siang','sore','malam'],
+                  reply: 'Halo! 👋 Selamat datang di Jelajah Madura. Saya Rara, ada yang bisa saya bantu hari ini?' },
+                { keys: ['bantuan akun','lupa password','tidak bisa login'],
+                  reply: 'Jika Anda mengalami kendala login atau lupa password, silakan gunakan fitur Reset Password di halaman login. Jika masih bermasalah, mohon sebutkan alamat email yang terdaftar.' },
+                { keys: ['wisata','destinasi','tempat','rekomendasi','liburan','jalan-jalan','jalan jalan','pantai','alam'],
+                  reply: 'Madura punya banyak destinasi keren! 🌊 Mulai dari Pantai Lombang, Api Tak Kunjung Padam, hingga Bukit Jaddih. Cek halaman Wisata di aplikasi kami untuk detail lengkapnya!' },
+                { keys: ['kuliner','makanan','makan','sate','bebek','oleh-oleh','oleh oleh','khas','enak'],
+                  reply: 'Kuliner Madura memang juara! 🍢 Sate Madura, Bebek Songkem, dan Lorjuk wajib dicoba. Cek halaman Kuliner kami untuk rekomendasi tempat makan terbaik!' },
+                { keys: ['umkm','belanja','kerajinan','batik','souvenir'],
+                  reply: 'Madura punya banyak UMKM unggulan! 🛍️ Batik Madura, kerajinan tangan, hingga produk olahan lokal. Jelajahi halaman UMKM kami!' },
+                { keys: ['kontributor','bergabung','join','tambah tempat',],
+                  reply: 'Tertarik jadi Kontributor Jelajah Madura? 📝 Caranya: Register → Login → Upload Foto & Cerita → Ajukan verifikasi di halaman Kontributor. Tim kami verifikasi dalam 1-2 hari kerja!' },
+                { keys: ['harga','tiket','biaya','berapa','gratis','bayar'],
+                  reply: 'Info harga tiket tertera di halaman detail masing-masing destinasi. Karena bisa berubah, sebaiknya konfirmasi langsung ke lokasi ya! 😊' },
+                { keys: ['terima kasih','makasih','thanks','thank you','ok','oke','siap','mantap'],
+                  reply: 'Sama-sama! 😊 Senang bisa membantu. Kalau ada pertanyaan lain, jangan ragu chat lagi. Selamat menjelajahi Madura! 🌊' },
+            ];
+
+            let matchedReply = null;
+            for (const rule of rules) {
+                if (rule.keys.some(k => t.includes(k))) { matchedReply = rule.reply; break; }
+            }
+
+            // Pesan default hanya dikirim 1x per sesi
+            if (!matchedReply) {
+                if (this.defaultReplySent) return;
+                this.defaultReplySent = true;
+                matchedReply = 'Halo! Pesan Anda sudah kami terima 🙏 Admin Rara akan segera merespons...';
+            }
+
+            // Tampilkan typing indicator lalu kirim balasan
+            const delay = 1200 + Math.random() * 800;
+            this.isTyping = true;
+            this.scrollToBottom();
+
+            setTimeout(async () => {
+                this.isTyping = false;
+                try {
+                    await fetch('/api/chat/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                        body: JSON.stringify({ session_id: this.sessionId, sender_name: 'Rara', sender_type: 'admin', message: matchedReply }),
+                    });
+                    await this.fetchMessages();
+                    this.scrollToBottom();
+                } catch (e) { console.error('[chat] autoReply error:', e); }
+            }, delay);
         },
 
         // Hapus seluruh riwayat chat sesi ini
@@ -270,7 +327,7 @@ function adminChatCenter() {
                     headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
                     body: JSON.stringify({
                         session_id: this.activeConv.sessionId,
-                        sender_name: 'Javier',
+                        sender_name: 'Rara',
                         sender_type: 'admin',
                         message: text,
                     }),
