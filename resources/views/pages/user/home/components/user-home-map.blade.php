@@ -65,10 +65,6 @@
                     {{-- Dark Gradient Overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent transition-opacity duration-300"></div>
 
-                    {{-- Destinasi Badge --}}
-                    <div class="absolute top-3.5 right-3.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 text-[10px] font-medium text-white/90">
-                        {{ $regency->approved_contents_count }} Destinasi
-                    </div>
 
                     {{-- Content at Bottom --}}
                     <div class="absolute bottom-0 inset-x-0 p-5 flex items-end justify-between gap-3">
