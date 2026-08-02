@@ -32,7 +32,7 @@ class DashboardController extends Controller
                 'category',
                 'regency',
                 'photos' => fn($q) => $q->where('is_primary', true),
-                'latestModerationNote',
+                'latestModerationNote.admin',
             ])
             ->where('user_id', $userId)
             ->latest()

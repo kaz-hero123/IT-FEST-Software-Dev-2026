@@ -159,7 +159,7 @@
 <section class="relative h-[85vh] flex items-center justify-center overflow-hidden ">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-        <img src="{{ asset('images/culture/culture03.jpg') }}"
+        <img src="{{ asset('images/culture/culture05.jpg') }}"
              alt="Eksplorasi Madura"
              data-parallax
              data-parallax-speed="0.25"
