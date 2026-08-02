@@ -234,7 +234,7 @@
 
             {{-- Image Preview Illustration --}}
             <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-sm group">
-                <img src="https://images.unsplash.com/photo-1596404179374-601980072bba?q=80&w=2670&auto=format&fit=crop" alt="Ilustrasi Gili Iyang" class="w-full h-full object-cover">
+                <img src="{{ asset('images/gili_lyang.jpg') }}" alt="Ilustrasi Gili Iyang" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/30 to-transparent"></div>
                 <div class="absolute bottom-5 left-5 right-5">
                     <span class="inline-flex items-center justify-center bg-[#25c46b] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm mb-2 tracking-wider">Inspirasi</span>

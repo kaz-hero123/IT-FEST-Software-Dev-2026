@@ -111,7 +111,7 @@
                                 </div>
                                 <span :class="msg.sender === 'admin' ? 'text-right block' : 'text-left block'" 
                                       class="text-[10px] text-gray-400 mt-1 px-1" 
-                                      x-text="msg.time + (msg.sender === 'admin' ? ' • Admin Javier' : '')"></span>
+                                      x-text="msg.time + (msg.sender === 'admin' ? ' • Admin Rara' : '')"></span>
                             </div>
                         </div>
                     </template>
@@ -133,7 +133,7 @@
                     <form @submit.prevent="sendAdminReply()" class="flex items-center gap-3">
                         <input type="text" 
                                x-model="replyMessage" 
-                               placeholder="Tulis balasan sebagai Admin Javier..." 
+                               placeholder="Tulis balasan sebagai Admin..." 
                                class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#b84c22] focus:bg-white transition-colors">
                         <button type="submit" 
                                 :disabled="!replyMessage.trim()"

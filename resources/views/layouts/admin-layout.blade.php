@@ -48,6 +48,24 @@
         </main>
     </div>
 
+    <x-throttle-modal />
+
+    <script>
+        // Global Fetch Interceptor for 429 Too Many Requests
+        (function() {
+            const originalFetch = window.fetch;
+            window.fetch = async function(...args) {
+                const response = await originalFetch.apply(this, args);
+                if (response.status === 429) {
+                    window.dispatchEvent(new CustomEvent('throttle-warning', {
+                        detail: { message: 'Terlalu banyak request di server, tolong tunggu sebentar.' }
+                    }));
+                }
+                return response;
+            };
+        })();
+    </script>
+
     <script>
         function openSidebar() {
             const sidebar = document.getElementById('sidebar');
