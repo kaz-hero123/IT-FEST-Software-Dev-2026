@@ -47,7 +47,7 @@
                                  x-transition:leave="transition ease-in duration-75"
                                  x-transition:leave-start="transform opacity-100 scale-100"
                                  x-transition:leave-end="transform opacity-0 scale-95"
-                                 class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                                 class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
                                 <div class="py-2">
                                     <h6 class="px-4 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                         Halo, {{ strtok(auth()->user()->name, ' ') }}
