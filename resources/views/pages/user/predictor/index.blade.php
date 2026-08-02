@@ -160,53 +160,87 @@
             <!-- List Results -->
             <div class="space-y-4">
                 <template x-for="(res, index) in results" :key="index">
-                    <a :href="'/explore/' + res.content.regency.slug + '/' + res.content.slug" 
-                       class="group block bg-white rounded-3xl p-4 sm:p-5 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div x-data="{ showDetails: false }" class="group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                         
-                        <!-- Rank Ribbon -->
-                        <div class="absolute -right-12 top-6 w-40 text-center transform rotate-45 text-[10px] font-bold py-1 shadow-sm uppercase tracking-wider"
-                             :class="index === 0 ? 'bg-amber-400 text-amber-900' : (index === 1 ? 'bg-gray-200 text-gray-700' : 'bg-orange-200 text-orange-800')">
-                            Top <span x-text="index + 1"></span>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-5">
-                            <!-- Image -->
-                            <div class="w-full sm:w-48 aspect-video sm:aspect-square sm:h-32 rounded-2xl overflow-hidden shrink-0 bg-gray-100">
-                                <img :src="res.content.primary_photo ? res.content.primary_photo.resolved_url : '/images/culture/culture05.jpg'" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                                     alt="Gambar">
+                        <a :href="'/explore/' + res.content.regency.slug + '/' + res.content.slug" class="block p-4 sm:p-5">
+                            <!-- Rank Ribbon -->
+                            <div class="absolute -right-12 top-6 w-40 text-center transform rotate-45 text-[10px] font-bold py-1 shadow-sm uppercase tracking-wider"
+                                 :class="index === 0 ? 'bg-teal-500 text-white' : (index === 1 ? 'bg-[#ed8a53] text-white' : 'bg-amber-500 text-white')">
+                                Top <span x-text="index + 1"></span>
                             </div>
 
-                            <!-- Info -->
-                            <div class="flex-1 flex flex-col justify-center">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded-md uppercase tracking-wider bg-gray-100 text-gray-600" x-text="res.content.category.name"></span>
-                                    <span class="text-xs text-gray-400" x-text="res.content.regency.name"></span>
+                            <div class="flex flex-col sm:flex-row gap-5">
+                                <!-- Image -->
+                                <div class="w-full sm:w-48 aspect-[4/3] rounded-2xl overflow-hidden shrink-0 bg-gray-100">
+                                    <img :src="res.content.primary_photo ? res.content.primary_photo.resolved_url : '/images/culture/culture05.jpg'" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                         alt="Gambar">
                                 </div>
-                                <h3 class="text-xl font-extrabold text-[#0a2622] mb-1 group-hover:text-teal-700 transition-colors" x-text="res.content.title"></h3>
-                                
-                                <div class="mt-auto pt-3 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-500">
-                                    <div class="flex items-center gap-1.5" title="Indeks Eco-Score Kategori">
-                                        <x-lucide-leaf class="w-4 h-4 text-green-500" />
-                                        <span>Base Eco: <span x-text="res.eco_index"></span></span>
+
+                                <!-- Info -->
+                                <div class="flex-1 flex flex-col justify-center">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs font-bold px-2 py-0.5 rounded-md uppercase tracking-wider bg-gray-100 text-gray-600" x-text="res.content.category.name"></span>
+                                        <span class="text-xs text-gray-400" x-text="res.content.regency.name"></span>
                                     </div>
-                                    <div class="flex items-center gap-1.5" title="Popularitas Web">
-                                        <x-lucide-eye class="w-4 h-4 text-blue-500" />
-                                        <span>Views: <span x-text="res.view_count"></span></span>
+                                    <h3 class="text-xl font-extrabold text-[#0a2622] mb-1 group-hover:text-teal-700 transition-colors" x-text="res.content.title"></h3>
+                                    
+                                    <div class="mt-auto pt-3 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-500">
+                                        <div class="flex items-center gap-1.5" title="Indeks Eco-Score Kategori">
+                                            <x-lucide-leaf class="w-4 h-4 text-green-500" />
+                                            <span>Base Eco: <span x-text="res.eco_index"></span></span>
+                                        </div>
+                                        <div class="flex items-center gap-1.5" title="Popularitas Web">
+                                            <x-lucide-eye class="w-4 h-4 text-blue-500" />
+                                            <span>Views: <span x-text="res.view_count"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Score Circular -->
+                                <div class="shrink-0 sm:self-center flex flex-col items-center justify-center p-4">
+                                    <div class="relative w-16 h-16 flex items-center justify-center rounded-full border-4"
+                                         :class="res.match_percentage >= 80 ? 'border-green-400 text-green-600' : 'border-amber-400 text-amber-600'">
+                                        <span class="text-xl font-bold" x-text="res.match_percentage + '%'"></span>
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 mt-2 tracking-wider">Match</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Accordion for Transparency -->
+                        <div class="border-t border-gray-50 bg-gray-50/50">
+                            <button @click="showDetails = !showDetails" class="w-full px-5 py-3 flex items-center justify-center gap-2 text-xs font-bold text-gray-500 hover:text-teal-600 transition-colors">
+                                <span x-text="showDetails ? 'Sembunyikan Rincian' : 'Lihat Rincian Perhitungan'"></span>
+                                <x-lucide-chevron-down class="w-4 h-4 transition-transform duration-300" :class="showDetails ? 'rotate-180' : ''" />
+                            </button>
+                            <div x-show="showDetails" x-collapse class="px-5 pb-4">
+                                <div class="bg-white rounded-xl p-4 border border-gray-100 text-xs text-gray-600 font-mono leading-relaxed shadow-sm">
+                                    <div class="font-bold text-gray-800 mb-2 border-b border-gray-100 pb-2">Metrik Simple Additive Weighting (SAW)</div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-1">Kriteria 1: Eco-Score (Benefit)</div>
+                                            <div>Nilai Awal: <span class="font-bold text-gray-800" x-text="res.eco_index"></span></div>
+                                            <!-- Normalisasi (Nilai / Max) -->
+                                            <div class="text-gray-400 mt-1">Ternormalisasi (x) = <span x-text="(res.eco_index / Math.max(...results.map(r => r.eco_index))).toFixed(3)"></span></div>
+                                        </div>
+                                        <div>
+                                            <div class="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-1">Kriteria 2: Popularitas (<span x-text="form.priority === 'sepi' ? 'Cost' : 'Benefit'"></span>)</div>
+                                            <div>Nilai Awal: <span class="font-bold text-gray-800" x-text="res.view_count"></span> views</div>
+                                            <!-- Normalisasi -->
+                                            <div class="text-gray-400 mt-1">Ternormalisasi (x) = 
+                                                <span x-text="form.priority === 'sepi' ? (res.view_count === 0 ? 1 : Math.min(...results.map(r => r.view_count))/res.view_count).toFixed(3) : (res.view_count / Math.max(...results.map(r => r.view_count))).toFixed(3)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 pt-3 border-t border-gray-100 bg-gray-50/80 -mx-4 -mb-4 p-4 rounded-b-xl flex items-center justify-between">
+                                        <span class="font-bold text-gray-700">Skor Akhir (Σ w * x)</span>
+                                        <span class="font-bold text-teal-600 text-sm" x-text="res.final_score.toFixed(4)"></span>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Score Circular -->
-                            <div class="shrink-0 sm:self-center flex flex-col items-center justify-center p-4">
-                                <div class="relative w-16 h-16 flex items-center justify-center rounded-full border-4"
-                                     :class="res.match_percentage >= 80 ? 'border-green-400 text-green-600' : 'border-amber-400 text-amber-600'">
-                                    <span class="text-xl font-bold" x-text="res.match_percentage + '%'"></span>
-                                </div>
-                                <span class="text-[10px] uppercase font-bold text-gray-400 mt-2 tracking-wider">Match</span>
-                            </div>
                         </div>
-                    </a>
+                    </div>
                 </template>
                 
                 <!-- Empty State -->
@@ -239,6 +273,9 @@ document.addEventListener('alpine:init', () => {
         async submitPrediction() {
             this.isLoading = true;
             try {
+                // Add artificial delay to show 'calculating' state
+                await new Promise(r => setTimeout(r, 800));
+
                 const response = await fetch('/predictor/predict', {
                     method: 'POST',
                     headers: {
