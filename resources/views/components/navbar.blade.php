@@ -87,7 +87,6 @@
         <a href="/" class="block text-sm {{ request()->is('/') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Beranda</a>
         <a href="/about" class="block text-sm {{ request()->is('about') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Tentang</a>
         <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Jelajah</a>
-        <a href="/predictor" class="block text-sm {{ request()->is('predictor') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Smart Predictor</a>
         <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Pertanyaan</a>
         <div class="pt-2 border-t border-gray-100 pb-2">
             @auth
