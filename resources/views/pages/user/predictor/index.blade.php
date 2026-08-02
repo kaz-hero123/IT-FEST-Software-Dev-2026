@@ -212,7 +212,7 @@
                         <div class="border-t border-gray-50 bg-gray-50/50">
                             <button @click="showDetails = !showDetails" class="w-full px-5 py-3 flex items-center justify-center gap-2 text-xs font-bold text-gray-500 hover:text-teal-600 transition-colors">
                                 <span x-text="showDetails ? 'Sembunyikan Rincian' : 'Lihat Rincian Perhitungan'"></span>
-                                <x-lucide-chevron-down class="w-4 h-4 transition-transform duration-300" :class="showDetails ? 'rotate-180' : ''" />
+                                <x-lucide-chevron-down class="w-4 h-4 transition-transform duration-300" x-bind:class="showDetails ? 'rotate-180' : ''" />
                             </button>
                             <div x-show="showDetails" x-collapse class="px-5 pb-4">
                                 <div class="bg-white rounded-xl p-4 border border-gray-100 text-xs text-gray-600 font-mono leading-relaxed shadow-sm">
