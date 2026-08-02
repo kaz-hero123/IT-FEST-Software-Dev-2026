@@ -90,17 +90,17 @@
 
                     <!-- KANAN ATAS: Gambar Utama Besar -->
                     <div class="absolute top-0 left-0 w-[70%] z-20 shadow-xl shadow-black/5 transition-transform duration-300 hover:scale-[1.02]">
-                        <img src="{{ asset('images/pantai.png') }}" alt="Main Vision" class="rounded-[2rem] w-full object-cover aspect-[4/3]">
+                        <img src="{{ asset('images/gili_lyang.jpg') }}" alt="Main Vision" class="rounded-[2rem] w-full object-cover aspect-[4/3]">
                     </div>
 
                     <!-- KANAN TENGAH-BELAKANG: Gambar Kedua Tanpa Border Putih -->
                     <div class="absolute top-1/4 right-0 w-[50%] z-10 opacity-90 shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-                        <img src="{{ asset('images/culture/culture07-old-2.jpg') }}" alt="Secondary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
+                        <img src="{{ asset('images/pantai.png') }}" alt="Secondary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
                     </div>
 
                     <!-- KIRI BAWAH: Gambar Ketiga Tanpa Border Putih -->
                     <div class="absolute bottom-0 left-[20%] w-[55%] z-30 shadow-2xl shadow-black/10 transition-transform duration-300 hover:scale-[1.02]">
-                        <img src="{{ asset('images/culture/culture06-old.jpg') }}" alt="Tertiary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
+                        <img src="{{ asset('images/food.png') }}" alt="Tertiary Vision" class="rounded-[1.5rem] w-full object-cover aspect-[4/3]">
                     </div>
 
                 </div>
