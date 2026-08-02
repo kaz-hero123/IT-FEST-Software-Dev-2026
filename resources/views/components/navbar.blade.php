@@ -31,6 +31,7 @@
                     <a href="/" class="{{ request()->is('/') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Home</a>
                     <a href="/about" class="{{ request()->is('about') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">About</a>
                     <a href="/explore" class="{{ request()->is('explore*') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Explore</a>
+                    <a href="/predictor" class="{{ request()->is('predictor') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Predictor</a>
                     <a href="/question" class="{{ request()->is('question') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">FAQ</a>
                     
                     <!-- Gradient Button / User Profile Menu -->
@@ -87,6 +88,7 @@
         <a href="/" class="block text-sm {{ request()->is('/') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Home</a>
         <a href="/about" class="block text-sm {{ request()->is('about') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">About</a>
         <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Explore</a>
+        <a href="/predictor" class="block text-sm {{ request()->is('predictor') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Predictor</a>
         <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">FAQ</a>
         <div class="pt-2 border-t border-gray-100 pb-2">
             @auth
