@@ -28,10 +28,6 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0a2622]/85 via-[#0a2622]/20 to-transparent"></div>
                     <!-- Teks di atas foto -->
                     <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <div class="flex items-center gap-2 text-[#EF8D55] text-xs font-bold uppercase tracking-wider mb-2">
-                            <x-lucide-sparkles class="w-3.5 h-3.5" />
-                            <span>Smart Predictor</span>
-                        </div>
                         <h3 class="text-xl font-extrabold leading-snug mb-2">Temukan Destinasi Impianmu di Madura</h3>
                         <p class="text-xs text-white/70 leading-relaxed">Pilih kriteria di sebelah kanan, sistem kami akan merekomendasikan destinasi terbaik menggunakan metode SAW.</p>
                     </div>
