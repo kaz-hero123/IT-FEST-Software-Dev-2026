@@ -103,7 +103,7 @@
                 
                 <!-- Tentang Section -->
                 <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
-                    <h2 class="text-xl font-bold text-[#0a2622] mb-5">About This Place</h2>
+                    <h2 class="text-xl font-bold text-[#0a2622] mb-5">Tentang Tempat Ini</h2>
                     
                     <div class="prose prose-gray max-w-none prose-p:leading-relaxed prose-p:text-gray-600 prose-p:mb-5">
                         <!-- Convert markdown-like syntax / linebreaks from description -->
@@ -142,7 +142,7 @@
             <div class="w-full lg:w-1/3 space-y-6">
                 <!-- Widget Lokasi -->
                 <div class="bg-white rounded-3xl p-6 md:p-7 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
-                    <h3 class="text-base font-extrabold text-[#0a2622] mb-4">Location & Contact</h3>
+                    <h3 class="text-base font-extrabold text-[#0a2622] mb-4">Lokasi & Kontak</h3>
                     
                     <!-- Real Interactive Google Maps Embed -->
                     <div class="w-full h-52 bg-gray-100 rounded-2xl mb-4 overflow-hidden relative border border-gray-200 shadow-sm">
@@ -183,7 +183,7 @@
                         <x-lucide-clock class="w-5 h-5 {{ $isOpen ? 'text-green-500' : 'text-red-400' }} mr-3 shrink-0 mt-0.5" />
                         <div class="flex flex-col">
                             <span class="text-sm font-bold {{ $isOpen ? 'text-green-600' : 'text-red-500' }} mb-0.5">
-                                {{ $isOpen ? 'Open Now' : 'Closed Now' }}
+                                {{ $isOpen ? 'Buka Sekarang' : 'Tutup Sekarang' }}
                             </span>
                             <span class="text-sm text-gray-500">
                                 {{ $openLabel }} – {{ $closeLabel }} WIB
@@ -195,12 +195,12 @@
                     @if($content->maps_url)
                         <a href="{{ $content->maps_url }}" target="_blank" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#c54e2e] hover:bg-[#a93f23] text-white font-semibold text-sm transition-colors shadow-sm">
                             <x-lucide-map class="w-4 h-4 mr-2" />
-                            Open in Google Maps
+                            Buka di Google Maps
                         </a>
                     @else
                         <div class="flex items-center justify-center w-full py-3 rounded-xl bg-gray-100 text-gray-400 font-semibold text-sm cursor-not-allowed">
                             <x-lucide-map-pin-off class="w-4 h-4 mr-2" />
-                            Location Unavailable
+                            Lokasi Tidak Tersedia
                         </div>
                     @endif
                 </div>
@@ -211,8 +211,8 @@
                         {{ strtoupper(substr($content->user->name ?? 'U', 0, 2)) }}
                     </div>
                     <div class="flex-1">
-                        <p class="text-[11px] text-gray-500 font-semibold mb-0.5">Added by</p>
-                        <p class="text-sm font-bold text-[#0a2622] leading-tight">{{ $content->user->name ?? 'Contributor' }}</p>
+                        <p class="text-[11px] text-gray-500 font-semibold mb-0.5">Ditambahkan oleh</p>
+                        <p class="text-sm font-bold text-[#0a2622] leading-tight">{{ $content->user->name ?? 'Kontributor' }}</p>
                     </div>
                     <x-lucide-badge-check class="w-6 h-6 text-green-500 shrink-0" />
                 </div>
@@ -226,11 +226,11 @@
         <div class="mt-20 border-t border-gray-200 pt-10 pb-8">
             <div class="flex justify-between items-end mb-8">
                 <div>
-                    <h2 class="text-2xl font-bold text-[#0a2622] mb-1">Related Places in {{ $content->regency->name }}</h2>
-                    <p class="text-sm text-gray-500">Other destinations you might love to visit</p>
+                    <h2 class="text-2xl font-bold text-[#0a2622] mb-1">Tempat Terkait di {{ $content->regency->name }}</h2>
+                    <p class="text-sm text-gray-500">Rekomendasi destinasi menarik lainnya yang patut Anda kunjungi</p>
                 </div>
                 <a href="/explore/{{ $content->regency->slug }}" class="text-[#c54e2e] font-semibold text-sm flex items-center hover:underline">
-                    View All
+                    Lihat Semua
                     <x-lucide-arrow-right class="w-4 h-4 ml-1" />
                 </a>
             </div>
