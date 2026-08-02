@@ -79,9 +79,10 @@
 
     {{-- Bottom --}}
     <div class="px-4 pb-7 space-y-2">
-        <form method="POST" action="/admin/logout">
+        <form method="POST" action="/admin/logout" id="form-logout-sidebar" x-data>
             @csrf
-            <button type="submit"
+            <button type="button"
+                    @click="$dispatch('confirm-action', { formId: 'form-logout-sidebar', title: 'Logout Admin', message: 'Apakah Anda yakin ingin keluar dari sesi admin?', confirmText: 'Logout', type: 'danger' })"
                     class="flex items-center gap-2 w-full px-2 py-2 text-[13px] font-bold text-[#374151] hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
