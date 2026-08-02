@@ -70,7 +70,7 @@
                         <input id="login-password" type="password" name="password" required autocomplete="current-password"
                             placeholder="Masukkan kata sandi"
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 pr-11 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition">
-                        <button type="button" class="eye-btn absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" onclick="togglePassword('login-password','eyeIconLogin')">
+                        <button type="button" class="eye-btn absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" onclick="togglePassword('login-password','eyeIconLogin')">
                             <svg id="eyeIconLogin" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -182,7 +182,7 @@
                         <input id="reg-password" type="password" name="password" required autocomplete="new-password"
                             placeholder="Minimal 8 karakter"
                             class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 pr-10 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition @error('password') border-red-400 @enderror">
-                        <button type="button" class="eye-btn absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" onclick="togglePassword('reg-password','eyeIconReg1')">
+                        <button type="button" class="eye-btn absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" onclick="togglePassword('reg-password','eyeIconReg1')">
                             <svg id="eyeIconReg1" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -197,7 +197,7 @@
                         <input id="reg-password-confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
                             placeholder="Ulangi kata sandi"
                             class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 pr-10 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition">
-                        <button type="button" class="eye-btn absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" onclick="togglePassword('reg-password-confirmation','eyeIconReg2')">
+                        <button type="button" class="eye-btn absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" onclick="togglePassword('reg-password-confirmation','eyeIconReg2')">
                             <svg id="eyeIconReg2" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
