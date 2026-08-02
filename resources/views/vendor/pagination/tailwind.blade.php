@@ -1,25 +1,25 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
+    <nav role="navigation" aria-label="Navigasi Paginasi" class="flex items-center justify-between">
 
         {{-- Mobile View --}}
         <div class="flex flex-1 justify-between sm:hidden gap-2">
             @if ($paginator->onFirstPage())
                 <span class="relative inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-400 cursor-not-allowed">
-                    {!! __('pagination.previous') !!}
+                    Sebelumnya
                 </span>
             @else
                 <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-[#ed8a53] transition-colors focus:z-20 focus:outline-offset-0">
-                    {!! __('pagination.previous') !!}
+                    Sebelumnya
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-[#ed8a53] transition-colors focus:z-20 focus:outline-offset-0">
-                    {!! __('pagination.next') !!}
+                    Selanjutnya
                 </a>
             @else
                 <span class="relative inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-400 cursor-not-allowed">
-                    {!! __('pagination.next') !!}
+                    Selanjutnya
                 </span>
             @endif
         </div>
