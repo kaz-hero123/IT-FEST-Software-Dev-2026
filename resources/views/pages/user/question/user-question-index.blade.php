@@ -135,15 +135,11 @@
                     
                     <div class="space-y-4">
                         <x-faq-accordion question="Bagaimana cara membuat akun baru?">
-                            Klik tombol <b>"Pendaftaran"</b> atau ikon profil di sudut kanan atas. Masukkan alamat email aktif Anda, buat kata sandi yang aman, lalu isi profil singkat. Verifikasi email Anda melalui tautan yang kami kirimkan ke kotak masuk.
+                            Klik tombol <b>"Pendaftaran"</b> atau ikon profil di sudut kanan atas. Masukkan alamat email aktif Anda, buat kata sandi yang aman, lalu isi profil singkat.
                         </x-faq-accordion>
                         
                         <x-faq-accordion question="Bagaimana jika saya lupa kata sandi?">
-                            Di halaman Login, klik tombol <b>"Lupa Kata Sandi?"</b>. Masukkan alamat email yang terdaftar, dan sistem akan secara otomatis mengirimkan tautan serta instruksi untuk mereset kata sandi Anda dengan aman.
-                        </x-faq-accordion>
-                        
-                        <x-faq-accordion question="Apakah saya bisa menghapus akun secara permanen?">
-                            Ya, Anda memiliki hak penuh atas akun Anda. Silakan masuk ke "Pengaturan Akun" dan pilih opsi "Hapus Akun Permanen". Perlu diingat, setelah dihapus, semua draf, bookmark, dan konten yang menyertai profil Anda ikut dihapus dan tidak bisa dipulihkan.
+                            Di halaman Pertanyaan, klik tombol <b>"Hubungi Kami"</b>. Masukkan alamat email dan nanti tim Admin Jelajah Madura akan membantu Anda untuk mereset kata sandi Anda dengan aman.
                         </x-faq-accordion>
                     </div>
                 </div>
@@ -235,7 +231,7 @@
                         </x-faq-accordion>
                         
                         <x-faq-accordion question="Bagaimana cara melaporkan Bug atau Error yang saya temui?">
-                            Apabila Anda menjumpai galat saat mengakses, layar blank, atau tombol tak merespon; bisa langsung infokan kami dengan menekan tombol **Hubungi Kami (Email)** pada bagian kanan bawah halaman ini. Lampirkan pula spesifikasi singkat berupa tangkapan layar jika dimungkinkan.
+                            Apabila Anda menjumpai bug saat mengakses, layar blank, atau tombol tak merespon; bisa langsung infokan kami dengan menekan tombol **Hubungi Kami** pada bagian kanan bawah halaman ini. Lampirkan pula spesifikasi singkat berupa tangkapan layar jika dimungkinkan.
                         </x-faq-accordion>
                     </div>
                 </div>

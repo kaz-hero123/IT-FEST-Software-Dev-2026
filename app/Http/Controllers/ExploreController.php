@@ -12,8 +12,9 @@ class ExploreController extends Controller
     public function index()
     {
         $regencies = Regency::withCount('approvedContents')->get();
+        $categories = Category::all();
 
-        return view('pages.user.explore.user-explore-index', compact('regencies'));
+        return view('pages.user.explore.user-explore-index', compact('regencies', 'categories'));
     }
 
     public function show(Request $request, Regency $regency)

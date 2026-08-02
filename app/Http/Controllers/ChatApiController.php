@@ -18,9 +18,9 @@ class ChatApiController extends Controller
         if ($messages->isEmpty()) {
             $welcome = ChatMessage::create([
                 'session_id'  => $sessionId,
-                'sender_name' => 'Javier',
+                'sender_name' => 'Rara',
                 'sender_type' => 'admin',
-                'message'     => 'Halo! 👋 Saya Javier dari tim Admin Jelajah Madura. Ada yang bisa saya bantu terkait pertanyaan atau destinasi Anda?',
+                'message'     => 'Halo! 👋 Saya Rara dari tim Admin Jelajah Madura. Ada yang bisa saya bantu terkait pertanyaan atau destinasi Anda?',
             ]);
             $messages = collect([$welcome]);
         }
@@ -133,9 +133,9 @@ class ChatApiController extends Controller
 
             ChatMessage::create([
                 'session_id'  => $sessionId,
-                'sender_name' => 'Javier',
+                'sender_name' => 'Rara',
                 'sender_type' => 'admin',
-                'message'     => 'Halo! Sesi percakapan telah diperbarui. Ada yang bisa Javier bantu?',
+                'message'     => 'Halo! Sesi percakapan telah diperbarui. Ada yang bisa Rara bantu?',
             ]);
         }
 

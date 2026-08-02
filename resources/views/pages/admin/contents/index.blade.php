@@ -8,9 +8,9 @@
     {{-- Header --}}
     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
         <div>
-            <h1 class="text-[22px] md:text-[26px] font-bold text-[#0f172a] tracking-tight">Content Management</h1>
+            <h1 class="text-[22px] md:text-[26px] font-bold text-[#0f172a] tracking-tight">Manajemen Konten</h1>
             <p class="text-[12px] md:text-[13px] text-gray-400 font-medium mt-1">
-                Manage all approved and published content on the platform.
+                Kelola semua konten yang telah disetujui dan dipublikasikan di platform.
             </p>
         </div>
 
@@ -22,14 +22,14 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
-                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Search content..."
+                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari konten..."
                        class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-medium text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:w-44 md:w-56">
             </div>
             <button type="submit" class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-200 bg-white text-[13px] font-bold text-[#374151] hover:bg-gray-50 transition-colors shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
-                Search
+                Cari
             </button>
         </form>
     </div>
@@ -50,12 +50,12 @@
             <table class="w-full text-left">
                 <thead>
                     <tr class="border-b border-gray-100">
-                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Content</th>
-                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden md:table-cell">Category</th>
-                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden md:table-cell">Regency</th>
-                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden lg:table-cell">Contributor</th>
+                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Konten</th>
+                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden md:table-cell">Kategori</th>
+                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden md:table-cell">Kabupaten</th>
+                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden lg:table-cell">Kontributor</th>
                         <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Status</th>
-                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+                        <th class="px-5 py-3.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -104,7 +104,7 @@
                         {{-- Status --}}
                         <td class="px-5 py-4">
                             <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-bold bg-green-50 text-green-600 border border-green-100">
-                                Published
+                                Dipublikasikan
                             </span>
                         </td>
 
@@ -113,12 +113,12 @@
                             <div class="flex items-center justify-end gap-2">
                                 <form x-data id="unpublish-form-{{ $content->id }}" method="POST" action="/admin/contents/{{ $content->slug }}/unpublish">
                                     @csrf
-                                    <input type="hidden" name="note" value="Unpublished by admin from content management.">
+                                    <input type="hidden" name="note" value="Dibatalkan publikasinya oleh admin dari manajemen konten.">
                                     <button type="button"
                                             @click="$dispatch('confirm-action', {
-                                                title: 'Unpublish Konten',
-                                                message: 'Konten ini akan ditarik dari halaman publik dan dikembalikan ke status Pending.',
-                                                confirmText: 'Ya, Unpublish',
+                                                title: 'Batal Publikasi Konten',
+                                                message: 'Konten ini akan ditarik dari halaman publik dan dikembalikan ke status Menunggu.',
+                                                confirmText: 'Ya, Batal Publikasi',
                                                 formId: 'unpublish-form-{{ $content->id }}',
                                                 type: 'warning'
                                             })"
@@ -126,7 +126,7 @@
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
                                         </svg>
-                                        Unpublish
+                                        Batal Publikasi
                                     </button>
                                 </form>
                                 <form x-data id="delete-form-{{ $content->id }}" method="POST" action="/admin/contents/{{ $content->slug }}">
@@ -144,7 +144,7 @@
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -168,8 +168,8 @@
         <svg class="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
         </svg>
-        <h3 class="text-[14px] font-bold text-gray-400 mb-1">No published content yet</h3>
-        <p class="text-[12px] text-gray-400">Approved content will appear here.</p>
+        <h3 class="text-[14px] font-bold text-gray-400 mb-1">Belum ada konten dipublikasikan</h3>
+        <p class="text-[12px] text-gray-400">Konten yang disetujui akan muncul di sini.</p>
     </div>
     @endif
 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Jelajah Madura</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/jelajah_madura_logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/jelajah_madura_logo.png') }}">
     <script src="{{ asset('js/chat-support.js') }}"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -39,7 +41,23 @@
     <x-admin-chat />
     <x-toast />
     <x-confirm-modal />    
+    <x-throttle-modal />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        // Global Fetch Interceptor for 429 Too Many Requests
+        (function() {
+            const originalFetch = window.fetch;
+            window.fetch = async function(...args) {
+                const response = await originalFetch.apply(this, args);
+                if (response.status === 429) {
+                    window.dispatchEvent(new CustomEvent('throttle-warning', {
+                        detail: { message: 'Terlalu banyak request di server, tolong tunggu sebentar.' }
+                    }));
+                }
+                return response;
+            };
+        })();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.initParallaxScroll === 'function') {

@@ -227,9 +227,9 @@
             <div class="flex justify-between items-end mb-8">
                 <div>
                     <h2 class="text-2xl font-bold text-[#0a2622] mb-1">Tempat Terkait di {{ $content->regency->name }}</h2>
-                    <p class="text-sm text-gray-500">Rekomendasi kuliner lain yang mungkin Anda suka</p>
+                    <p class="text-sm text-gray-500">Rekomendasi destinasi menarik lainnya yang patut Anda kunjungi</p>
                 </div>
-                <a href="#" class="text-[#c54e2e] font-semibold text-sm flex items-center hover:underline">
+                <a href="/explore/{{ $content->regency->slug }}" class="text-[#c54e2e] font-semibold text-sm flex items-center hover:underline">
                     Lihat Semua
                     <x-lucide-arrow-right class="w-4 h-4 ml-1" />
                 </a>

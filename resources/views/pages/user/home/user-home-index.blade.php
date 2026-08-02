@@ -17,6 +17,9 @@
     {{-- Popular --}}
     @include('pages.user.home.components.user-home-popular')
 
+    {{-- YouTube Autoplay --}}
+    @include('pages.user.home.components.user-home-youtube')
+
     {{-- Contributor --}}
     @include('pages.user.home.components.user-home-contributor')
 @endsection

@@ -19,9 +19,7 @@ class ContentFactory extends Factory
     {
         $fakerID = \Faker\Factory::create('id_ID');
         
-        $kataDepan = ['Wisata', 'Pesona', 'Keindahan', 'Taman', 'Pantai', 'Bukit', 'Kuliner', 'Warung', 'Sate', 'Soto', 'Kerajinan', 'Sentra'];
-        $kataBelakang = ['Indah', 'Asri', 'Nusantara', 'Jaya', 'Sejahtera', 'Madura', 'Utama', 'Khas', 'Tradisional', 'Modern'];
-        $title = $fakerID->randomElement($kataDepan) . ' ' . $fakerID->city() . ' ' . $fakerID->randomElement($kataBelakang);
+        $title = 'Temp Title ' . $fakerID->numberBetween(1, 9999);
 
         $deskripsiAcak = [
             'Tempat ini sangat direkomendasikan untuk dikunjungi bersama keluarga tercinta saat liburan.',

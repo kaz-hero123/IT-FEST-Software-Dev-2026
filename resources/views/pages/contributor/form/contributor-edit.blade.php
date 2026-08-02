@@ -24,9 +24,9 @@
             <div class="absolute top-0 left-0 w-1 h-full bg-[#f6d078]"></div>
             <h4 class="text-[13px] font-bold text-[#8a5f00] mb-1 flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-[#eaa400]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                Status Update Notice
+                Pemberitahuan Perubahan Status
             </h4>
-            <p class="text-[12px] text-[#8a5f00]/90 pl-5 leading-relaxed">Content will return to 'pending' status after saving changes. It will require moderation approval before becoming public again.</p>
+            <p class="text-[12px] text-[#8a5f00]/90 pl-5 leading-relaxed">Konten akan kembali ke status 'Menunggu' setelah perubahan disimpan dan memerlukan persetujuan moderasi sebelum dipublikasikan kembali.</p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-8">
@@ -37,7 +37,7 @@
                       x-data="editForm()"
                       @submit.prevent="$dispatch('confirm-action', {
                           title: 'Simpan Perubahan',
-                          message: 'Menyimpan perubahan akan mengubah status konten ini kembali menjadi Pending dan perlu dimoderasi ulang. Lanjutkan?',
+                          message: 'Menyimpan perubahan akan mengubah status konten ini kembali menjadi Menunggu dan perlu dimoderasi ulang. Lanjutkan?',
                           confirmText: 'Ya, Simpan',
                           formId: 'edit-form',
                           type: 'warning'
@@ -234,7 +234,7 @@
 
             {{-- Image Preview Illustration --}}
             <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-sm group">
-                <img src="https://images.unsplash.com/photo-1596404179374-601980072bba?q=80&w=2670&auto=format&fit=crop" alt="Ilustrasi Gili Iyang" class="w-full h-full object-cover">
+                <img src="{{ asset('images/gili_lyang.jpg') }}" alt="Ilustrasi Gili Iyang" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/30 to-transparent"></div>
                 <div class="absolute bottom-5 left-5 right-5">
                     <span class="inline-flex items-center justify-center bg-[#25c46b] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm mb-2 tracking-wider">Inspirasi</span>

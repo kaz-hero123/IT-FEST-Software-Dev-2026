@@ -25,18 +25,18 @@
                     </svg>
                 </button>
 
-                    <!-- Desktop Menu -->
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8 text-[15px] font-medium">
                     <!-- Active State for Home -->
-                    <a href="/" class="{{ request()->is('/') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Home</a>
-                    <a href="/about" class="{{ request()->is('about') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">About</a>
-                    <a href="/explore" class="{{ request()->is('explore*') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Explore</a>
-                    <a href="/question" class="{{ request()->is('question') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Question</a>
+                    <a href="/" class="{{ request()->is('/') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Beranda</a>
+                    <a href="/about" class="{{ request()->is('about') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Tentang</a>
+                    <a href="/explore" class="{{ request()->is('explore*') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Jelajah</a>
+                    <a href="/question" class="{{ request()->is('question') ? 'text-[#ed8a53] border-b-2 border-[#ed8a53] pb-1' : 'text-gray-900 hover:text-[#ed8a53]' }} transition-colors">Pertanyaan</a>
                     
                     <!-- Gradient Button / User Profile Menu -->
                     @auth
                         <div x-data="{ profileOpen: false }" class="relative">
-                            <button @click="profileOpen = !profileOpen" @click.away="profileOpen = false" class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-transparent hover:border-[#ed8a53] focus:outline-none focus:border-[#ed8a53] transition-all overflow-hidden shadow-sm">
+                            <button @click="profileOpen = !profileOpen" @click.away="profileOpen = false" class="flex items-center justify-center w-10 h-10 rounded-full focus:outline-none focus:ring-2 focus:ring-[#ed8a53] focus:ring-offset-2 transition-all overflow-hidden shadow-sm">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=ed8a53&color=fff" alt="Profile" class="w-full h-full object-cover">
                             </button>
                             
@@ -47,19 +47,19 @@
                                  x-transition:leave="transition ease-in duration-75"
                                  x-transition:leave-start="transform opacity-100 scale-100"
                                  x-transition:leave-end="transform opacity-0 scale-95"
-                                 class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                                 class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
                                 <div class="py-2">
                                     <h6 class="px-4 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        Hi, {{ strtok(auth()->user()->name, ' ') }}
+                                        Halo, {{ strtok(auth()->user()->name, ' ') }}
                                     </h6>
                                     <div class="border-t border-gray-100 mt-1 mb-1"></div>
                                     <a href="{{ auth()->user()->role === 'admin' ? '/admin/dashboard' : '/dashboard' }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#ed8a53]">
-                                        Dashboard
+                                        Dasbor
                                     </a>
                                     <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}">
                                         @csrf
                                         <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-red-600 hover:text-red-700">
-                                            Logout
+                                            Keluar
                                         </button>
                                     </form>
                                 </div>
@@ -84,23 +84,24 @@
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
          class="md:hidden bg-white border-t border-gray-50 px-4 py-4 space-y-3" style="display: none;">
-        <a href="/" class="block text-sm {{ request()->is('/') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Home</a>
-        <a href="/about" class="block text-sm {{ request()->is('about') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">About</a>
-        <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Explore</a>
-        <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Question</a>
+        <a href="/" class="block text-sm {{ request()->is('/') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Beranda</a>
+        <a href="/about" class="block text-sm {{ request()->is('about') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Tentang</a>
+        <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Jelajah</a>
+        <a href="/predictor" class="block text-sm {{ request()->is('predictor') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Smart Predictor</a>
+        <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Pertanyaan</a>
         <div class="pt-2 border-t border-gray-100 pb-2">
             @auth
                 <div class="flex items-center justify-center px-4 py-3 border-b border-gray-100 mb-2 gap-3">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=ed8a53&color=fff" alt="Profile" class="w-10 h-10 rounded-full shadow-sm border border-gray-200">
+                    <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=ed8a53&color=fff" alt="Profile" class="w-10 h-10 rounded-full shadow-sm">
                     <span class="text-sm font-semibold text-gray-700">{{ auth()->user()->name }}</span>
                 </div>
                 <a href="{{ auth()->user()->role === 'admin' ? '/admin/dashboard' : '/dashboard' }}" class="block w-full text-center bg-gray-50 text-gray-700 py-3 rounded-xl font-semibold mb-2 hover:bg-gray-100">
-                    Dashboard
+                    Dasbor
                 </a>
                 <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}">
                     @csrf
                     <button type="submit" class="block w-full text-center bg-red-50 text-red-600 py-3 rounded-xl font-semibold hover:bg-red-100">
-                        Logout
+                        Keluar
                     </button>
                 </form>
             @else

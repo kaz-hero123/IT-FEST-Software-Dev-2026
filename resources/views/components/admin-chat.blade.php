@@ -33,8 +33,8 @@
         <div class="bg-[#0a2622] px-4 py-3.5 border-b border-[#0a2622]/20 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
                 <div class="relative">
-                    <img src="{{ asset('images/culture/culture01.jpg') }}" 
-                         alt="Admin Javier" 
+                    <img src="{{ asset('images/rara.jpg') }}" 
+                         alt="Admin Rara" 
                          class="w-10 h-10 rounded-full object-cover shadow-sm">
                     <template x-if="hasUnreadAdmin">
                         <span class="absolute bottom-0 right-0 flex h-3 w-3">
@@ -79,7 +79,7 @@
                 <div :class="msg.sender === 'user' ? 'flex flex-col items-end' : 'flex items-start gap-2.5'">
                     <!-- Admin Avatar if Admin -->
                     <template x-if="msg.sender === 'admin'">
-                        <img src="{{ asset('images/culture/culture01.jpg') }}" alt="Admin" class="w-7 h-7 rounded-full object-cover border-2 border-emerald-400 mt-1 shrink-0 shadow-sm">
+                        <img src="{{ asset('images/rara.jpg') }}" alt="Admin" class="w-7 h-7 rounded-full object-cover border-2 border-emerald-400 mt-1 shrink-0 shadow-sm">
                     </template>
 
                     <div class="max-w-[82%]">
@@ -97,7 +97,7 @@
 
             <!-- Typing Indicator -->
             <div x-show="isTyping" class="flex items-start gap-2.5">
-                <img src="{{ asset('images/culture/culture01.jpg') }}" alt="Admin" class="w-7 h-7 rounded-full object-cover border-2 border-emerald-400 mt-1 shadow-sm">
+                <img src="{{ asset('images/rara.jpg') }}" alt="Admin" class="w-7 h-7 rounded-full object-cover border-2 border-emerald-400 mt-1 shadow-sm">
                 <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-xs text-gray-400 flex items-center gap-1.5 shadow-sm">
                     <span class="w-1.5 h-1.5 bg-[#0a2622] rounded-full animate-bounce"></span>
                     <span class="w-1.5 h-1.5 bg-[#0a2622] rounded-full animate-bounce [animation-delay:0.2s]"></span>
