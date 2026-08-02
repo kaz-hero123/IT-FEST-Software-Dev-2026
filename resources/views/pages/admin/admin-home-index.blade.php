@@ -11,11 +11,6 @@
             <h1 class="text-[22px] md:text-[26px] font-bold text-[#0f172a] tracking-tight">Dashboard Overview</h1>
             <p class="text-[12px] md:text-[13px] text-gray-400 font-medium mt-1">Platform statistics and recent moderation activity.</p>
         </div>
-        <div class="shrink-0">
-            <span class="inline-flex items-center px-3 py-1.5 rounded-full border border-gray-200 bg-white text-[11px] font-semibold text-gray-500 shadow-sm">
-                System Status: Optimal
-            </span>
-        </div>
     </div>
 
     @include('pages.admin.components.dashboard.admin-dashboard')
