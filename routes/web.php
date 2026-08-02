@@ -24,8 +24,7 @@ Route::get('/explore', [ExploreController::class, 'index']);
 Route::get('/explore/{regency}', [ExploreController::class, 'show']);
 Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
 
-// Smart Predictor (Bagian A)
-Route::get('/predictor', [App\Http\Controllers\PredictorController::class, 'index']);
+// Smart Predictor (Bagian A) - Dipindahkan ke Explore
 Route::post('/predictor/predict', [App\Http\Controllers\PredictorController::class, 'predict']);
 
 // Chat API (public - accessible without auth)
