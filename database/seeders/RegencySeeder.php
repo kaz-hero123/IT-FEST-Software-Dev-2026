@@ -11,8 +11,8 @@ class RegencySeeder extends Seeder
     {
         $regencies = [
             ['name' => 'Bangkalan',  'slug' => 'bangkalan', 'img' => 'images/culture/culture02.jpg'],
-            ['name' => 'Sampang',    'slug' => 'sampang',   'img' => 'images/food.png'],
-            ['name' => 'Pamekasan',  'slug' => 'pamekasan', 'img' => 'images/culture/culture15.jpg'],
+            ['name' => 'Sampang',    'slug' => 'sampang',   'img' => 'images/culture/culture05.jpg'],
+            ['name' => 'Pamekasan',  'slug' => 'pamekasan', 'img' => 'images/culture/culture06.jpg'],
             ['name' => 'Sumenep',    'slug' => 'sumenep',   'img' => 'images/culture/culture08.jpg'],
         ];
 
