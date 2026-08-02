@@ -15,9 +15,10 @@
             <p class="text-[11.5px] text-gray-400 font-medium mb-3 leading-relaxed">
                 Jika konten memenuhi semua panduan dan tidak memerlukan perubahan.
             </p>
-            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/approve" class="mb-5">
+            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/approve" id="form-approve" class="mb-5" x-data>
                 @csrf
-                <button type="submit"
+                <button type="button"
+                        @click="$dispatch('confirm-action', { formId: 'form-approve', title: 'Setujui Konten', message: 'Apakah Anda yakin ingin menyetujui dan mempublikasikan konten ini?', confirmText: 'Setujui & Publikasikan', type: 'warning' })"
                         class="w-full flex items-center justify-center gap-2 py-2.5 bg-green-500 hover:bg-green-600 text-white text-[13px] font-bold rounded-xl transition-colors shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -32,12 +33,13 @@
                 Jika konten melanggar panduan atau memerlukan perbaikan signifikan.
             </p>
             <p class="text-[10.5px] font-bold text-gray-500 uppercase tracking-wider mb-2">Alasan Penolakan (Wajib)</p>
-            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/reject">
+            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/reject" id="form-reject" x-data="{ note: '' }">
                 @csrf
-                <textarea name="note" rows="3" required
+                <textarea name="note" x-model="note" rows="3" required
                           placeholder="Tuliskan alasan mengapa pengajuan ini ditolak..."
                           class="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-[12px] text-[#374151] placeholder-gray-300 font-medium focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-300 resize-none mb-3"></textarea>
-                <button type="submit"
+                <button type="button"
+                        @click="if(!note.trim()) { alert('Alasan penolakan wajib diisi!'); return; } $dispatch('confirm-action', { formId: 'form-reject', title: 'Tolak Konten', message: 'Apakah Anda yakin ingin menolak pengajuan ini?', confirmText: 'Tolak', type: 'danger' })"
                         class="w-full flex items-center justify-center gap-2 py-2.5 bg-red-500 hover:bg-red-600 text-white text-[13px] font-bold rounded-xl transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>

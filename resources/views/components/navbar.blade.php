@@ -56,9 +56,11 @@
                                     <a href="{{ auth()->user()->role === 'admin' ? '/admin/dashboard' : '/dashboard' }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#ed8a53]">
                                         Dasbor
                                     </a>
-                                    <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}">
+                                    <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}" id="form-logout-desktop" x-data>
                                         @csrf
-                                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-red-600 hover:text-red-700">
+                                        <button type="button" 
+                                                @click="$dispatch('confirm-action', { formId: 'form-logout-desktop', title: 'Konfirmasi Keluar', message: 'Apakah Anda yakin ingin mengakhiri sesi ini?', confirmText: 'Keluar', type: 'danger' })"
+                                                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-red-600 hover:text-red-700">
                                             Keluar
                                         </button>
                                     </form>
@@ -87,7 +89,6 @@
         <a href="/" class="block text-sm {{ request()->is('/') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Beranda</a>
         <a href="/about" class="block text-sm {{ request()->is('about') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Tentang</a>
         <a href="/explore" class="block text-sm {{ request()->is('explore*') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Jelajah</a>
-        <a href="/predictor" class="block text-sm {{ request()->is('predictor') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Smart Predictor</a>
         <a href="/question" class="block text-sm {{ request()->is('question') ? 'font-semibold text-[#ed8a53]' : 'font-medium text-gray-600' }} py-2">Pertanyaan</a>
         <div class="pt-2 border-t border-gray-100 pb-2">
             @auth
@@ -98,9 +99,11 @@
                 <a href="{{ auth()->user()->role === 'admin' ? '/admin/dashboard' : '/dashboard' }}" class="block w-full text-center bg-gray-50 text-gray-700 py-3 rounded-xl font-semibold mb-2 hover:bg-gray-100">
                     Dasbor
                 </a>
-                <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}">
+                <form method="POST" action="{{ auth()->user()->role === 'admin' ? '/admin/logout' : '/logout' }}" id="form-logout-mobile" x-data>
                     @csrf
-                    <button type="submit" class="block w-full text-center bg-red-50 text-red-600 py-3 rounded-xl font-semibold hover:bg-red-100">
+                    <button type="button" 
+                            @click="$dispatch('confirm-action', { formId: 'form-logout-mobile', title: 'Konfirmasi Keluar', message: 'Apakah Anda yakin ingin mengakhiri sesi ini?', confirmText: 'Keluar', type: 'danger' })"
+                            class="block w-full text-center bg-red-50 text-red-600 py-3 rounded-xl font-semibold hover:bg-red-100">
                         Keluar
                     </button>
                 </form>

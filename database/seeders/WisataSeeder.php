@@ -26,10 +26,10 @@ class WisataSeeder extends Seeder
         );
 
         // 3. Pastikan Kabupaten Terdaftar
-        $bangkalan = Regency::firstOrCreate(['slug' => 'bangkalan'], ['name' => 'Bangkalan', 'img' => 'images/culture/culture04.jpg']);
-        $sampang   = Regency::firstOrCreate(['slug' => 'sampang'],   ['name' => 'Sampang',   'img' => 'images/culture/culture05.jpg']);
-        $pamekasan = Regency::firstOrCreate(['slug' => 'pamekasan'], ['name' => 'Pamekasan', 'img' => 'images/culture/culture06.jpg']);
-        $sumenep   = Regency::firstOrCreate(['slug' => 'sumenep'],   ['name' => 'Sumenep',   'img' => 'images/culture/culture07.jpg']);
+        $bangkalan = Regency::firstOrCreate(['slug' => 'bangkalan'], ['name' => 'Bangkalan', 'img' => 'images/culture/culture13.jpg']);
+        $sampang   = Regency::firstOrCreate(['slug' => 'sampang'],   ['name' => 'Sampang',   'img' => 'images/culture/culture01.jpg']);
+        $pamekasan = Regency::firstOrCreate(['slug' => 'pamekasan'], ['name' => 'Pamekasan', 'img' => 'images/culture/culture12.jpg']);
+        $sumenep   = Regency::firstOrCreate(['slug' => 'sumenep'],   ['name' => 'Sumenep',   'img' => 'images/culture/culture14.jpg']);
 
         // Data tempat wisata terkurasi di Madura dengan variasi foto acak & bervariasi
         $wisataList = [
@@ -44,7 +44,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 14200,
-                'photos'      => ['images/culture/culture04.jpg', 'images/culture/culture02.jpg', 'images/culture/culture08-old.jpg'],
+                'photos'      => ['images/culture/culture04.jpg', 'images/culture/culture15.jpg', 'images/culture/culture05.jpg'],
             ],
             [
                 'regency_id'  => $bangkalan->id,
@@ -56,7 +56,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '08:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 8900,
-                'photos'      => ['images/culture/culture03.jpg', 'images/culture/culture01.jpg', 'images/culture/culture07-old.jpg'],
+                'photos'      => ['images/culture/culture01.jpg', 'images/culture/culture18.jpg', 'images/culture/culture14.jpg'],
             ],
             [
                 'regency_id'  => $bangkalan->id,
@@ -68,7 +68,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '18:00:00',
                 'view_count'  => 5600,
-                'photos'      => ['images/culture/culture05.jpg', 'images/culture/culture06-old.jpg', 'images/culture/culture02.jpg'],
+                'photos'      => ['images/culture/culture06.jpg', 'images/culture/culture16.jpg', 'images/food.png'],
             ],
 
             // SAMPANG
@@ -82,7 +82,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '18:00:00',
                 'view_count'  => 16800,
-                'photos'      => ['images/culture/culture06.jpg', 'images/culture/culture08.jpg', 'images/pantai.png'],
+                'photos'      => ['images/culture/culture10.jpg', 'images/pantai.png', 'images/culture/culture03.jpg'],
             ],
             [
                 'regency_id'  => $sampang->id,
@@ -94,7 +94,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '18:30:00',
                 'view_count'  => 11300,
-                'photos'      => ['images/pantai.png', 'images/culture/culture05.jpg', 'images/culture/culture06.jpg'],
+                'photos'      => ['images/culture/culture12.jpg', 'images/culture/culture07.jpg', 'images/culture/culture15.jpg'],
             ],
             [
                 'regency_id'  => $sampang->id,
@@ -106,7 +106,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 7200,
-                'photos'      => ['images/culture/culture07-old.jpg', 'images/culture/culture01.jpg', 'images/culture/culture03.jpg'],
+                'photos'      => ['images/culture/culture03.jpg', 'images/culture/culture07.jpg', 'images/culture/culture04.jpg'],
             ],
 
             // PAMEKASAN
@@ -120,7 +120,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '00:00:00',
                 'close_time'  => '23:59:59',
                 'view_count'  => 19500,
-                'photos'      => ['images/culture/culture07.jpg', 'images/culture/culture02.jpg', 'images/culture/culture04.jpg'],
+                'photos'      => ['images/culture/culture07.jpg', 'images/pantai.png', 'images/culture/culture08.jpg'],
             ],
             [
                 'regency_id'  => $pamekasan->id,
@@ -132,7 +132,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '17:30:00',
                 'view_count'  => 9400,
-                'photos'      => ['images/culture/culture08.jpg', 'images/pantai.png', 'images/culture/culture05.jpg'],
+                'photos'      => ['images/culture/culture18.jpg', 'images/culture/culture12.jpg', 'images/culture/culture11.jpg'],
             ],
             [
                 'regency_id'  => $pamekasan->id,
@@ -144,7 +144,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '08:00:00',
                 'close_time'  => '16:00:00',
                 'view_count'  => 6300,
-                'photos'      => ['images/culture/culture01.jpg', 'images/culture/culture03.jpg', 'images/culture/culture07.jpg'],
+                'photos'      => ['images/culture/culture17.jpg', 'images/culture/culture13.jpg', 'images/culture/culture03.jpg'],
             ],
 
             // SUMENEP
@@ -158,7 +158,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '18:00:00',
                 'view_count'  => 22400,
-                'photos'      => ['images/culture/culture06-old.jpg', 'images/pantai.png', 'images/culture/culture08.jpg'],
+                'photos'      => ['images/culture/culture02.jpg', 'images/culture/culture13.jpg', 'images/culture/culture17.jpg'],
             ],
             [
                 'regency_id'  => $sumenep->id,
@@ -170,7 +170,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 18900,
-                'photos'      => ['images/culture/culture08-old.jpg', 'images/culture/culture06.jpg', 'images/culture/culture01.jpg'],
+                'photos'      => ['images/culture/culture10.jpg', 'images/pantai.png', 'images/culture/culture03.jpg'],
             ],
             [
                 'regency_id'  => $sumenep->id,
@@ -182,7 +182,7 @@ class WisataSeeder extends Seeder
                 'open_time'   => '07:30:00',
                 'close_time'  => '15:30:00',
                 'view_count'  => 12100,
-                'photos'      => ['images/culture/culture02.jpg', 'images/culture/culture03.jpg', 'images/culture/culture04.jpg'],
+                'photos'      => ['images/culture/culture08.jpg', 'images/culture/culture15.jpg', 'images/culture/culture17.jpg'],
             ],
         ];
 

@@ -29,7 +29,7 @@
                      loading="lazy"
                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                      onerror="this.src='{{ asset('images/food.png') }}'"/>
-                  <span class="absolute top-4 right-4 bg-[#00D2C4] text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span class="absolute top-4 right-4 bg-[#ed8a53] text-white text-xs font-medium px-3 py-1.5 rounded-full">
                     Terbaru
                   </span>
               </div>

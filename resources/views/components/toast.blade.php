@@ -76,7 +76,7 @@ document.addEventListener('alpine:init', () => {
             @endif
 
             // Validation Errors catch-all
-            @if($errors->any())
+            @if(isset($errors) && $errors->any())
                 setTimeout(() => {
                     this.add('error', 'Validasi Gagal', 'Silakan periksa kembali isian formulir Anda.');
                 }, 100);

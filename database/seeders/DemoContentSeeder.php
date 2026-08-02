@@ -59,7 +59,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '08:00:00',
                 'close_time'  => '21:00:00',
                 'view_count'  => 9800,
-                'photos'      => ['images/food.png', 'images/culture/culture04.jpg'],
+                'photos'      => ['images/culture/culture06.jpg', 'images/culture/culture16.jpg', 'images/culture/culture01.jpg'],
             ],
             [
                 'user_id'     => $contributors[1]->id,
@@ -73,7 +73,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '14:00:00',
                 'view_count'  => 7200,
-                'photos'      => ['images/food.png', 'images/culture/culture05.jpg'],
+                'photos'      => ['images/culture/culture16.jpg', 'images/food.png', 'images/culture/culture07.jpg'],
             ],
             [
                 'user_id'     => $contributors[2]->id,
@@ -87,7 +87,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '05:30:00',
                 'close_time'  => '11:00:00',
                 'view_count'  => 4500,
-                'photos'      => ['images/food.png', 'images/culture/culture06.jpg'],
+                'photos'      => ['images/pantai.png', 'images/culture/culture10.jpg', 'images/culture/culture17.jpg'],
             ],
             [
                 'user_id'     => $contributors[3]->id,
@@ -101,7 +101,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '05:00:00',
                 'close_time'  => '10:00:00',
                 'view_count'  => 5600,
-                'photos'      => ['images/food.png', 'images/culture/culture07.jpg'],
+                'photos'      => ['images/culture/culture09.jpg', 'images/culture/culture03.jpg', 'images/culture/culture08.jpg'],
             ],
         ];
 
@@ -119,7 +119,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '08:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 3200,
-                'photos'      => ['images/culture/culture01.jpg', 'images/culture/culture03.jpg'],
+                'photos'      => ['images/culture/culture05.jpg', 'images/culture/culture02.jpg', 'images/culture/culture09.jpg'],
             ],
             [
                 'user_id'     => $contributors[1]->id,
@@ -133,7 +133,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '08:00:00',
                 'close_time'  => '16:00:00',
                 'view_count'  => 4100,
-                'photos'      => ['images/culture/culture01.jpg', 'images/culture/culture02.jpg'],
+                'photos'      => ['images/culture/culture18.jpg', 'images/culture/culture12.jpg', 'images/culture/culture16.jpg'],
             ],
             [
                 'user_id'     => $contributors[2]->id,
@@ -147,7 +147,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '16:00:00',
                 'view_count'  => 3800,
-                'photos'      => ['images/culture/culture08.jpg', 'images/culture/culture06.jpg'],
+                'photos'      => ['images/culture/culture15.jpg', 'images/culture/culture09.jpg', 'images/culture/culture04.jpg'],
             ],
             [
                 'user_id'     => $contributors[3]->id,
@@ -161,7 +161,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 2900,
-                'photos'      => ['images/food.png', 'images/culture/culture05.jpg'],
+                'photos'      => ['images/culture/culture06.jpg', 'images/culture/culture15.jpg', 'images/food.png'],
             ],
         ];
 
@@ -179,7 +179,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '18:00:00',
                 'view_count'  => 8700,
-                'photos'      => ['images/culture/culture04.jpg', 'images/pantai.png'],
+                'photos'      => ['images/culture/culture09.jpg', 'images/culture/culture17.jpg', 'images/culture/culture05.jpg'],
             ],
             [
                 'user_id'     => $contributors[1]->id,
@@ -193,7 +193,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '07:00:00',
                 'close_time'  => '17:00:00',
                 'view_count'  => 6100,
-                'photos'      => ['images/culture/culture03.jpg', 'images/culture/culture02.jpg'],
+                'photos'      => ['images/culture/culture14.jpg', 'images/food.png', 'images/culture/culture12.jpg'],
             ],
             [
                 'user_id'     => $contributors[2]->id,
@@ -207,7 +207,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '06:00:00',
                 'close_time'  => '18:00:00',
                 'view_count'  => 5300,
-                'photos'      => ['images/pantai.png', 'images/culture/culture08.jpg'],
+                'photos'      => ['images/culture/culture18.jpg', 'images/culture/culture10.jpg', 'images/culture/culture16.jpg'],
             ],
             [
                 'user_id'     => $contributors[3]->id,
@@ -221,7 +221,7 @@ class DemoContentSeeder extends Seeder
                 'open_time'   => '00:00:00',
                 'close_time'  => '23:59:59',
                 'view_count'  => 15200,
-                'photos'      => ['images/pantai.png', 'images/culture/culture06.jpg'],
+                'photos'      => ['images/culture/culture11.jpg', 'images/culture/culture09.jpg', 'images/culture/culture01.jpg'],
             ],
         ];
 
