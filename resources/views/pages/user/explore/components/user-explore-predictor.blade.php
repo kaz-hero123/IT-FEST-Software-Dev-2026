@@ -1,11 +1,4 @@
-@extends('layouts.layout')
-
-@section('navbar')
-    @include('components.navbar')
-@endsection
-
-@section('content')
-<div class="min-h-screen bg-gray-50/50 py-12" x-data="smartPredictor()">
+<section id="predictor" class="bg-gray-50/50 py-16" x-data="smartPredictor()">
     <div class="max-w-4xl mx-auto px-4 md:px-6">
         
         <!-- Header -->
@@ -13,7 +6,7 @@
             <div class="inline-flex items-center justify-center p-3 bg-teal-50 rounded-2xl mb-4">
                 <x-lucide-sparkles class="w-8 h-8 text-teal-600" />
             </div>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-[#0a2622] mb-3 tracking-tight">Smart Predictor</h1>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#0a2622] mb-3 tracking-tight">Smart Predictor</h2>
             <p class="text-gray-500 max-w-xl mx-auto">Sistem cerdas penentu rekomendasi destinasi wisata terbaik menggunakan metode Simple Additive Weighting (SAW) berdasarkan preferensi Anda.</p>
         </div>
 
@@ -143,7 +136,7 @@
         <div x-show="showResults" style="display: none;" class="space-y-8" x-transition:enter="transition ease-out duration-500 delay-100" x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0">
             
             <div class="flex items-center justify-between">
-                <h2 class="text-2xl font-bold text-[#0a2622]">Hasil Rekomendasi (Top 3)</h2>
+                <h3 class="text-2xl font-bold text-[#0a2622]">Hasil Rekomendasi (Top 3)</h3>
                 <button @click="resetForm" class="text-sm font-semibold text-gray-500 hover:text-teal-600 flex items-center gap-1.5 transition-colors">
                     <x-lucide-rotate-ccw class="w-4 h-4" /> Ulangi Prediksi
                 </button>
@@ -183,7 +176,7 @@
                                         <span class="text-xs font-bold px-2 py-0.5 rounded-md uppercase tracking-wider bg-gray-100 text-gray-600" x-text="res.content.category.name"></span>
                                         <span class="text-xs text-gray-400" x-text="res.content.regency.name"></span>
                                     </div>
-                                    <h3 class="text-xl font-extrabold text-[#0a2622] mb-1 group-hover:text-teal-700 transition-colors" x-text="res.content.title"></h3>
+                                    <h4 class="text-xl font-extrabold text-[#0a2622] mb-1 group-hover:text-teal-700 transition-colors" x-text="res.content.title"></h4>
                                     
                                     <div class="mt-auto pt-3 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-500">
                                         <div class="flex items-center gap-1.5" title="Indeks Eco-Score Kategori">
@@ -253,7 +246,7 @@
         </div>
 
     </div>
-</div>
+</section>
 
 <!-- CSRF Token for Axios/Fetch -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -309,4 +302,3 @@ document.addEventListener('alpine:init', () => {
     }))
 })
 </script>
-@endsection

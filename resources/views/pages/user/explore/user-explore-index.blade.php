@@ -252,4 +252,7 @@
     </div>
     <p class="text-center mt-8 text-sm text-white/40 italic"> Arahkan kursor ke panel untuk melihat lebih lanjut.</p>
 </section>
+
+<!-- Smart Predictor Section -->
+@include('pages.user.explore.components.user-explore-predictor')
 @endsection
