@@ -22,7 +22,7 @@ class UserExploreDetailSeeder extends Seeder
         // Siapkan Kabupaten Bangkalan
         $regency = Regency::firstOrCreate(['slug' => 'bangkalan'], [
             'name' => 'Bangkalan',
-            'img' => 'images/culture/culture01.jpg'
+            'img' => 'images/culture/culture08.jpg'
         ]);
 
         // Hapus dummy lama terkait Bebek Sinjay agar tidak dobel
@@ -54,11 +54,11 @@ EOD;
         );
 
         // Dummy Photos for Bebek Sinjay
-        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture01.jpg'], ['is_primary' => true]);
-        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture02.jpg'], ['is_primary' => false]);
-        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture03.jpg'], ['is_primary' => false]);
-        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture04.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture07.jpg'], ['is_primary' => true]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture09.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture16.jpg'], ['is_primary' => false]);
         Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture05.jpg'], ['is_primary' => false]);
+        Photo::firstOrCreate(['content_id' => $mainContent->id, 'file_path' => 'images/culture/culture07.jpg'], ['is_primary' => false]);
 
         // 2. Konten Terkait (Sate Madura H. Toha)
         $related1 = Content::updateOrCreate(
@@ -76,7 +76,7 @@ EOD;
                 'view_count' => 3120
             ]
         );
-        Photo::firstOrCreate(['content_id' => $related1->id, 'is_primary' => true], ['file_path' => 'images/culture/culture05.jpg']);
+        Photo::firstOrCreate(['content_id' => $related1->id, 'is_primary' => true], ['file_path' => 'images/culture/culture10.jpg']);
 
         // 3. Konten Terkait (Soto Mata Sapi Burneh)
         $related2 = Content::updateOrCreate(
@@ -94,7 +94,7 @@ EOD;
                 'view_count' => 1950
             ]
         );
-        Photo::firstOrCreate(['content_id' => $related2->id, 'is_primary' => true], ['file_path' => 'images/culture/culture06.jpg']);
+        Photo::firstOrCreate(['content_id' => $related2->id, 'is_primary' => true], ['file_path' => 'images/culture/culture11.jpg']);
 
         // 4. Konten Terkait (Nasi Serpah Khas Bangkalan)
         $related3 = Content::updateOrCreate(
@@ -130,6 +130,6 @@ EOD;
                 'view_count' => 880
             ]
         );
-        Photo::firstOrCreate(['content_id' => $related4->id, 'is_primary' => true], ['file_path' => 'images/culture/culture01.jpg']);
+        Photo::firstOrCreate(['content_id' => $related4->id, 'is_primary' => true], ['file_path' => 'images/culture/culture16.jpg']);
     }
 }
