@@ -6,8 +6,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
     </div>
-    <h3 class="text-[15px] font-bold text-[#0f172a] mb-1">Queue Empty</h3>
-    <p class="text-[13px] text-gray-400 font-medium">All submissions have been reviewed. Great work!</p>
+    <h3 class="text-[15px] font-bold text-[#0f172a] mb-1">Antrean Kosong</h3>
+    <p class="text-[13px] text-gray-400 font-medium">Semua pengajuan telah ditinjau. Kerja bagus!</p>
 </div>
 @else
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -35,15 +35,15 @@
             <div class="absolute top-3 left-3">
                 @if($item->status === 'approved')
                     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/90 text-white uppercase tracking-wider">
-                        Approved
+                        Disetujui
                     </span>
                 @elseif($item->status === 'rejected')
                     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/90 text-white uppercase tracking-wider">
-                        Rejected
+                        Ditolak
                     </span>
                 @else
                     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-400/90 text-yellow-900 uppercase tracking-wider">
-                        Pending
+                        Menunggu
                     </span>
                 @endif
             </div>
@@ -81,7 +81,7 @@
             <div class="mt-auto">
                 <a href="/admin/moderation/{{ $item->slug ?? $item->id }}"
                    class="flex items-center justify-center w-full py-2.5 bg-[#0a1512] hover:bg-black text-white text-[12.5px] font-bold rounded-xl transition-colors">
-                    Review Content
+                    Tinjau Konten
                 </a>
             </div>
         </div>

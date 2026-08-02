@@ -4,7 +4,7 @@
     {{-- Total Content --}}
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
         <div class="flex justify-between items-start mb-3 md:mb-4">
-            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Total Content</span>
+            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Total Konten</span>
             <div class="p-1.5 md:p-2 bg-gray-100 rounded-lg">
                 <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
@@ -13,14 +13,14 @@
         </div>
         <h3 class="text-[24px] md:text-[30px] font-bold text-[#0f172a] leading-none mb-1.5 md:mb-2">{{ number_format($stats['total']) }}</h3>
         <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">
-            Total submissions
+            Total pengajuan
         </p>
     </div>
 
     {{-- Pending --}}
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
         <div class="flex justify-between items-start mb-3 md:mb-4">
-            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Pending</span>
+            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Menunggu</span>
             <div class="p-1.5 md:p-2 bg-yellow-50 rounded-lg">
                 <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -28,13 +28,13 @@
             </div>
         </div>
         <h3 class="text-[24px] md:text-[30px] font-bold text-[#0f172a] leading-none mb-1.5 md:mb-2">{{ number_format($stats['pending']) }}</h3>
-        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Requires moderation</p>
+        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Menunggu moderasi</p>
     </div>
 
     {{-- Approved --}}
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
         <div class="flex justify-between items-start mb-3 md:mb-4">
-            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Approved</span>
+            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Disetujui</span>
             <div class="p-1.5 md:p-2 bg-green-50 rounded-lg">
                 <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -42,13 +42,13 @@
             </div>
         </div>
         <h3 class="text-[24px] md:text-[30px] font-bold text-[#0f172a] leading-none mb-1.5 md:mb-2">{{ number_format($stats['approved']) }}</h3>
-        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Live on platform</p>
+        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Aktif di platform</p>
     </div>
 
     {{-- Rejected --}}
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
         <div class="flex justify-between items-start mb-3 md:mb-4">
-            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Rejected</span>
+            <span class="text-[9.5px] md:text-[10.5px] font-bold text-gray-400 tracking-widest uppercase">Ditolak</span>
             <div class="p-1.5 md:p-2 bg-red-50 rounded-lg">
                 <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -56,16 +56,16 @@
             </div>
         </div>
         <h3 class="text-[24px] md:text-[30px] font-bold text-[#0f172a] leading-none mb-1.5 md:mb-2">{{ number_format($stats['rejected']) }}</h3>
-        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Requires revision</p>
+        <p class="text-[10.5px] md:text-[11.5px] font-semibold text-gray-400">Memerlukan perbaikan</p>
     </div>
 </div>
 
 {{-- Recent Pending Table --}}
 <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
     <div class="px-4 md:px-6 py-4 flex justify-between items-center border-b border-gray-100">
-        <h2 class="text-[15px] md:text-[17px] font-bold text-[#0f172a]">Recent Pending</h2>
+        <h2 class="text-[15px] md:text-[17px] font-bold text-[#0f172a]">Menunggu Moderasi Terbaru</h2>
         <a href="/admin/moderation" class="text-[12px] md:text-[12.5px] font-bold text-[#b84c22] hover:text-[#8e3618] flex items-center gap-1 transition-colors">
-            See All
+            Lihat Semua
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
@@ -80,11 +80,11 @@
                 <p class="text-[13px] font-bold text-[#0f172a] leading-snug pr-4">{{ $content->title }}</p>
                 <a href="/admin/moderation/{{ $content->slug ?? $content->id }}"
                    class="shrink-0 inline-flex items-center px-3 py-1 rounded-lg border border-[#e8c5b5] bg-white text-[#b84c22] text-[11.5px] font-bold hover:bg-[#b84c22] hover:text-white transition-colors">
-                    Review
+                    Tinjau
                 </a>
             </div>
             <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-gray-400 font-medium">
-                <span>{{ $content->user->name ?? 'Unknown' }}</span>
+                <span>{{ $content->user->name ?? 'Tidak diketahui' }}</span>
                 <span class="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 font-semibold">{{ $content->category->name ?? '-' }}</span>
                 <span>{{ $content->regency->name ?? '-' }}</span>
                 <span>{{ $content->created_at->diffForHumans() }}</span>
@@ -102,19 +102,19 @@
         <table class="w-full text-left">
             <thead>
                 <tr class="border-b border-gray-100 bg-[#fafafa]">
-                    <th class="px-6 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Title</th>
-                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Contributor</th>
-                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Category</th>
-                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Regency</th>
-                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Time</th>
-                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase text-right">Action</th>
+                    <th class="px-6 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Judul</th>
+                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Kontributor</th>
+                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Kategori</th>
+                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Kabupaten</th>
+                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase">Waktu</th>
+                    <th class="px-4 py-3 text-[10px] font-bold text-gray-400 tracking-widest uppercase text-right">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
                 @forelse($recentPending as $content)
                 <tr class="hover:bg-gray-50/60 transition-colors">
                     <td class="px-6 py-4 text-[13.5px] font-bold text-[#0f172a]">{{ $content->title }}</td>
-                    <td class="px-4 py-4 text-[13px] text-[#475569] font-medium">{{ $content->user->name ?? 'Unknown' }}</td>
+                    <td class="px-4 py-4 text-[13px] text-[#475569] font-medium">{{ $content->user->name ?? 'Tidak diketahui' }}</td>
                     <td class="px-4 py-4">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">
                             {{ $content->category->name ?? '-' }}
@@ -125,7 +125,7 @@
                     <td class="px-4 py-4 text-right">
                         <a href="/admin/moderation/{{ $content->slug ?? $content->id }}"
                            class="inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg border border-[#e8c5b5] bg-white text-[#b84c22] text-[12px] font-bold hover:bg-[#b84c22] hover:text-white transition-colors">
-                            Review
+                            Tinjau
                         </a>
                     </td>
                 </tr>
