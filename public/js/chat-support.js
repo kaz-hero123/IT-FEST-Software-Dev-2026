@@ -198,8 +198,8 @@ function adminChat(authUserName = null) {
                 matchedReply = 'Halo! Pesan Anda sudah kami terima 🙏 Admin Rara akan segera merespons...';
             }
 
-            // Tampilkan typing indicator lalu kirim balasan
-            const delay = 1200 + Math.random() * 800;
+            // Tampilkan balasan tanpa jeda agar user tidak perlu menunggu
+            const delay = 0;
             this.isTyping = true;
             this.scrollToBottom();
 
