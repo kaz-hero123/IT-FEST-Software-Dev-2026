@@ -53,13 +53,14 @@ class ChatApiController extends Controller
         $senderType = $request->sender_type;
         $senderName = $request->sender_name;
 
-        // Security check: Only real admins can send as admin
+        // Security check: Only real admins can send as admin (Kecuali bot Rara auto-reply dari frontend)
         if ($senderType === 'admin') {
             if (!auth()->check() || auth()->user()->role !== 'admin') {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Unauthorized admin impersonation.'
-                ], 403);
+                if ($senderName !== 'Rara') {
+                    // Paksa kembali menjadi user biasa jika mencoba menyamar selain jadi Rara
+                    $senderType = 'user';
+                    $senderName = 'Guest (' . substr($request->session_id, -4) . ')';
+                }
             }
         }
 
