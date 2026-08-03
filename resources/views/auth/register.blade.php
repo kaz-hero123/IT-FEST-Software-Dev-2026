@@ -111,7 +111,7 @@
     </div>
 
     {{-- RIGHT HALF CONTAINER (Active Register Form) --}}
-    <div id="right-container" class="w-full md:w-1/2 min-h-screen md:h-full relative z-10 flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-8 md:py-6 overflow-y-auto md:overflow-hidden bg-white">
+    <div id="right-container" class="w-full md:w-1/2 min-h-screen md:h-full relative z-10 flex md:flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-8 md:py-6 overflow-y-auto md:overflow-hidden bg-white">
         
         {{-- REGISTER FORM CONTENT (Active on Register page) --}}
         <div id="register-form-wrapper" class="w-full max-w-md mx-auto my-auto flex flex-col justify-center transition-all duration-500 ease-in-out">
