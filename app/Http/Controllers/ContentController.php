@@ -207,6 +207,11 @@ class ContentController extends Controller
     {
         $extension = strtolower($file->getClientOriginalExtension());
         
+        // Fallback langsung jika ekstensi GD tidak tersedia (mencegah Error 500 di server)
+        if (!extension_loaded('gd')) {
+            return $file->store("contents/{$contentId}", 'public');
+        }
+
         $directory = storage_path("app/public/contents/{$contentId}");
         if (!\Illuminate\Support\Facades\File::exists($directory)) {
             \Illuminate\Support\Facades\File::makeDirectory($directory, 0755, true);

@@ -5,7 +5,7 @@
 @section('content')
 <div x-data="adminChatCenter()" x-init="init()" x-on:keydown.escape.window="showDeleteModal = false" class="flex h-full overflow-hidden bg-gray-50 relative">
     <!-- Conversations List (Left Sidebar) -->
-    <div class="w-full md:w-80 lg:w-96 border-r border-gray-200 bg-white flex flex-col shrink-0">
+    <div :class="activeConv ? 'hidden md:flex' : 'flex'" class="w-full md:w-80 lg:w-96 border-r border-gray-200 bg-white flex-col shrink-0">
         <!-- Header -->
         <div class="p-4 border-b border-gray-100 bg-[#0a2622] text-white flex items-center justify-between">
             <div>
@@ -66,12 +66,15 @@
     </div>
 
     <!-- Active Chat Conversation (Right Panel) -->
-    <div class="flex-1 flex flex-col h-full overflow-hidden bg-white">
+    <div :class="activeConv ? 'flex' : 'hidden md:flex'" class="flex-1 flex-col h-full overflow-hidden bg-white">
         <template x-if="activeConv">
             <div class="flex-1 flex flex-col h-full overflow-hidden">
                 <!-- Chat Header -->
-                <div class="px-6 py-4 border-b border-gray-200 bg-white flex items-center justify-between shrink-0 shadow-xs">
-                    <div class="flex items-center gap-3">
+                <div class="px-4 md:px-6 py-4 border-b border-gray-200 bg-white flex items-center justify-between shrink-0 shadow-xs">
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <button @click="activeConv = null; activeConvId = null" class="md:hidden p-1.5 mr-1 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
                         <div class="w-10 h-10 rounded-full bg-[#0a2622] text-white flex items-center justify-center font-bold text-sm shadow-sm"
                              x-text="activeConv.userName.charAt(0).toUpperCase()"></div>
                         <div>
@@ -111,7 +114,7 @@
                                 </div>
                                 <span :class="msg.sender === 'admin' ? 'text-right block' : 'text-left block'" 
                                       class="text-[10px] text-gray-400 mt-1 px-1" 
-                                      x-text="msg.time + (msg.sender === 'admin' ? ' • Admin Rara' : '')"></span>
+                                      x-text="msg.time + (msg.sender === 'admin' ? ' • ' + '{{ addslashes(Auth::user()->name) }}' : '')"></span>
                             </div>
                         </div>
                     </template>

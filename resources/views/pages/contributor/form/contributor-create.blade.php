@@ -116,8 +116,8 @@
                             </label>
                             <input type="time" name="open_time"
                                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#ed8a53] focus:ring-2 focus:ring-[#ed8a53]/20 bg-white"
-                                   placeholder="07:00">
-                            <p class="text-[11px] text-gray-400 mt-1">Contoh: 08:00</p>
+                                   placeholder="06:00">
+                            <p class="text-[11px] text-gray-400 mt-1">Contoh: 06:00</p>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-[#0f172a] mb-1.5 flex items-center gap-2">

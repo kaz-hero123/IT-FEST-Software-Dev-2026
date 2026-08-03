@@ -4,6 +4,7 @@
     <div class="order-first lg:order-last w-full lg:w-[300px] shrink-0 space-y-4 lg:sticky lg:top-0 lg:self-start">
 
         {{-- Moderation Decision --}}
+        @if($content->status === 'pending')
         <div class="bg-white rounded-2xl border border-gray-200 p-5">
             <h2 class="text-[14px] font-bold text-[#0f172a] flex items-center gap-2 mb-4">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,13 +34,12 @@
                 Jika konten melanggar panduan atau memerlukan perbaikan signifikan.
             </p>
             <p class="text-[10.5px] font-bold text-gray-500 uppercase tracking-wider mb-2">Alasan Penolakan (Wajib)</p>
-            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/reject" id="form-reject" x-data="{ note: '' }">
+            <form method="POST" action="/admin/moderation/{{ $content->slug ?? $content->id }}/reject" id="form-reject" x-data="{ note: '' }" x-on:submit.prevent="$dispatch('confirm-action', { formId: 'form-reject', title: 'Tolak Konten', message: 'Apakah Anda yakin ingin menolak pengajuan ini?', confirmText: 'Tolak', type: 'danger' })">
                 @csrf
                 <textarea name="note" x-model="note" rows="3" required
                           placeholder="Tuliskan alasan mengapa pengajuan ini ditolak..."
                           class="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-[12px] text-[#374151] placeholder-gray-300 font-medium focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-300 resize-none mb-3"></textarea>
-                <button type="button"
-                        @click="if(!note.trim()) { alert('Alasan penolakan wajib diisi!'); return; } $dispatch('confirm-action', { formId: 'form-reject', title: 'Tolak Konten', message: 'Apakah Anda yakin ingin menolak pengajuan ini?', confirmText: 'Tolak', type: 'danger' })"
+                <button type="submit"
                         class="w-full flex items-center justify-center gap-2 py-2.5 bg-red-500 hover:bg-red-600 text-white text-[13px] font-bold rounded-xl transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -48,6 +48,7 @@
                 </button>
             </form>
         </div>
+        @endif
 
         {{-- Contributor Info --}}
         <div class="bg-white rounded-2xl border border-gray-200 p-5">
