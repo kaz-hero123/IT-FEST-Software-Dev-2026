@@ -50,10 +50,23 @@ class ChatApiController extends Controller
             'message'     => 'required|string',
         ]);
 
+        $senderType = $request->sender_type;
+        $senderName = $request->sender_name;
+
+        // Security check: Only real admins can send as admin
+        if ($senderType === 'admin') {
+            if (!auth()->check() || auth()->user()->role !== 'admin') {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Unauthorized admin impersonation.'
+                ], 403);
+            }
+        }
+
         $msg = ChatMessage::create([
             'session_id'  => $request->session_id,
-            'sender_name' => $request->sender_name,
-            'sender_type' => $request->sender_type,
+            'sender_name' => $senderName,
+            'sender_type' => $senderType,
             'message'     => trim($request->message),
         ]);
 
