@@ -166,14 +166,14 @@
 
                 <div>
                     <label for="reg-name" class="block text-xs font-semibold text-[#0f172a] mb-0.5">Nama Lengkap</label>
-                    <input id="reg-name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name"
+                    <input id="reg-name" type="text" name="name" value="{{ old('name') }}" autocomplete="name"
                         placeholder="Masukkan nama lengkap Anda"
                         class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition @error('name') border-red-400 @enderror">
                 </div>
 
                 <div>
                     <label for="reg-email" class="block text-xs font-semibold text-[#0f172a] mb-0.5">Email</label>
-                    <input id="reg-email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email"
+                    <input id="reg-email" type="email" name="email" value="{{ old('email') }}" autocomplete="email"
                         placeholder="nama@email.com"
                         class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition @error('email') border-red-400 @enderror">
                 </div>
@@ -181,7 +181,7 @@
                 <div>
                     <label for="reg-password" class="block text-xs font-semibold text-[#0f172a] mb-0.5">Kata Sandi</label>
                     <div class="relative">
-                        <input id="reg-password" type="password" name="password" required autocomplete="new-password"
+                        <input id="reg-password" type="password" name="password" autocomplete="new-password"
                             placeholder="Minimal 8 karakter"
                             class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 pr-10 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition @error('password') border-red-400 @enderror">
                         <button type="button" class="eye-btn absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" onclick="togglePassword('reg-password','eyeIconReg1')">
@@ -196,7 +196,7 @@
                 <div>
                     <label for="reg-password-confirmation" class="block text-xs font-semibold text-[#0f172a] mb-0.5">Konfirmasi Kata Sandi</label>
                     <div class="relative">
-                        <input id="reg-password-confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                        <input id="reg-password-confirmation" type="password" name="password_confirmation" autocomplete="new-password"
                             placeholder="Ulangi kata sandi"
                             class="w-full border border-gray-200 rounded-xl px-3.5 py-1.5 pr-10 text-sm text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#af4926]/40 focus:border-[#af4926] transition">
                         <button type="button" class="eye-btn absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" onclick="togglePassword('reg-password-confirmation','eyeIconReg2')">
@@ -209,9 +209,9 @@
                 </div>
 
                 <div class="flex items-start gap-2 pt-0.5">
-                    <input id="terms" type="checkbox" name="terms" required class="mt-0.5 accent-[#af4926] w-4 h-4 shrink-0 cursor-pointer">
+                    <input id="terms" type="checkbox" name="terms" class="mt-0.5 accent-[#af4926] w-4 h-4 shrink-0 cursor-pointer">
                     <label for="terms" class="text-xs text-gray-500 leading-tight cursor-pointer">
-                        Saya menyetujui <span class="text-[#af4926] font-semibold">Syarat &amp; Ketentuan</span> dan <span class="text-[#af4926] font-semibold">Kebijakan Privasi</span>.
+                        Saya menyetujui <a href="#" class="text-[#af4926] font-semibold hover:underline">Syarat &amp; Ketentuan</a> dan <a href="#" class="text-[#af4926] font-semibold hover:underline">Kebijakan Privasi</a>.
                     </label>
                 </div>
 
