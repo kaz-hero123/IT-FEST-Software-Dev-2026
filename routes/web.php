@@ -60,6 +60,11 @@ Route::middleware(['auth', 'contributor'])->group(function () {
     Route::delete('/contents/{content}', [ContentController::class, 'destroy']);
 });
 
+// ADMIN API ROUTES (No prefix, but uses admin auth)
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
+});
+
 // ADMIN ROUTES
 Route::prefix('admin')->group(function () {
 
@@ -87,6 +92,5 @@ Route::prefix('admin')->group(function () {
 
         // Live Chat Support
         Route::get('/chat', [AdminChatController::class, 'index']);
-        Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
     });
 });
