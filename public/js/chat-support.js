@@ -72,13 +72,26 @@ function adminChat(authUserName = null) {
         // Lifecycle
         init() {
             this.fetchMessages();
-            this.pollInterval = setInterval(() => this.fetchMessages(true), 5000);
+            this.startPolling();
+        },
+
+        // Polling cerdas: 5 detik saat terbuka, 30 detik saat tertutup
+        startPolling() {
+            if (this.pollInterval) clearTimeout(this.pollInterval);
+            const interval = this.isOpen ? 5000 : 30000;
+            this.pollInterval = setTimeout(async () => {
+                await this.fetchMessages(true);
+                this.startPolling();
+            }, interval);
         },
 
         // Buka / tutup popup chat
         toggleChat() {
             this.isOpen = !this.isOpen;
-            if (!this.isOpen) return;
+            if (!this.isOpen) {
+                this.startPolling(); // Sesuaikan interval ke 30s
+                return;
+            }
 
             this.unreadCount = 0;
             this.hasUnreadAdmin = false;
@@ -87,11 +100,7 @@ function adminChat(authUserName = null) {
             }
             this.fetchMessages();
 
-            // Restart polling kalau sempat mati karena error
-            if (!this.pollInterval) {
-                this.errorCount = 0;
-                this.pollInterval = setInterval(() => this.fetchMessages(true), 5000);
-            }
+            this.startPolling(); // Sesuaikan interval ke 5s
             this.scrollToBottom();
         },
 
@@ -116,12 +125,9 @@ function adminChat(authUserName = null) {
                     }
                 }
                 if (!silent) this.scrollToBottom();
-            } catch {
+            } catch (e) {
                 this.errorCount++;
-                if (this.errorCount >= 5) {
-                    clearInterval(this.pollInterval);
-                    this.pollInterval = null;
-                }
+                console.error('[chat] fetch error:', e);
             }
         },
 
@@ -256,7 +262,15 @@ function adminChatCenter() {
         // Lifecycle
         init() {
             this.fetchConversations();
-            this.pollInterval = setInterval(() => this.fetchConversations(true), 2500);
+            this.startPolling();
+        },
+
+        startPolling() {
+            if (this.pollInterval) clearTimeout(this.pollInterval);
+            this.pollInterval = setTimeout(async () => {
+                await this.fetchConversations(true);
+                this.startPolling();
+            }, 5000); // Admin polling setiap 5 detik (dikurangi dari 2.5s)
         },
 
         // Ambil semua percakapan dari server

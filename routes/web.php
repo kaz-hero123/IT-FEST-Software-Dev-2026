@@ -31,7 +31,6 @@ Route::post('/predictor/predict', [App\Http\Controllers\PredictorController::cla
 Route::middleware('throttle:120,1')->group(function () {
     Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
     Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
-    Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
     Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
 });
 
@@ -88,5 +87,6 @@ Route::prefix('admin')->group(function () {
 
         // Live Chat Support
         Route::get('/chat', [AdminChatController::class, 'index']);
+        Route::get('/api/chat/admin/conversations', [ChatApiController::class, 'getAdminConversations']);
     });
 });
