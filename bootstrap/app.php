@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
         'contributor' => \App\Http\Middleware\EnsureContributor::class,
         'admin'       => \App\Http\Middleware\EnsureAdmin::class,
+        'ajax'        => \App\Http\Middleware\EnsureAjaxRequest::class,
     ]);
      $middleware->redirectGuestsTo(function ($request) {
         if ($request->is('admin/*')) {
