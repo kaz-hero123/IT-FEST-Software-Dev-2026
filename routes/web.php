@@ -28,12 +28,7 @@ Route::get('/explore/{regency}/{content}', [ContentController::class, 'show']);
 Route::post('/predictor/predict', [App\Http\Controllers\PredictorController::class, 'predict']);
 
 // Chat API (public - accessible without auth)
-Route::middleware(['throttle:120,1', function ($request, $next) {
-    if (!$request->ajax() && !app()->runningUnitTests()) {
-        return response()->json(['error' => 'Forbidden: API access is restricted to the application frontend.'], 403);
-    }
-    return $next($request);
-}])->group(function () {
+Route::middleware(['throttle:120,1', 'ajax'])->group(function () {
     Route::get('/api/chat/messages', [ChatApiController::class, 'getMessages']);
     Route::post('/api/chat/send', [ChatApiController::class, 'sendMessage']);
     Route::post('/api/chat/clear', [ChatApiController::class, 'clearMessages']);
