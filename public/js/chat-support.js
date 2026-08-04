@@ -107,7 +107,9 @@ function adminChat(authUserName = null) {
         // Ambil pesan dari server
         async fetchMessages(silent = false) {
             try {
-                const res = await fetch('/api/chat/messages?session_id=' + encodeURIComponent(this.sessionId));
+                const res = await fetch('/api/chat/messages?session_id=' + encodeURIComponent(this.sessionId), {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const data = await res.json();
 
@@ -140,7 +142,7 @@ function adminChat(authUserName = null) {
             try {
                 const res = await fetch('/api/chat/send', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken(), 'X-Requested-With': 'XMLHttpRequest' },
                     body: JSON.stringify({
                         session_id: this.sessionId,
                         sender_name: this.userName,
@@ -208,7 +210,7 @@ function adminChat(authUserName = null) {
                 try {
                     await fetch('/api/chat/send', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken(), 'X-Requested-With': 'XMLHttpRequest' },
                         body: JSON.stringify({ session_id: this.sessionId, sender_name: 'Rara', sender_type: 'admin', message: matchedReply }),
                     });
                     await this.fetchMessages();
@@ -222,7 +224,7 @@ function adminChat(authUserName = null) {
             try {
                 await fetch('/api/chat/clear', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken(), 'X-Requested-With': 'XMLHttpRequest' },
                     body: JSON.stringify({ session_id: this.sessionId }),
                 });
                 this.unreadCount = 0;
@@ -276,7 +278,9 @@ function adminChatCenter() {
         // Ambil semua percakapan dari server
         async fetchConversations(silent = false) {
             try {
-                const res = await fetch('/api/chat/admin/conversations');
+                const res = await fetch('/api/chat/admin/conversations', {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
                 const data = await res.json();
                 if (data.status !== 'success') return;
 
@@ -338,7 +342,7 @@ function adminChatCenter() {
             try {
                 const res = await fetch('/api/chat/send', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken(), 'X-Requested-With': 'XMLHttpRequest' },
                     body: JSON.stringify({
                         session_id: this.activeConv.sessionId,
                         sender_name: 'Rara',
@@ -365,7 +369,7 @@ function adminChatCenter() {
             try {
                 await fetch('/api/chat/clear', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken() },
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': getCsrfToken(), 'X-Requested-With': 'XMLHttpRequest' },
                     body: JSON.stringify({ session_id: this.activeConv.sessionId }),
                 });
                 this.activeConvId = null;
