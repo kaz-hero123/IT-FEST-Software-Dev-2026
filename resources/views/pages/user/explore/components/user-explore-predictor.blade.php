@@ -211,9 +211,25 @@
                                     <h4 class="text-lg font-bold text-[#0a2622] mb-1 group-hover:text-[#EF8D55] transition-colors" x-text="res.content.title"></h4>
                                     
                                     <div class="mt-auto pt-3 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-500">
-                                        <div class="flex items-center gap-1.5">
+                                        <div class="flex items-center gap-1.5 relative" x-data="{ showTooltip: false }" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false" @click="showTooltip = !showTooltip">
                                             <x-lucide-leaf class="w-4 h-4 text-green-500" />
                                             <span>Base Eco: <span x-text="res.eco_index"></span></span>
+                                            <x-lucide-info class="w-3.5 h-3.5 text-gray-400 cursor-help transition-colors hover:text-gray-600" />
+                                            
+                                            <!-- Tooltip -->
+                                            <div x-show="showTooltip" 
+                                                 x-transition
+                                                 class="absolute bottom-full left-0 mb-2 w-64 bg-gray-900 text-white text-xs p-3 rounded-xl shadow-xl z-20 pointer-events-none"
+                                                 style="display: none;">
+                                                <div class="font-bold text-gray-200 mb-1">Eco-Score (Kriteria SAW C1)</div>
+                                                <p class="text-[10px] text-gray-400 mb-2 leading-relaxed">Indeks ramah lingkungan dihitung berdasarkan kategori destinasi:</p>
+                                                <ul class="space-y-1 text-[10px] text-gray-300">
+                                                    <li class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-green-400"></div> Wisata Alam / Bahari: 80 - 100</li>
+                                                    <li class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-blue-400"></div> Religi / Budaya: 70 - 80</li>
+                                                    <li class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div> Buatan / Kuliner: 60 - 70</li>
+                                                </ul>
+                                                <div class="absolute -bottom-1 left-6 w-2.5 h-2.5 bg-gray-900 transform rotate-45"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

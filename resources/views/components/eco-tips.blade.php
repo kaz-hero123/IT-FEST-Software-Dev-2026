@@ -69,10 +69,32 @@
         @endforeach
     </ul>
 
-    <div class="mt-5 pt-4 border-t border-[#a7f3d0]/50 flex items-center gap-2">
-        <x-lucide-globe class="w-3.5 h-3.5 text-[#10b981]" />
-        <p class="text-[11px] text-[#6ee7b7] font-medium">
-            Jelajah Madura mendukung pariwisata berkelanjutan untuk Pulau Madura
-        </p>
+    <div class="mt-6 pt-5 border-t border-[#a7f3d0]/50" x-data="{ 
+        pledged: localStorage.getItem('pledge_{{ $content->id ?? 0 }}'), 
+        pledgesCount: {{ 40 + (($content->id ?? 1) * 7) % 150 }} 
+    }">
+        <template x-if="!pledged">
+            <div>
+                <p class="text-[12px] text-[#065f46] font-semibold mb-3">Mari jaga kelestarian {{ $content->title ?? 'tempat ini' }} bersama-sama.</p>
+                <button @click="localStorage.setItem('pledge_{{ $content->id ?? 0 }}', 'true'); pledged = true; pledgesCount++" class="w-full py-2.5 bg-[#10b981] hover:bg-[#059669] text-white text-[13px] font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 group active:scale-95">
+                    <x-lucide-leaf class="w-4 h-4 transition-transform group-hover:-rotate-12" />
+                    Saya Berkomitmen Menjaganya
+                </button>
+            </div>
+        </template>
+        <template x-if="pledged">
+            <div class="bg-[#10b981]/15 rounded-xl p-3.5 border border-[#10b981]/20 flex items-center gap-3 relative overflow-hidden">
+                <div class="absolute -right-2 -top-2 text-[#10b981]/10">
+                    <x-lucide-leaf class="w-16 h-16 transform rotate-45" />
+                </div>
+                <div class="w-8 h-8 rounded-full bg-[#10b981] text-white flex items-center justify-center shrink-0 shadow-sm relative z-10">
+                    <x-lucide-check-circle-2 class="w-5 h-5" />
+                </div>
+                <div class="relative z-10">
+                    <p class="text-[13px] font-bold text-[#064e3b]">Terima Kasih, Pejuang Bumi!</p>
+                    <p class="text-[11px] text-[#065f46] leading-tight mt-0.5">Anda & <span x-text="pledgesCount" class="font-bold"></span> pengunjung lain berkomitmen menjaga tempat ini.</p>
+                </div>
+            </div>
+        </template>
     </div>
 </div>

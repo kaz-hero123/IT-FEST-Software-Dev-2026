@@ -4,30 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Jelajah Madura</title>
+    <title>@yield('title', 'Jelajah Madura — Pariwisata Cerdas Pulau Madura')</title>
     <link rel="icon" type="image/png" href="{{ asset('images/jelajah_madura_logo.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/jelajah_madura_logo.png') }}">
     <script src="{{ asset('js/chat-support.js') }}"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Satoshi', sans-serif; }
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Satoshi', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
 </head>
 <body class="bg-gray-50 text-[#0a2622] min-h-screen flex flex-col">
     {{-- Main Navbar --}}
@@ -102,8 +89,4 @@
         });
     </script>
 </body>
-
-
-
-
 </html>

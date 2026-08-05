@@ -1,11 +1,44 @@
 @extends('layouts.layout')
+@section('title', $content->title . ' — Jelajah Madura')
 
 @section('navbar')
     @include('components.navbar')
 @endsection
 
 @section('content')
-<div class="bg-gray-50 min-h-screen py-10">
+@php
+    $allPhotos = collect();
+    if($content->primaryPhoto) {
+        $allPhotos->push($content->primaryPhoto);
+    }
+    $secondaryPhotos = $content->photos->where('is_primary', false);
+    $allPhotos = $allPhotos->merge($secondaryPhotos);
+@endphp
+<div class="bg-gray-50 min-h-screen py-10" x-data="{
+    lightboxOpen: false,
+    currentIndex: 0,
+    photos: [
+        @foreach($allPhotos as $photo)
+            '{{ $photo->resolved_url }}',
+        @endforeach
+    ],
+    openLightbox(index) {
+        if(this.photos.length === 0) return;
+        this.currentIndex = index;
+        this.lightboxOpen = true;
+        document.body.style.overflow = 'hidden';
+    },
+    closeLightbox() {
+        this.lightboxOpen = false;
+        document.body.style.overflow = '';
+    },
+    nextPhoto() {
+        if (this.currentIndex < this.photos.length - 1) this.currentIndex++;
+    },
+    prevPhoto() {
+        if (this.currentIndex > 0) this.currentIndex--;
+    }
+}" @keydown.escape.window="closeLightbox()" @keydown.arrow-right.window="nextPhoto()" @keydown.arrow-left.window="prevPhoto()">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
         <!-- Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -33,7 +66,7 @@
         <!-- Photo Gallery (Grid) -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 mb-10 h-auto md:h-[500px]">
             <!-- Big Image -->
-            <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0">
+            <div class="md:col-span-3 rounded-2xl overflow-hidden h-64 md:h-full relative group min-h-0 min-w-0 cursor-pointer" @click="openLightbox(0)">
                 @if($content->primaryPhoto)
                     <img src="{{ $content->primaryPhoto->resolved_url }}" 
                          alt="{{ $content->title }}" 
@@ -48,12 +81,12 @@
             <!-- Small Images Right Column -->
             <div class="md:col-span-1 flex flex-col gap-3 md:gap-4 h-auto md:h-full min-h-0 min-w-0">
                 <!-- Fetch rest of photos, max 3 -->
-                @php $secondaryPhotos = $content->photos->where('is_primary', false)->take(3); @endphp
+                @php $secondaryPhotosSubset = $secondaryPhotos->take(3); @endphp
                 
                 <!-- 1st Small Image -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(0))
-                        <img src="{{ $secondaryPhotos->values()->get(0)->resolved_url }}" 
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100 cursor-pointer" @click="openLightbox(1)">
+                    @if($secondaryPhotosSubset->values()->get(0))
+                        <img src="{{ $secondaryPhotosSubset->values()->get(0)->resolved_url }}" 
                              alt="Gallery 1" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex items-center justify-center">
@@ -63,9 +96,9 @@
                 </div>
                 
                 <!-- 2nd Small Image -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(1))
-                        <img src="{{ $secondaryPhotos->values()->get(1)->resolved_url }}" 
+                <div class="rounded-2xl overflow-hidden flex-1 relative hidden md:block min-h-0 bg-gray-100 cursor-pointer" @click="openLightbox(2)">
+                    @if($secondaryPhotosSubset->values()->get(1))
+                        <img src="{{ $secondaryPhotosSubset->values()->get(1)->resolved_url }}" 
                              alt="Gallery 2" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex items-center justify-center">
@@ -75,9 +108,9 @@
                 </div>
                 
                 <!-- 3rd Small Image with overlay -->
-                <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0 bg-gray-100">
-                    @if($secondaryPhotos->values()->get(2))
-                        <img src="{{ $secondaryPhotos->values()->get(2)->resolved_url }}" 
+                <div class="rounded-2xl overflow-hidden flex-1 relative cursor-pointer group hidden md:block min-h-0 bg-gray-100" @click="openLightbox(3)">
+                    @if($secondaryPhotosSubset->values()->get(2))
+                        <img src="{{ $secondaryPhotosSubset->values()->get(2)->resolved_url }}" 
                              alt="Gallery 3" class="w-full h-full object-cover">
                         <!-- Overlay hanya jika ada foto -->
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
@@ -111,9 +144,6 @@
                     </div>
                 </div>
 
-                {{-- Fasilitas section hidden — hardcoded data, semua konten menampilkan fasilitas yang sama.
-                     Akan di-uncomment setelah fasilitas dibuat dynamic per konten. --}}
-                {{--
                 <div class="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.02)]">
                     <h2 class="text-base font-bold text-gray-800 uppercase tracking-wider mb-6">FASILITAS</h2>
                     
@@ -125,17 +155,16 @@
                             <x-lucide-droplets class="w-5 h-5 text-gray-400 mr-3" /> Toilet Bersih
                         </div>
                         <div class="flex items-center text-sm font-medium text-gray-700">
+                            <x-lucide-recycle class="w-5 h-5 text-green-500 mr-3" /> Sampah Terpilah
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-700">
                             <x-lucide-moon class="w-5 h-5 text-gray-400 mr-3" /> Mushola
                         </div>
                         <div class="flex items-center text-sm font-medium text-gray-700">
-                            <x-lucide-shopping-bag class="w-5 h-5 text-gray-400 mr-3" /> Pusat Oleh-oleh
-                        </div>
-                        <div class="flex items-center text-sm font-medium text-gray-700">
-                            <x-lucide-snowflake class="w-5 h-5 text-gray-400 mr-3" /> Ruangan Ber-AC (VIP)
+                            <x-lucide-camera class="w-5 h-5 text-gray-400 mr-3" /> Spot Foto
                         </div>
                     </div>
                 </div>
-                --}}
             </div>
 
             <!-- Right Column: Lokasi & Kontributor Info -->
@@ -261,6 +290,48 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div x-show="lightboxOpen" 
+         class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         style="display: none;">
+        
+        <!-- Close button -->
+        <button @click="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white z-10 transition-colors bg-black/50 p-2 rounded-full">
+            <x-lucide-x class="w-6 h-6" />
+        </button>
+
+        <!-- Counter -->
+        <div class="absolute top-6 left-6 text-white/80 font-semibold text-sm tracking-widest z-10 bg-black/50 px-4 py-2 rounded-full">
+            <span x-text="currentIndex + 1"></span> / <span x-text="photos.length"></span>
+        </div>
+
+        <!-- Prev button -->
+        <button @click="prevPhoto()" x-show="currentIndex > 0" class="absolute left-4 md:left-10 text-white/50 hover:text-white transition-all hover:scale-110 p-3 z-10 bg-black/50 rounded-full">
+            <x-lucide-chevron-left class="w-8 h-8" />
+        </button>
+
+        <!-- Next button -->
+        <button @click="nextPhoto()" x-show="currentIndex < photos.length - 1" class="absolute right-4 md:right-10 text-white/50 hover:text-white transition-all hover:scale-110 p-3 z-10 bg-black/50 rounded-full">
+            <x-lucide-chevron-right class="w-8 h-8" />
+        </button>
+
+        <!-- Image Container -->
+        <div class="w-full h-full p-4 md:p-12 flex items-center justify-center" @click.self="closeLightbox()">
+            <template x-if="photos.length > 0">
+                <img :src="photos[currentIndex]" class="max-w-full max-h-full object-contain shadow-2xl transition-all duration-300 select-none">
+            </template>
+            <template x-if="photos.length === 0">
+                <img src="{{ asset('images/pantai.png') }}" class="max-w-full max-h-full object-contain shadow-2xl select-none">
+            </template>
+        </div>
     </div>
 </div>
 @endsection

@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Jelajahi ' . $regency->name . ' — Jelajah Madura')
 
 @section('navbar')
     @include('components.navbar')
