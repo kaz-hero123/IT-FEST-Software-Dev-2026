@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Lupa Password — Jelajah Madura')
 
 @section('navbar')
     <nav class="bg-white border-b border-gray-100 py-4 px-6 md:px-12 flex justify-between items-center">

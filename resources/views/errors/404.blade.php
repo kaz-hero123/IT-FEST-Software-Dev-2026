@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Halaman Tidak Ditemukan — Jelajah Madura')
 
 @section('navbar')
     @include('components.navbar')

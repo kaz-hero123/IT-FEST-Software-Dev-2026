@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit: ' . $content->title . ' — Jelajah Madura')
 
 @section('navbar')
     @include('components.navbar')
