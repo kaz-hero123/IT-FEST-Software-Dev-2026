@@ -16,6 +16,17 @@
         <p class="text-sm text-gray-500 mb-6">Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang password Anda.</p>
 
         <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
+            @if(session('status'))
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl mb-4">
+                    <p class="text-sm text-blue-700 font-bold mb-1 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Catatan Demo
+                    </p>
+                    <p class="text-xs text-blue-600 leading-relaxed">
+                        Tautan reset berhasil di-generate. Namun karena ini adalah versi pameran, email tidak benar-benar dikirimkan ke kotak masuk Anda (tidak terhubung ke SMTP asli). Tautan hanya disimpan di dalam server log.
+                    </p>
+                </div>
+            @endif
             @csrf
             <div>
                 <label for="email" class="block text-sm font-bold text-[#0f172a] mb-1.5">Email</label>
