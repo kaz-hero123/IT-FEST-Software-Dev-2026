@@ -84,7 +84,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-1.5">
                         <label for="login-password" class="text-xs md:text-sm font-semibold text-[#0f172a]">Kata Sandi</label>
-                        <span class="text-xs text-gray-400 font-medium">Min. 8 karakter</span>
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-[#af4926] hover:underline">Lupa Sandi?</a>
                     </div>
                     <div class="relative">
                         <input id="login-password" type="password" name="password" required autocomplete="current-password"
