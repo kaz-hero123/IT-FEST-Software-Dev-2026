@@ -90,12 +90,15 @@ class ChatApiController extends Controller
             ->get()
             ->pluck('session_id');
 
+        $allMessages = ChatMessage::whereIn('session_id', $sessions)
+            ->orderBy('created_at', 'asc')
+            ->get()
+            ->groupBy('session_id');
+
         $conversations = [];
 
         foreach ($sessions as $index => $sId) {
-            $msgs = ChatMessage::where('session_id', $sId)
-                ->orderBy('created_at', 'asc')
-                ->get();
+            $msgs = $allMessages->get($sId) ?? collect();
 
             $lastMsg = $msgs->last();
             $firstUserMsg = $msgs->where('sender_type', 'user')->first();

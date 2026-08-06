@@ -7,10 +7,13 @@ use App\Models\Content;
 class SmartPredictorService
 {
     /**
-     * Algoritma Simple Additive Weighting (SAW)
+     * Kalkulasi rekomendasi destinasi menggunakan algoritma Simple Additive Weighting (SAW).
      * Kriteria (C):
-     * C1 = Tingkat Ramah Lingkungan (Eco-Score) -> Berasal dari kategori
-     * C2 = Popularitas -> Berasal dari view_count
+     * C1 = Tingkat Ramah Lingkungan (Eco-Score) -> Berasal dari kategori (Benefit)
+     * C2 = Popularitas -> Berasal dari view_count (Bisa Benefit atau Cost tergantung prioritas)
+     *
+     * @param  array{priority: string, category: string, regency: string}  $preferences
+     * @return \Illuminate\Support\Collection<int, array{content: Content, eco_index: int, view_count: int, match_percentage: int, final_score: float}>
      */
     public function predict(array $preferences)
     {
